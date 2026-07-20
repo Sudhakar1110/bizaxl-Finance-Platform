@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "covenant_type",
+  "cb",
+  "required_value",
+  "actual_value",
+  "frequency",
+  "cb",
+  "last_monitored_date",
+  "next_monitoring_date",
+  "compliance_status",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "COV-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "covenant_type",
+   "fieldtype": "Select",
+   "label": "Covenant Type",
+   "options": "DSCR\nCurrent Ratio\nDebt Equity Ratio\nNet Worth\nInterest Coverage\nFixed Asset Coverage\nWorking Capital"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "required_value",
+   "fieldtype": "Float",
+   "label": "Required Value"
+  },
+  {
+   "fieldname": "actual_value",
+   "fieldtype": "Float",
+   "label": "Actual Value"
+  },
+  {
+   "fieldname": "frequency",
+   "fieldtype": "Select",
+   "label": "Frequency",
+   "options": "Monthly\nQuarterly\nHalf-Yearly\nYearly"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_monitored_date",
+   "fieldtype": "Date",
+   "label": "Last Monitored"
+  },
+  {
+   "fieldname": "next_monitoring_date",
+   "fieldtype": "Date",
+   "label": "Next Monitoring"
+  },
+  {
+   "fieldname": "compliance_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Compliant\nBreached\nCritical Breach\nNot Monitored",
+   "default": "Not Monitored"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Loan Covenant",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "COV-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Credit Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "covenant_type",
+ "track_changes": 1,
+ "track_seen": 1
+}

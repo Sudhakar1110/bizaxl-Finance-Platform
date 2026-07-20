@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_description",
+  "ornament_type",
+  "purity",
+  "cb",
+  "gross_weight",
+  "net_weight",
+  "item_value",
+  "market_rate_per_gram",
+  "item_image"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_description",
+   "fieldtype": "Data",
+   "label": "Item Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ornament_type",
+   "fieldtype": "Select",
+   "label": "Ornament Type",
+   "options": "Chain\nBangle\nRing\nEarring\nNecklace\nBracelet\nCoin\nBar\nOther"
+  },
+  {
+   "fieldname": "purity",
+   "fieldtype": "Select",
+   "label": "Purity",
+   "options": "24K\n22K\n18K\n14K\nOther"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "label": "Gross Weight (gms)",
+   "precision": 3,
+   "reqd": 1
+  },
+  {
+   "fieldname": "net_weight",
+   "fieldtype": "Float",
+   "label": "Net Weight (gms)",
+   "precision": 3,
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_value",
+   "fieldtype": "Currency",
+   "label": "Item Value",
+   "read_only": 1
+  },
+  {
+   "fieldname": "market_rate_per_gram",
+   "fieldtype": "Currency",
+   "label": "Market Rate/gm"
+  },
+  {
+   "fieldname": "item_image",
+   "fieldtype": "Data",
+   "label": "Image",
+   "options": "Attach Image"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 1,
+ "editable_grid": 1,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Gold Item",
+ "naming_rule": "",
+ "autoname": "",
+ "naming_series_options": "",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "item_description",
+ "track_changes": 1,
+ "track_seen": 1
+}

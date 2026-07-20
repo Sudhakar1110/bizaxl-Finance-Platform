@@ -1,0 +1,227 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "company_name",
+  "registration_number",
+  "gstin",
+  "pan",
+  "cin",
+  "rbi_registration",
+  "cb",
+  "company_type",
+  "nbfc_category",
+  "registered_address",
+  "city",
+  "state",
+  "pincode",
+  "contact_section",
+  "phone",
+  "email",
+  "website",
+  "cb",
+  "contact_person",
+  "contact_person_phone",
+  "regulatory_section",
+  "rbi_approval_number",
+  "rbi_approval_date",
+  "quarter_end_month",
+  "cb",
+  "is_fiu_registered",
+  "is_ciibil_member",
+  "logo_section",
+  "logo"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CC-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Company Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "label": "Registration Number"
+  },
+  {
+   "fieldname": "gstin",
+   "fieldtype": "Data",
+   "label": "GSTIN"
+  },
+  {
+   "fieldname": "pan",
+   "fieldtype": "Data",
+   "label": "PAN"
+  },
+  {
+   "fieldname": "cin",
+   "fieldtype": "Data",
+   "label": "CIN"
+  },
+  {
+   "fieldname": "rbi_registration",
+   "fieldtype": "Data",
+   "label": "RBI Registration Number"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company_type",
+   "fieldtype": "Select",
+   "label": "Company Type",
+   "options": "NBFC\nNBFC-MFI\nMFI\nChit Fund\nHousing Finance\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nbfc_category",
+   "fieldtype": "Select",
+   "label": "NBFC Category",
+   "options": "NBFC-ND-SI\nNBFC-ND\nNBFC-D\nHFC\nOther"
+  },
+  {
+   "fieldname": "registered_address",
+   "fieldtype": "Data",
+   "label": "Registered Address"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "label": "Pincode"
+  },
+  {
+   "fieldname": "contact_section",
+   "fieldtype": "Section Break",
+   "label": "Contact"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "contact_person_phone",
+   "fieldtype": "Data",
+   "label": "Contact Person Phone"
+  },
+  {
+   "fieldname": "regulatory_section",
+   "fieldtype": "Section Break",
+   "label": "Regulatory"
+  },
+  {
+   "fieldname": "rbi_approval_number",
+   "fieldtype": "Data",
+   "label": "RBI Approval Number"
+  },
+  {
+   "fieldname": "rbi_approval_date",
+   "fieldtype": "Date",
+   "label": "RBI Approval Date"
+  },
+  {
+   "fieldname": "quarter_end_month",
+   "fieldtype": "Select",
+   "label": "Quarter End",
+   "options": "March\nJune\nSeptember\nDecember"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_fiu_registered",
+   "fieldtype": "Check",
+   "label": "FIU Registered"
+  },
+  {
+   "fieldname": "is_ciibil_member",
+   "fieldtype": "Check",
+   "label": "CIBIL Member"
+  },
+  {
+   "fieldname": "logo_section",
+   "fieldtype": "Section Break",
+   "label": "Branding"
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Data",
+   "label": "Logo",
+   "options": "Attach Image"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Company Config",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "CC-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "System Admin",
+   "read": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "company_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

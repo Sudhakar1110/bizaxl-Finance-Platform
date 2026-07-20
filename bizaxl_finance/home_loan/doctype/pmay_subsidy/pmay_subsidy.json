@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "applicant_name",
+  "aadhaar",
+  "income_category",
+  "cb",
+  "is_first_home",
+  "eligible_for_clss",
+  "subsidy_amount",
+  "principal_reduction",
+  "cb",
+  "subsidy_status",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "PMAY-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "applicant_name",
+   "fieldtype": "Data",
+   "label": "Applicant Name"
+  },
+  {
+   "fieldname": "aadhaar",
+   "fieldtype": "Data",
+   "label": "Aadhaar"
+  },
+  {
+   "fieldname": "income_category",
+   "fieldtype": "Select",
+   "label": "Income Category",
+   "options": "EWS (Up to Rs.3L)\nLIG (Rs.3L-6L)\nMIG-I (Rs.6L-12L)\nMIG-II (Rs.12L-18L)"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_first_home",
+   "fieldtype": "Check",
+   "label": "First Home Buyer"
+  },
+  {
+   "fieldname": "eligible_for_clss",
+   "fieldtype": "Check",
+   "label": "Eligible for CLSS"
+  },
+  {
+   "fieldname": "subsidy_amount",
+   "fieldtype": "Currency",
+   "label": "Subsidy Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "principal_reduction",
+   "fieldtype": "Currency",
+   "label": "Principal Reduction",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "subsidy_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Eligibility Checked\nSubmitted to NHB\nNHB Approved\nSubsidy Credited\nRejected"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "PMAY Subsidy",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "PMAY-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "applicant_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

@@ -1,0 +1,14 @@
+{
+ "doctype": "Report",
+ "name": "chit_fund_portfolio",
+ "report_name": "chit_fund_portfolio",
+ "report_type": "Script Report",
+ "ref_doctype": "Chit Group",
+ "is_standard": "Yes",
+ "module": "Bizaxl Finance",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}

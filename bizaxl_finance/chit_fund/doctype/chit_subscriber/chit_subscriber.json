@@ -1,0 +1,140 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "chit_group",
+  "subscriber_number",
+  "subscriber_name",
+  "aadhaar",
+  "phone",
+  "cb",
+  "subscriber_type",
+  "prized_date",
+  "prize_amount",
+  "total_subscriptions_paid",
+  "cb",
+  "total_dividend_received",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CHIT-SUB-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "chit_group",
+   "fieldtype": "Link",
+   "label": "Chit Group",
+   "options": "Chit Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "subscriber_number",
+   "fieldtype": "Int",
+   "label": "Subscriber #",
+   "reqd": 1
+  },
+  {
+   "fieldname": "subscriber_name",
+   "fieldtype": "Data",
+   "label": "Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "aadhaar",
+   "fieldtype": "Data",
+   "label": "Aadhaar"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "subscriber_type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Regular\nPrized\nForeman"
+  },
+  {
+   "fieldname": "prized_date",
+   "fieldtype": "Date",
+   "label": "Prized Date"
+  },
+  {
+   "fieldname": "prize_amount",
+   "fieldtype": "Currency",
+   "label": "Prize Amount"
+  },
+  {
+   "fieldname": "total_subscriptions_paid",
+   "fieldtype": "Currency",
+   "label": "Total Paid",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_dividend_received",
+   "fieldtype": "Currency",
+   "label": "Total Dividend",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nDefaulting\nPrized\nCompleted\nTerminated",
+   "default": "Active"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Chit Subscriber",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "CHIT-SUB-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Chit Foreman",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "subscriber_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

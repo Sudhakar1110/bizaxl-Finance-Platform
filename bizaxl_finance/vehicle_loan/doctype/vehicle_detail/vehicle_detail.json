@@ -1,0 +1,200 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "vehicle_category",
+  "make",
+  "model",
+  "manufacture_year",
+  "cb",
+  "condition",
+  "otr_price",
+  "valuation_price",
+  "agreed_price",
+  "registration_section",
+  "registration_number",
+  "engine_number",
+  "chassis_number",
+  "cb",
+  "fuel_type",
+  "insurance_expiry",
+  "rc_document",
+  "loan_section",
+  "dealer",
+  "cb",
+  "rc_hypothecation_date",
+  "rc_hypothecation_status",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "VH-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "vehicle_category",
+   "fieldtype": "Select",
+   "label": "Category",
+   "options": "2 Wheeler\n3 Wheeler\n4 Wheeler - Hatchback\n4 Wheeler - Sedan\n4 Wheeler - SUV\nCommercial Vehicle\nElectric Vehicle\nTractor"
+  },
+  {
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "label": "Make",
+   "reqd": 1
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model",
+   "reqd": 1
+  },
+  {
+   "fieldname": "manufacture_year",
+   "fieldtype": "Int",
+   "label": "Year"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "condition",
+   "fieldtype": "Select",
+   "label": "Condition",
+   "options": "New\nUsed - Certified\nUsed - Non-Certified"
+  },
+  {
+   "fieldname": "otr_price",
+   "fieldtype": "Currency",
+   "label": "On Road Price"
+  },
+  {
+   "fieldname": "valuation_price",
+   "fieldtype": "Currency",
+   "label": "Valuation Price"
+  },
+  {
+   "fieldname": "agreed_price",
+   "fieldtype": "Currency",
+   "label": "Agreed Price"
+  },
+  {
+   "fieldname": "registration_section",
+   "fieldtype": "Section Break",
+   "label": "Registration"
+  },
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "label": "Registration Number"
+  },
+  {
+   "fieldname": "engine_number",
+   "fieldtype": "Data",
+   "label": "Engine Number"
+  },
+  {
+   "fieldname": "chassis_number",
+   "fieldtype": "Data",
+   "label": "Chassis Number"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fuel_type",
+   "fieldtype": "Select",
+   "label": "Fuel Type",
+   "options": "Petrol\nDiesel\nCNG\nElectric\nHybrid"
+  },
+  {
+   "fieldname": "insurance_expiry",
+   "fieldtype": "Date",
+   "label": "Insurance Expiry"
+  },
+  {
+   "fieldname": "rc_document",
+   "fieldtype": "Data",
+   "label": "RC Document",
+   "options": "Attach"
+  },
+  {
+   "fieldname": "loan_section",
+   "fieldtype": "Section Break",
+   "label": "Loan"
+  },
+  {
+   "fieldname": "dealer",
+   "fieldtype": "Link",
+   "label": "Dealer",
+   "options": "Dealer Master"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rc_hypothecation_date",
+   "fieldtype": "Date",
+   "label": "RC Hypothecation Date"
+  },
+  {
+   "fieldname": "rc_hypothecation_status",
+   "fieldtype": "Select",
+   "label": "Hypothecation Status",
+   "options": "Pending\nSubmitted to RTO\nEndorsed\nCopy Received\nReleased"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nRepossessed\nClosed\nWritten Off",
+   "default": "Active"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Vehicle Detail",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "VH-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "registration_number",
+ "track_changes": 1,
+ "track_seen": 1
+}

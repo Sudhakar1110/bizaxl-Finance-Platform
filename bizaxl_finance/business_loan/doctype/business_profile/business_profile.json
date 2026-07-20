@@ -1,0 +1,140 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "business_name",
+  "gstin",
+  "udyam_number",
+  "business_type",
+  "cb",
+  "business_vintage_years",
+  "industry",
+  "annual_turnover",
+  "net_profit_last_year",
+  "cb",
+  "total_assets",
+  "total_liabilities",
+  "existing_bank_borrowings",
+  "business_address"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "BIZ-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "business_name",
+   "fieldtype": "Data",
+   "label": "Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gstin",
+   "fieldtype": "Data",
+   "label": "GSTIN"
+  },
+  {
+   "fieldname": "udyam_number",
+   "fieldtype": "Data",
+   "label": "Udyam/MSME Number"
+  },
+  {
+   "fieldname": "business_type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Sole Proprietorship\nPartnership\nLLP\nPrivate Limited\nPublic Limited"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "business_vintage_years",
+   "fieldtype": "Int",
+   "label": "Vintage (Years)"
+  },
+  {
+   "fieldname": "industry",
+   "fieldtype": "Select",
+   "label": "Industry",
+   "options": "Manufacturing\nTrading\nServices\nAgriculture\nIT/ITES\nConstruction\nHealthcare\nEducation"
+  },
+  {
+   "fieldname": "annual_turnover",
+   "fieldtype": "Currency",
+   "label": "Annual Turnover"
+  },
+  {
+   "fieldname": "net_profit_last_year",
+   "fieldtype": "Currency",
+   "label": "Net Profit (Last Year)"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_assets",
+   "fieldtype": "Currency",
+   "label": "Total Assets"
+  },
+  {
+   "fieldname": "total_liabilities",
+   "fieldtype": "Currency",
+   "label": "Total Liabilities"
+  },
+  {
+   "fieldname": "existing_bank_borrowings",
+   "fieldtype": "Currency",
+   "label": "Existing Borrowings"
+  },
+  {
+   "fieldname": "business_address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Business Profile",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "BIZ-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Credit Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "business_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

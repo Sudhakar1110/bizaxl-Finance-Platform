@@ -1,0 +1,154 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "chit_name",
+  "chit_value",
+  "number_of_members",
+  "monthly_subscription",
+  "cb",
+  "duration_months",
+  "start_date",
+  "status",
+  "foreman_section",
+  "foreman_name",
+  "foreman_commission",
+  "foreman_commission_amount",
+  "cb",
+  "auction_day",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CHIT-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "chit_name",
+   "fieldtype": "Data",
+   "label": "Chit Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "chit_value",
+   "fieldtype": "Currency",
+   "label": "Chit Value",
+   "reqd": 1
+  },
+  {
+   "fieldname": "number_of_members",
+   "fieldtype": "Int",
+   "label": "Members",
+   "reqd": 1
+  },
+  {
+   "fieldname": "monthly_subscription",
+   "fieldtype": "Currency",
+   "label": "Monthly Sub",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "duration_months",
+   "fieldtype": "Int",
+   "label": "Duration (Months)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Forming\nActive\nCompleted\nTerminated",
+   "default": "Forming"
+  },
+  {
+   "fieldname": "foreman_section",
+   "fieldtype": "Section Break",
+   "label": "Foreman"
+  },
+  {
+   "fieldname": "foreman_name",
+   "fieldtype": "Data",
+   "label": "Foreman Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "foreman_commission",
+   "fieldtype": "Percent",
+   "label": "Commission (%)",
+   "default": 5
+  },
+  {
+   "fieldname": "foreman_commission_amount",
+   "fieldtype": "Currency",
+   "label": "Commission Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "auction_day",
+   "fieldtype": "Select",
+   "label": "Auction Day",
+   "options": "1st\n5th\n10th\n15th\n20th\n25th\nLast Day"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Chit Group",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "CHIT-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Chit Foreman",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "chit_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

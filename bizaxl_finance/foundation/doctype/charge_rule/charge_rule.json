@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "charge_name",
+  "charge_type",
+  "charge_method",
+  "cb",
+  "fixed_amount",
+  "percentage",
+  "collection_timing",
+  "applicability_section",
+  "applicable_on",
+  "is_taxable",
+  "gst_percentage",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CHG-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "charge_name",
+   "fieldtype": "Data",
+   "label": "Charge Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "charge_type",
+   "fieldtype": "Select",
+   "label": "Charge Type",
+   "options": "Processing Fee\nPrepayment Charge\nLate Payment Fee\nForeclosure Charge\nDocument Charge\nInsurance\nLegal Fee\nValuation Fee\nOther"
+  },
+  {
+   "fieldname": "charge_method",
+   "fieldtype": "Select",
+   "label": "Charge Method",
+   "options": "Fixed Amount\nPercentage of Loan Amount\nPercentage of Outstanding"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fixed_amount",
+   "fieldtype": "Currency",
+   "label": "Fixed Amount"
+  },
+  {
+   "fieldname": "percentage",
+   "fieldtype": "Percent",
+   "label": "Percentage (%)"
+  },
+  {
+   "fieldname": "collection_timing",
+   "fieldtype": "Select",
+   "label": "Collection Timing",
+   "options": "At Disbursement\nWith EMI\nAt Closure\nAt Prepayment"
+  },
+  {
+   "fieldname": "applicability_section",
+   "fieldtype": "Section Break",
+   "label": "Applicability"
+  },
+  {
+   "fieldname": "applicable_on",
+   "fieldtype": "Select",
+   "label": "Applicable On",
+   "options": "All Loans\nPersonal Loan\nBusiness Loan\nHome Loan\nVehicle Loan\nGold Loan\nEducation Loan"
+  },
+  {
+   "fieldname": "is_taxable",
+   "fieldtype": "Check",
+   "label": "Is Taxable"
+  },
+  {
+   "fieldname": "gst_percentage",
+   "fieldtype": "Percent",
+   "label": "GST (%)"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive",
+   "default": "Active"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Charge Rule",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "CHG-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "System Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "charge_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

@@ -1,0 +1,201 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "anchor",
+  "supplier_name",
+  "invoice_number",
+  "invoice_date",
+  "cb",
+  "invoice_amount",
+  "advance_amount",
+  "retention_amount",
+  "grn_section",
+  "grn_number",
+  "grn_verified",
+  "cb",
+  "funding_status",
+  "disbursement_date",
+  "disbursed_amount",
+  "disbursement_mode",
+  "utr_number",
+  "cb",
+  "due_date",
+  "repayment_date",
+  "repayment_amount",
+  "treds_invoice_id",
+  "treds_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "INV-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "anchor",
+   "fieldtype": "Link",
+   "label": "Anchor",
+   "options": "Anchor Master",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Supplier Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoice_number",
+   "fieldtype": "Data",
+   "label": "Invoice Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoice_date",
+   "fieldtype": "Date",
+   "label": "Invoice Date"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "invoice_amount",
+   "fieldtype": "Currency",
+   "label": "Invoice Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "advance_amount",
+   "fieldtype": "Currency",
+   "label": "Advance Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "retention_amount",
+   "fieldtype": "Currency",
+   "label": "Retention Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grn_section",
+   "fieldtype": "Section Break",
+   "label": "GRN"
+  },
+  {
+   "fieldname": "grn_number",
+   "fieldtype": "Data",
+   "label": "GRN Number"
+  },
+  {
+   "fieldname": "grn_verified",
+   "fieldtype": "Check",
+   "label": "GRN Verified"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "funding_status",
+   "fieldtype": "Select",
+   "label": "Funding Status",
+   "options": "Pending\nApproved\nFunded\nRepaid\nSettled",
+   "default": "Pending"
+  },
+  {
+   "fieldname": "disbursement_date",
+   "fieldtype": "Date",
+   "label": "Disbursement Date"
+  },
+  {
+   "fieldname": "disbursed_amount",
+   "fieldtype": "Currency",
+   "label": "Disbursed Amount"
+  },
+  {
+   "fieldname": "disbursement_mode",
+   "fieldtype": "Select",
+   "label": "Mode",
+   "options": "NEFT\nRTGS\nIMPS"
+  },
+  {
+   "fieldname": "utr_number",
+   "fieldtype": "Data",
+   "label": "UTR Number"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "Due Date"
+  },
+  {
+   "fieldname": "repayment_date",
+   "fieldtype": "Date",
+   "label": "Repayment Date"
+  },
+  {
+   "fieldname": "repayment_amount",
+   "fieldtype": "Currency",
+   "label": "Repayment Amount"
+  },
+  {
+   "fieldname": "treds_invoice_id",
+   "fieldtype": "Data",
+   "label": "TReDS Invoice ID"
+  },
+  {
+   "fieldname": "treds_status",
+   "fieldtype": "Select",
+   "label": "TReDS Status",
+   "options": "Not Submitted\nSubmitted\nBid Received\nAccepted\nSettled"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Invoice Finance",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "INV-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "invoice_number",
+ "track_changes": 1,
+ "track_seen": 1
+}

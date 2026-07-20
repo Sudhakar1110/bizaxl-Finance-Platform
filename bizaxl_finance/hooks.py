@@ -1,7 +1,7 @@
 app_name = "bizaxl_finance"
 app_title = "Bizaxl Finance Platform"
 app_publisher = "Bizaxl Technologies"
-app_description = "Complete Financial Services Platform — Banking, Payments, Investments, Loans, Insurance, Credit & Portfolio Management"
+app_description = "Complete Financial Services Platform — 12 Lending Verticals: NBFC, MFI, Gold Loan, Vehicle Loan, Home Loan, Personal Loan, Business Loan, Education Loan, BNPL, Invoice Finance, Chit Fund, Consumer Finance"
 app_email = "info@bizaxl.com"
 app_license = "MIT"
 app_version = "1.0.0"
@@ -34,7 +34,16 @@ fixtures = [
         "Customer",
         "Customer Service Representative",
         "Compliance Officer",
-    ]]]},
+        "System Admin",
+        "Credit Officer",
+        "Collection Officer",
+        "Gold Appraiser",
+        "Branch Manager",
+        "Auditor",
+        "Relationship Manager",
+        "Field Officer",
+        "Chit Foreman",
+    ]]}]},
     "Custom Field",
     "Property Setter",
     {"dt": "Module Def", "filters": [["module_name", "=", "Bizaxl Finance"]]},
@@ -46,11 +55,35 @@ fixtures = [
     {"dt": "Module Def", "filters": [["module_name", "=", "Credit Management"]]},
     {"dt": "Module Def", "filters": [["module_name", "=", "Portfolio Management"]]},
     {"dt": "Module Def", "filters": [["module_name", "=", "Customer Management"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Foundation"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "NBFC Lending"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Gold Loan"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Microfinance"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Vehicle Loan"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Home Loan"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Business Loan"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Education Loan"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "BNPL"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Invoice Finance"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Chit Fund"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Consumer Finance"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Collections"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Risk & Compliance"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Accounting"]]},
     {"dt": "Workspace", "filters": [["name", "=", "Bizaxl Finance"]]},
 ]
 
 # ── Custom Roles ──────────────────────────────────────────────────────────────
 roles = [
+    {"role_name": "System Admin", "desk_access": 1},
+    {"role_name": "Credit Officer", "desk_access": 1},
+    {"role_name": "Collection Officer", "desk_access": 1},
+    {"role_name": "Gold Appraiser", "desk_access": 1},
+    {"role_name": "Branch Manager", "desk_access": 1},
+    {"role_name": "Auditor", "desk_access": 1},
+    {"role_name": "Relationship Manager", "desk_access": 1},
+    {"role_name": "Field Officer", "desk_access": 1},
+    {"role_name": "Chit Foreman", "desk_access": 1},
     {"role_name": "Banking Manager", "desk_access": 1},
     {"role_name": "Payments Manager", "desk_access": 1},
     {"role_name": "Investment Manager", "desk_access": 1},

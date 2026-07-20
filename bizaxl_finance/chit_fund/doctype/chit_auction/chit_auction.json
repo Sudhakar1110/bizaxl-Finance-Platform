@@ -1,0 +1,141 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "chit_group",
+  "auction_number",
+  "auction_date",
+  "winner_name",
+  "cb",
+  "bid_amount",
+  "prize_amount",
+  "foreman_commission",
+  "dividend_per_member",
+  "cb",
+  "status",
+  "participants_json",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CHIT-AUC-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "chit_group",
+   "fieldtype": "Link",
+   "label": "Chit Group",
+   "options": "Chit Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "auction_number",
+   "fieldtype": "Int",
+   "label": "Auction #",
+   "reqd": 1
+  },
+  {
+   "fieldname": "auction_date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "winner_name",
+   "fieldtype": "Data",
+   "label": "Winner Name"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bid_amount",
+   "fieldtype": "Currency",
+   "label": "Bid Amount"
+  },
+  {
+   "fieldname": "prize_amount",
+   "fieldtype": "Currency",
+   "label": "Prize Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "foreman_commission",
+   "fieldtype": "Currency",
+   "label": "Foreman Commission",
+   "read_only": 1
+  },
+  {
+   "fieldname": "dividend_per_member",
+   "fieldtype": "Currency",
+   "label": "Dividend Per Member",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Scheduled\nConducted\nCompleted\nCancelled",
+   "default": "Scheduled"
+  },
+  {
+   "fieldname": "participants_json",
+   "fieldtype": "Code",
+   "label": "Participants & Bids (JSON)",
+   "options": "JSON"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Chit Auction",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "CHIT-AUC-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Chit Foreman",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "auction_number",
+ "track_changes": 1,
+ "track_seen": 1
+}

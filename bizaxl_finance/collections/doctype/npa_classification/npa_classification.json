@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "customer_name",
+  "dpd_days",
+  "npa_category",
+  "cb",
+  "asset_classification",
+  "classification_date",
+  "outstanding_amount",
+  "provisioning_section",
+  "provision_percentage",
+  "provision_amount",
+  "cb",
+  "npa_date",
+  "recovery_date",
+  "status",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "NPA-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name"
+  },
+  {
+   "fieldname": "dpd_days",
+   "fieldtype": "Int",
+   "label": "DPD Days",
+   "read_only": 1
+  },
+  {
+   "fieldname": "npa_category",
+   "fieldtype": "Select",
+   "label": "Category",
+   "options": "SMA-0\nSMA-1\nSMA-2\nSubstandard\nDoubtful\nLoss"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "asset_classification",
+   "fieldtype": "Select",
+   "label": "Asset Classification",
+   "options": "Standard\nSubstandard\nDoubtful - Up to 1 Year\nDoubtful - 1 to 3 Years\nDoubtful - 3+ Years\nLoss"
+  },
+  {
+   "fieldname": "classification_date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "outstanding_amount",
+   "fieldtype": "Currency",
+   "label": "Outstanding"
+  },
+  {
+   "fieldname": "provisioning_section",
+   "fieldtype": "Section Break",
+   "label": "Provision"
+  },
+  {
+   "fieldname": "provision_percentage",
+   "fieldtype": "Percent",
+   "label": "Provision (%)"
+  },
+  {
+   "fieldname": "provision_amount",
+   "fieldtype": "Currency",
+   "label": "Provision Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "npa_date",
+   "fieldtype": "Date",
+   "label": "NPA Date"
+  },
+  {
+   "fieldname": "recovery_date",
+   "fieldtype": "Date",
+   "label": "Recovery Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active NPA\nRecovered\nWritten Off",
+   "default": "Active NPA"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "NPA Classification",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "NPA-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Collection Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "customer_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

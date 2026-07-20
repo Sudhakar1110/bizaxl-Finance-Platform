@@ -1,0 +1,279 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "applicant_name",
+  "applicant_pan",
+  "applicant_aadhaar",
+  "branch",
+  "loan_category",
+  "cb",
+  "loan_amount",
+  "tenure_months",
+  "interest_rate",
+  "status",
+  "employment_section",
+  "employment_type",
+  "monthly_income",
+  "employer_name",
+  "cb",
+  "years_in_current_job",
+  "credit_section",
+  "bureau_score",
+  "bureau_name",
+  "foir",
+  "risk_grade",
+  "cb",
+  "assessed_amount",
+  "recommendation",
+  "approval_section",
+  "committee_level",
+  "sanction_date",
+  "sanctioned_amount",
+  "sanction_letter",
+  "cb",
+  "disbursement_date",
+  "disbursed_amount",
+  "disbursement_mode",
+  "utr_number",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "NBFC-LA-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "applicant_name",
+   "fieldtype": "Data",
+   "label": "Applicant Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "applicant_pan",
+   "fieldtype": "Data",
+   "label": "PAN",
+   "reqd": 1
+  },
+  {
+   "fieldname": "applicant_aadhaar",
+   "fieldtype": "Data",
+   "label": "Aadhaar"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch Master"
+  },
+  {
+   "fieldname": "loan_category",
+   "fieldtype": "Select",
+   "label": "Loan Category",
+   "options": "NBFC Personal\nNBFC Business\nNBFC Vehicle\nNBFC Gold\nNBFC Home\nNBFC Education\nNBFC Consumer"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loan_amount",
+   "fieldtype": "Currency",
+   "label": "Loan Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tenure_months",
+   "fieldtype": "Int",
+   "label": "Tenure (Months)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Percent",
+   "label": "Interest Rate (%)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nUnder Review\nCredit Assessment\nCommittee Pending\nApproved\nRejected\nSanctioned\nDisbursed\nClosed\nDefaulted",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "employment_section",
+   "fieldtype": "Section Break",
+   "label": "Employment"
+  },
+  {
+   "fieldname": "employment_type",
+   "fieldtype": "Select",
+   "label": "Employment Type",
+   "options": "Salaried\nSelf-Employed\nBusiness\nProfessional\nStudent"
+  },
+  {
+   "fieldname": "monthly_income",
+   "fieldtype": "Currency",
+   "label": "Monthly Income"
+  },
+  {
+   "fieldname": "employer_name",
+   "fieldtype": "Data",
+   "label": "Employer Name"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "years_in_current_job",
+   "fieldtype": "Int",
+   "label": "Years in Current Job"
+  },
+  {
+   "fieldname": "credit_section",
+   "fieldtype": "Section Break",
+   "label": "Credit Assessment"
+  },
+  {
+   "fieldname": "bureau_score",
+   "fieldtype": "Int",
+   "label": "Bureau Score"
+  },
+  {
+   "fieldname": "bureau_name",
+   "fieldtype": "Select",
+   "label": "Bureau",
+   "options": "CIBIL\nExperian\nCRIF\nEquifax\nNot Checked"
+  },
+  {
+   "fieldname": "foir",
+   "fieldtype": "Percent",
+   "label": "FOIR (%)"
+  },
+  {
+   "fieldname": "risk_grade",
+   "fieldtype": "Select",
+   "label": "Risk Grade",
+   "options": "A1\nA2\nB1\nB2\nC1\nC2\nD\nNot Assessed"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "assessed_amount",
+   "fieldtype": "Currency",
+   "label": "Assessed Amount"
+  },
+  {
+   "fieldname": "recommendation",
+   "fieldtype": "Select",
+   "label": "Recommendation",
+   "options": "Approve\nRefer\nReject"
+  },
+  {
+   "fieldname": "approval_section",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "fieldname": "committee_level",
+   "fieldtype": "Select",
+   "label": "Committee Level",
+   "options": "Branch Manager\nRegional Credit\nHO Credit Committee\nBoard"
+  },
+  {
+   "fieldname": "sanction_date",
+   "fieldtype": "Date",
+   "label": "Sanction Date"
+  },
+  {
+   "fieldname": "sanctioned_amount",
+   "fieldtype": "Currency",
+   "label": "Sanctioned Amount"
+  },
+  {
+   "fieldname": "sanction_letter",
+   "fieldtype": "Data",
+   "label": "Sanction Letter",
+   "options": "Attach"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "disbursement_date",
+   "fieldtype": "Date",
+   "label": "Disbursement Date"
+  },
+  {
+   "fieldname": "disbursed_amount",
+   "fieldtype": "Currency",
+   "label": "Disbursed Amount"
+  },
+  {
+   "fieldname": "disbursement_mode",
+   "fieldtype": "Select",
+   "label": "Mode",
+   "options": "NEFT\nRTGS\nIMPS\nUPI\nCheque"
+  },
+  {
+   "fieldname": "utr_number",
+   "fieldtype": "Data",
+   "label": "UTR Number"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "NBFC Loan Application",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "NBFC-LA-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Credit Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "applicant_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

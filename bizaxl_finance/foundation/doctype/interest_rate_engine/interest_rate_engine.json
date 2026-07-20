@@ -1,0 +1,168 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "rate_name",
+  "product_type",
+  "rate_type",
+  "cb",
+  "base_rate",
+  "spread",
+  "effective_rate",
+  "tiering_section",
+  "min_loan_amount",
+  "max_loan_amount",
+  "cb",
+  "penalty_rate",
+  "prepayment_charge",
+  "processing_fee_percent",
+  "validity_section",
+  "effective_from",
+  "effective_to",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "IRE-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "rate_name",
+   "fieldtype": "Data",
+   "label": "Rate Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "product_type",
+   "fieldtype": "Select",
+   "label": "Product Type",
+   "options": "Personal Loan\nBusiness Loan\nHome Loan\nVehicle Loan\nGold Loan\nEducation Loan\nMFI\nConsumer Finance\nBNPL\nInvoice Finance\nChit Fund"
+  },
+  {
+   "fieldname": "rate_type",
+   "fieldtype": "Select",
+   "label": "Rate Type",
+   "options": "Fixed\nFloating\nMCLR Linked\nRepo Linked\nBase Rate"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "base_rate",
+   "fieldtype": "Percent",
+   "label": "Base Rate (%)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "spread",
+   "fieldtype": "Percent",
+   "label": "Spread (%)"
+  },
+  {
+   "fieldname": "effective_rate",
+   "fieldtype": "Percent",
+   "label": "Effective Rate (%)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tiering_section",
+   "fieldtype": "Section Break",
+   "label": "Amount Tiering"
+  },
+  {
+   "fieldname": "min_loan_amount",
+   "fieldtype": "Currency",
+   "label": "Min Loan Amount"
+  },
+  {
+   "fieldname": "max_loan_amount",
+   "fieldtype": "Currency",
+   "label": "Max Loan Amount"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "penalty_rate",
+   "fieldtype": "Percent",
+   "label": "Penalty Rate (%)"
+  },
+  {
+   "fieldname": "prepayment_charge",
+   "fieldtype": "Percent",
+   "label": "Prepayment Charge (%)"
+  },
+  {
+   "fieldname": "processing_fee_percent",
+   "fieldtype": "Percent",
+   "label": "Processing Fee (%)"
+  },
+  {
+   "fieldname": "validity_section",
+   "fieldtype": "Section Break",
+   "label": "Validity"
+  },
+  {
+   "fieldname": "effective_from",
+   "fieldtype": "Date",
+   "label": "Effective From"
+  },
+  {
+   "fieldname": "effective_to",
+   "fieldtype": "Date",
+   "label": "Effective To"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive\nArchived",
+   "default": "Active"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Interest Rate Engine",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "IRE-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "System Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "rate_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

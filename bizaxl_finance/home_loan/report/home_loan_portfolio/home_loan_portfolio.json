@@ -1,0 +1,14 @@
+{
+ "doctype": "Report",
+ "name": "home_loan_portfolio",
+ "report_name": "home_loan_portfolio",
+ "report_type": "Script Report",
+ "ref_doctype": "Property Detail",
+ "is_standard": "Yes",
+ "module": "Bizaxl Finance",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}

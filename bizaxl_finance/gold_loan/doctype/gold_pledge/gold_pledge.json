@@ -1,0 +1,251 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "customer_name",
+  "customer_pan",
+  "customer_aadhaar",
+  "branch",
+  "cb",
+  "loan_amount",
+  "interest_rate",
+  "tenure_months",
+  "interest_type",
+  "gold_details_section",
+  "gold_items",
+  "cb",
+  "total_gross_weight",
+  "total_net_weight",
+  "total_gold_value",
+  "ltv_section",
+  "ltv_amount",
+  "ltv_ratio",
+  "market_rate_per_gram",
+  "cb",
+  "valuation_date",
+  "appraiser",
+  "disbursement_section",
+  "disbursement_date",
+  "disbursed_amount",
+  "disbursement_mode",
+  "cb",
+  "maturity_date",
+  "status",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "GP-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_pan",
+   "fieldtype": "Data",
+   "label": "PAN"
+  },
+  {
+   "fieldname": "customer_aadhaar",
+   "fieldtype": "Data",
+   "label": "Aadhaar"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch Master"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loan_amount",
+   "fieldtype": "Currency",
+   "label": "Loan Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Percent",
+   "label": "Interest Rate (%)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tenure_months",
+   "fieldtype": "Int",
+   "label": "Tenure (Months)",
+   "reqd": 1,
+   "default": 12
+  },
+  {
+   "fieldname": "interest_type",
+   "fieldtype": "Select",
+   "label": "Interest Type",
+   "options": "Flat\nReducing\nDaily Reducing"
+  },
+  {
+   "fieldname": "gold_details_section",
+   "fieldtype": "Section Break",
+   "label": "Gold Items"
+  },
+  {
+   "fieldname": "gold_items",
+   "fieldtype": "Table",
+   "label": "Gold Items",
+   "options": "Gold Item"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_gross_weight",
+   "fieldtype": "Float",
+   "label": "Total Gross Weight (gms)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_net_weight",
+   "fieldtype": "Float",
+   "label": "Total Net Weight (gms)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_gold_value",
+   "fieldtype": "Currency",
+   "label": "Total Gold Value",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ltv_section",
+   "fieldtype": "Section Break",
+   "label": "LTV"
+  },
+  {
+   "fieldname": "ltv_amount",
+   "fieldtype": "Currency",
+   "label": "LTV Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ltv_ratio",
+   "fieldtype": "Percent",
+   "label": "LTV Ratio (%)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "market_rate_per_gram",
+   "fieldtype": "Currency",
+   "label": "Market Rate/gm"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "valuation_date",
+   "fieldtype": "Date",
+   "label": "Valuation Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "appraiser",
+   "fieldtype": "Data",
+   "label": "Appraiser"
+  },
+  {
+   "fieldname": "disbursement_section",
+   "fieldtype": "Section Break",
+   "label": "Disbursement"
+  },
+  {
+   "fieldname": "disbursement_date",
+   "fieldtype": "Date",
+   "label": "Disbursement Date"
+  },
+  {
+   "fieldname": "disbursed_amount",
+   "fieldtype": "Currency",
+   "label": "Disbursed Amount"
+  },
+  {
+   "fieldname": "disbursement_mode",
+   "fieldtype": "Select",
+   "label": "Mode",
+   "options": "Cash\nUPI\nNEFT\nRTGS"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "maturity_date",
+   "fieldtype": "Date",
+   "label": "Maturity Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nTop-Up Available\nOverdue\nNPA\nAuction Initiated\nAuctioned\nClosed\nReleased",
+   "default": "Active",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Gold Pledge",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "GP-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Gold Appraiser",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "customer_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

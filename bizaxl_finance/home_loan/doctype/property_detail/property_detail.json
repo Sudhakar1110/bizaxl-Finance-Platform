@@ -1,0 +1,172 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "property_type",
+  "property_address",
+  "city",
+  "state",
+  "pincode",
+  "cb",
+  "built_up_area",
+  "agreed_value",
+  "market_value",
+  "legal_section",
+  "title_deed_number",
+  "encumbrance_certificate",
+  "cb",
+  "legal_status",
+  "valuation_section",
+  "valuated_amount",
+  "valuation_report",
+  "cb",
+  "construction_stage"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "PROP-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "property_type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Apartment/Flat\nIndependent House\nVilla\nPlot\nCommercial\nUnder Construction\nReady to Move"
+  },
+  {
+   "fieldname": "property_address",
+   "fieldtype": "Data",
+   "label": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "label": "Pincode"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "built_up_area",
+   "fieldtype": "Float",
+   "label": "Built-up Area (sqft)"
+  },
+  {
+   "fieldname": "agreed_value",
+   "fieldtype": "Currency",
+   "label": "Agreed Value"
+  },
+  {
+   "fieldname": "market_value",
+   "fieldtype": "Currency",
+   "label": "Market Value"
+  },
+  {
+   "fieldname": "legal_section",
+   "fieldtype": "Section Break",
+   "label": "Legal"
+  },
+  {
+   "fieldname": "title_deed_number",
+   "fieldtype": "Data",
+   "label": "Title Deed Number"
+  },
+  {
+   "fieldname": "encumbrance_certificate",
+   "fieldtype": "Data",
+   "label": "Encumbrance Certificate",
+   "options": "Attach"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "legal_status",
+   "fieldtype": "Select",
+   "label": "Legal Status",
+   "options": "Clear Title\nDisputed\nEncumbered\nPending Verification"
+  },
+  {
+   "fieldname": "valuation_section",
+   "fieldtype": "Section Break",
+   "label": "Valuation"
+  },
+  {
+   "fieldname": "valuated_amount",
+   "fieldtype": "Currency",
+   "label": "Valuated Amount"
+  },
+  {
+   "fieldname": "valuation_report",
+   "fieldtype": "Data",
+   "label": "Valuation Report",
+   "options": "Attach"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "construction_stage",
+   "fieldtype": "Select",
+   "label": "Construction Stage",
+   "options": "Not Started\nFoundation\nGround Floor\nFirst Floor\nRoof\nFinishing\nCompleted"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Property Detail",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "PROP-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "property_address",
+ "track_changes": 1,
+ "track_seen": 1
+}

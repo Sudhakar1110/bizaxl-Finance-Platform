@@ -1,0 +1,119 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "tranche_number",
+  "tranche_amount",
+  "tranche_purpose",
+  "cb",
+  "planned_date",
+  "actual_date",
+  "status",
+  "engineer_certificate_obtained",
+  "utr_number",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "TR-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "tranche_number",
+   "fieldtype": "Int",
+   "label": "Tranche Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tranche_amount",
+   "fieldtype": "Currency",
+   "label": "Tranche Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tranche_purpose",
+   "fieldtype": "Select",
+   "label": "Purpose",
+   "options": "Land Purchase\nFoundation\nConstruction Stage 1\nConstruction Stage 2\nFinishing\nInterior"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "planned_date",
+   "fieldtype": "Date",
+   "label": "Planned Date"
+  },
+  {
+   "fieldname": "actual_date",
+   "fieldtype": "Date",
+   "label": "Actual Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Planned\nApproved\nDisbursed\nOn Hold\nCancelled",
+   "default": "Planned"
+  },
+  {
+   "fieldname": "engineer_certificate_obtained",
+   "fieldtype": "Check",
+   "label": "Engineer Certificate Obtained"
+  },
+  {
+   "fieldname": "utr_number",
+   "fieldtype": "Data",
+   "label": "UTR Number"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Bizaxl Finance",
+ "name": "Tranche Disbursement",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "TR-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "name",
+ "track_changes": 1,
+ "track_seen": 1
+}

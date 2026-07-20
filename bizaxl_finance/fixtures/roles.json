@@ -1,6 +1,66 @@
 [
   {
     "doctype": "Role",
+    "name": "System Admin",
+    "role_name": "System Admin",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Credit Officer",
+    "role_name": "Credit Officer",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Collection Officer",
+    "role_name": "Collection Officer",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Gold Appraiser",
+    "role_name": "Gold Appraiser",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Branch Manager",
+    "role_name": "Branch Manager",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Compliance Officer",
+    "role_name": "Compliance Officer",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Auditor",
+    "role_name": "Auditor",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Relationship Manager",
+    "role_name": "Relationship Manager",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Field Officer",
+    "role_name": "Field Officer",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Chit Foreman",
+    "role_name": "Chit Foreman",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
     "name": "Banking Manager",
     "role_name": "Banking Manager",
     "desk_access": 1
@@ -45,12 +105,6 @@
     "doctype": "Role",
     "name": "Customer Service Representative",
     "role_name": "Customer Service Representative",
-    "desk_access": 1
-  },
-  {
-    "doctype": "Role",
-    "name": "Compliance Officer",
-    "role_name": "Compliance Officer",
     "desk_access": 1
   }
 ]
