@@ -43,7 +43,7 @@ fixtures = [
         "Relationship Manager",
         "Field Officer",
         "Chit Foreman",
-    ]]}]},
+    ]]]},
     "Custom Field",
     "Property Setter",
     {"dt": "Module Def", "filters": [["module_name", "=", "Bizaxl Finance"]]},
