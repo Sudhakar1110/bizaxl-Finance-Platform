@@ -1,0 +1,149 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "loan_application",
+  "customer",
+  "customer_name",
+  "repayment_type",
+  "column_break_1",
+  "amount",
+  "payment_date",
+  "status",
+  "section_details",
+  "emi_number",
+  "principal_amount",
+  "interest_amount",
+  "column_break_2",
+  "penalty_amount",
+  "outstanding_balance",
+  "transaction_reference"
+ ],
+ "fields": [
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "repayment_type",
+   "fieldtype": "Select",
+   "label": "Repayment Type",
+   "options": "Scheduled EMI\nPrepayment\nPartial Prepayment\nForeclosure",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nCompleted\nFailed",
+   "default": "Pending"
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break",
+   "label": "Repayment Breakdown"
+  },
+  {
+   "fieldname": "emi_number",
+   "fieldtype": "Int",
+   "label": "EMI Number"
+  },
+  {
+   "fieldname": "principal_amount",
+   "fieldtype": "Currency",
+   "label": "Principal Amount"
+  },
+  {
+   "fieldname": "interest_amount",
+   "fieldtype": "Currency",
+   "label": "Interest Amount"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "penalty_amount",
+   "fieldtype": "Currency",
+   "label": "Penalty Amount"
+  },
+  {
+   "fieldname": "outstanding_balance",
+   "fieldtype": "Currency",
+   "label": "Outstanding Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "transaction_reference",
+   "fieldtype": "Data",
+   "label": "Transaction Reference",
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Loans",
+ "name": "Loan Repayment",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "LR-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

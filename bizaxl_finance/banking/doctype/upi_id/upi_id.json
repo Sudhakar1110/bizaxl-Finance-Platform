@@ -1,0 +1,154 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "upi_id",
+  "bank_account",
+  "column_break_1",
+  "provider",
+  "is_primary",
+  "status",
+  "section_details",
+  "linked_mobile",
+  "registered_on",
+  "last_used",
+  "column_break_2",
+  "daily_limit",
+  "per_transaction_limit",
+  "total_transactions"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "label": "Bank Account",
+   "options": "Bank Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "provider",
+   "fieldtype": "Select",
+   "label": "UPI Provider",
+   "options": "BHIM\nGoogle Pay\nPhonePe\nPaytm\nAmazon Pay\nCRED\nMobikwik\nOther"
+  },
+  {
+   "fieldname": "is_primary",
+   "fieldtype": "Check",
+   "label": "Is Primary",
+   "default": 0
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nBlocked\nDeactivated",
+   "default": "Active"
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break",
+   "label": "Usage Details"
+  },
+  {
+   "fieldname": "linked_mobile",
+   "fieldtype": "Data",
+   "label": "Linked Mobile"
+  },
+  {
+   "fieldname": "registered_on",
+   "fieldtype": "Date",
+   "label": "Registered On"
+  },
+  {
+   "fieldname": "last_used",
+   "fieldtype": "Datetime",
+   "label": "Last Used",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "daily_limit",
+   "fieldtype": "Currency",
+   "label": "Daily Limit",
+   "default": 100000
+  },
+  {
+   "fieldname": "per_transaction_limit",
+   "fieldtype": "Currency",
+   "label": "Per Transaction Limit",
+   "default": 10000
+  },
+  {
+   "fieldname": "total_transactions",
+   "fieldtype": "Int",
+   "label": "Total Transactions",
+   "default": 0,
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Banking",
+ "name": "UPI ID",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "UPI-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Banking Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "upi_id",
+ "track_changes": 1
+}

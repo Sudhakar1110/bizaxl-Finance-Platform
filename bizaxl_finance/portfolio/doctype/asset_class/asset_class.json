@@ -1,0 +1,69 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "asset_class_name",
+  "description",
+  "risk_level",
+  "expected_return",
+  "icon"
+ ],
+ "fields": [
+  {
+   "fieldname": "asset_class_name",
+   "fieldtype": "Data",
+   "label": "Asset Class Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "risk_level",
+   "fieldtype": "Select",
+   "label": "Risk Level",
+   "options": "Low\nModerate\nHigh\nVery High"
+  },
+  {
+   "fieldname": "expected_return",
+   "fieldtype": "Percent",
+   "label": "Expected Return"
+  },
+  {
+   "fieldname": "icon",
+   "fieldtype": "Data",
+   "label": "Icon"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Portfolio Management",
+ "name": "Asset Class",
+ "naming_rule": "By Naming Series",
+ "autoname": "field:asset_class_name",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Investment Manager",
+   "read": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "asset_class_name"
+}

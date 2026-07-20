@@ -1,0 +1,165 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "fd_number",
+  "bank",
+  "deposit_amount",
+  "column_break_1",
+  "interest_rate",
+  "tenure_months",
+  "interest_type",
+  "maturity_amount",
+  "section_dates",
+  "deposit_date",
+  "maturity_date",
+  "status",
+  "column_break_2",
+  "auto_renew",
+  "nominee",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "fd_number",
+   "fieldtype": "Data",
+   "label": "FD Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "bank",
+   "fieldtype": "Data",
+   "label": "Bank / Institution"
+  },
+  {
+   "fieldname": "deposit_amount",
+   "fieldtype": "Currency",
+   "label": "Deposit Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Percent",
+   "label": "Interest Rate",
+   "default": 7.0
+  },
+  {
+   "fieldname": "tenure_months",
+   "fieldtype": "Int",
+   "label": "Tenure (Months)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "interest_type",
+   "fieldtype": "Select",
+   "label": "Interest Type",
+   "options": "Simple\nCompounded\nCumulative",
+   "default": "Simple"
+  },
+  {
+   "fieldname": "maturity_amount",
+   "fieldtype": "Currency",
+   "label": "Maturity Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_dates",
+   "fieldtype": "Section Break",
+   "label": "Dates & Status"
+  },
+  {
+   "fieldname": "deposit_date",
+   "fieldtype": "Date",
+   "label": "Deposit Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "maturity_date",
+   "fieldtype": "Date",
+   "label": "Maturity Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nMatured\nPremature Closed\nRenewed\nLien",
+   "default": "Active",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "auto_renew",
+   "fieldtype": "Check",
+   "label": "Auto Renew",
+   "default": 0
+  },
+  {
+   "fieldname": "nominee",
+   "fieldtype": "Data",
+   "label": "Nominee"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Investments",
+ "name": "Fixed Deposit",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "FD-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Investment Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "fd_number"
+}

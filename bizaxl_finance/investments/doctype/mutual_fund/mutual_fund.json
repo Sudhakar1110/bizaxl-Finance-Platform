@@ -1,0 +1,216 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "fund_name",
+  "fund_type",
+  "amc",
+  "column_break_1",
+  "scheme_code",
+  "isin",
+  "nav",
+  "nav_date",
+  "section_holdings",
+  "units_held",
+  "invested_amount",
+  "current_value",
+  "column_break_2",
+  "folio_number",
+  "investment_account",
+  "status",
+  "section_returns",
+  "abs_return",
+  "annual_return",
+  "xirr",
+  "column_break_3",
+  "purchase_date",
+  "purchase_nav",
+  "last_updated"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "fund_name",
+   "fieldtype": "Data",
+   "label": "Fund Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "fund_type",
+   "fieldtype": "Select",
+   "label": "Fund Type",
+   "options": "Equity Large Cap\nEquity Mid Cap\nEquity Small Cap\nELSS\nDebt\nLiquid\nHybrid\nIndex\nSectoral\nThematic\nInternational Fund of Funds\nOther",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "amc",
+   "fieldtype": "Select",
+   "label": "AMC",
+   "options": "SBI Mutual Fund\nHDFC Mutual Fund\nICICI Prudential Mutual Fund\nKotak Mahindra Mutual Fund\nAxis Mutual Fund\nNippon India Mutual Fund\nUTI Mutual Fund\nAditya Birla Sun Life Mutual Fund\nMirae Asset Mutual Fund\nTata Mutual Fund\nQuant Mutual Fund\nPGIM India Mutual Fund\nDSP Mutual Fund\nOther"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "scheme_code",
+   "fieldtype": "Data",
+   "label": "Scheme Code"
+  },
+  {
+   "fieldname": "isin",
+   "fieldtype": "Data",
+   "label": "ISIN"
+  },
+  {
+   "fieldname": "nav",
+   "fieldtype": "Currency",
+   "label": "NAV",
+   "precision": 4
+  },
+  {
+   "fieldname": "nav_date",
+   "fieldtype": "Date",
+   "label": "NAV Date"
+  },
+  {
+   "fieldname": "section_holdings",
+   "fieldtype": "Section Break",
+   "label": "Holdings"
+  },
+  {
+   "fieldname": "units_held",
+   "fieldtype": "Float",
+   "label": "Units Held",
+   "precision": 4
+  },
+  {
+   "fieldname": "invested_amount",
+   "fieldtype": "Currency",
+   "label": "Invested Amount"
+  },
+  {
+   "fieldname": "current_value",
+   "fieldtype": "Currency",
+   "label": "Current Value",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "folio_number",
+   "fieldtype": "Data",
+   "label": "Folio Number"
+  },
+  {
+   "fieldname": "investment_account",
+   "fieldtype": "Link",
+   "label": "Investment Account",
+   "options": "Investment Account"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nRedeemed\nSIP Active\nSIP Stopped",
+   "default": "Active"
+  },
+  {
+   "fieldname": "section_returns",
+   "fieldtype": "Section Break",
+   "label": "Returns"
+  },
+  {
+   "fieldname": "abs_return",
+   "fieldtype": "Percent",
+   "label": "Absolute Return",
+   "read_only": 1
+  },
+  {
+   "fieldname": "annual_return",
+   "fieldtype": "Percent",
+   "label": "Annual Return",
+   "read_only": 1
+  },
+  {
+   "fieldname": "xirr",
+   "fieldtype": "Percent",
+   "label": "XIRR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "purchase_date",
+   "fieldtype": "Date",
+   "label": "Purchase Date"
+  },
+  {
+   "fieldname": "purchase_nav",
+   "fieldtype": "Currency",
+   "label": "Purchase NAV",
+   "precision": 4
+  },
+  {
+   "fieldname": "last_updated",
+   "fieldtype": "Datetime",
+   "label": "Last Updated",
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Investments",
+ "name": "Mutual Fund",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "MF-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Investment Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "fund_name",
+ "track_changes": 1
+}

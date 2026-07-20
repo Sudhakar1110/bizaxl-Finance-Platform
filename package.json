@@ -1,0 +1,14 @@
+{
+	"name": "bizaxl_finance",
+	"description": "Bizaxl Finance Platform",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Sudhakar1110/bizaxl-Finance-Platform.git"
+	},
+	"author": "Bizaxl Technologies",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Sudhakar1110/bizaxl-Finance-Platform/issues"
+	},
+	"homepage": "https://github.com/Sudhakar1110/bizaxl-Finance-Platform#readme"
+}

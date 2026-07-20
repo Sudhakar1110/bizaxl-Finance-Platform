@@ -1,0 +1,78 @@
+from __future__ import unicode_literals
+from frappe import _
+
+def get_data():
+    return [
+        {
+            "module_name": "Bizaxl Finance",
+            "category": "Modules",
+            "color": "#1a73e8",
+            "icon": "octicon octicon-credit-card",
+            "type": "module",
+            "label": _("Bizaxl Finance"),
+        },
+        {
+            "module_name": "Banking",
+            "category": "Modules",
+            "color": "#1565c0",
+            "icon": "octicon octicon-bank",
+            "type": "module",
+            "label": _("Banking & Accounts"),
+        },
+        {
+            "module_name": "Payments",
+            "category": "Modules",
+            "color": "#00897b",
+            "icon": "octicon octicon-credit-card",
+            "type": "module",
+            "label": _("Payments & Bills"),
+        },
+        {
+            "module_name": "Investments",
+            "category": "Modules",
+            "color": "#7b1fa2",
+            "icon": "octicon octicon-graph",
+            "type": "module",
+            "label": _("Investments"),
+        },
+        {
+            "module_name": "Loans",
+            "category": "Modules",
+            "color": "#e65100",
+            "icon": "octicon octicon-bookmark",
+            "type": "module",
+            "label": _("Loan Management"),
+        },
+        {
+            "module_name": "Insurance",
+            "category": "Modules",
+            "color": "#2e7d32",
+            "icon": "octicon octicon-shield-check",
+            "type": "module",
+            "label": _("Insurance"),
+        },
+        {
+            "module_name": "Credit Management",
+            "category": "Modules",
+            "color": "#37474f",
+            "icon": "octicon octicon-star",
+            "type": "module",
+            "label": _("Credit Management"),
+        },
+        {
+            "module_name": "Portfolio Management",
+            "category": "Modules",
+            "color": "#283593",
+            "icon": "octicon octicon-pie-chart",
+            "type": "module",
+            "label": _("Portfolio & Goals"),
+        },
+        {
+            "module_name": "Customer Management",
+            "category": "Modules",
+            "color": "#4a148c",
+            "icon": "octicon octicon-people",
+            "type": "module",
+            "label": _("Customer Management"),
+        },
+    ]

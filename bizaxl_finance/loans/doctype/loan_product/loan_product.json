@@ -1,0 +1,148 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "loan_product_name",
+  "loan_type",
+  "interest_rate",
+  "processing_fee",
+  "column_break_1",
+  "min_amount",
+  "max_amount",
+  "min_tenure_months",
+  "max_tenure_months",
+  "section_eligibility",
+  "min_credit_score",
+  "min_income",
+  "max_age",
+  "column_break_2",
+  "collateral_required",
+  "income_multiple",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "loan_product_name",
+   "fieldtype": "Data",
+   "label": "Loan Product Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "loan_type",
+   "fieldtype": "Select",
+   "label": "Loan Type",
+   "options": "Personal Loan\nHome Loan\nAuto Loan\nEducation Loan\nBusiness Loan\nLoan Against Property\nLoan Against Securities\nGold Loan\nMSME Loan\nAgriculture Loan\nConsumer Durable Loan\nMedical Loan\nWedding Loan\nTravel Loan\nOther",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Percent",
+   "label": "Interest Rate (p.a.)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "processing_fee",
+   "fieldtype": "Percent",
+   "label": "Processing Fee",
+   "default": 0
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "min_amount",
+   "fieldtype": "Currency",
+   "label": "Minimum Amount"
+  },
+  {
+   "fieldname": "max_amount",
+   "fieldtype": "Currency",
+   "label": "Maximum Amount"
+  },
+  {
+   "fieldname": "min_tenure_months",
+   "fieldtype": "Int",
+   "label": "Minimum Tenure (Months)",
+   "default": 3
+  },
+  {
+   "fieldname": "max_tenure_months",
+   "fieldtype": "Int",
+   "label": "Maximum Tenure (Months)",
+   "default": 60
+  },
+  {
+   "fieldname": "section_eligibility",
+   "fieldtype": "Section Break",
+   "label": "Eligibility Criteria"
+  },
+  {
+   "fieldname": "min_credit_score",
+   "fieldtype": "Int",
+   "label": "Minimum Credit Score"
+  },
+  {
+   "fieldname": "min_income",
+   "fieldtype": "Currency",
+   "label": "Minimum Annual Income"
+  },
+  {
+   "fieldname": "max_age",
+   "fieldtype": "Int",
+   "label": "Maximum Age (at maturity)"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "collateral_required",
+   "fieldtype": "Check",
+   "label": "Collateral Required",
+   "default": 0
+  },
+  {
+   "fieldname": "income_multiple",
+   "fieldtype": "Float",
+   "label": "Income Multiple"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Loans",
+ "name": "Loan Product",
+ "naming_rule": "By Naming Series",
+ "autoname": "field:loan_product_name",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "loan_product_name"
+}

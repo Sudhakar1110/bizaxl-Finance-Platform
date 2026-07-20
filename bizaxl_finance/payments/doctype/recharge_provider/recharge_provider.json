@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "provider_name",
+  "provider_type",
+  "service_category",
+  "is_active",
+  "column_break_1",
+  "api_endpoint",
+  "api_key",
+  "commission_rate",
+  "section_plans",
+  "available_plans_json"
+ ],
+ "fields": [
+  {
+   "fieldname": "provider_name",
+   "fieldtype": "Data",
+   "label": "Provider Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "provider_type",
+   "fieldtype": "Select",
+   "label": "Provider Type",
+   "options": "Telecom\nElectricity\nWater\nGas\nInsurance\nLoan\nDTH\nBroadband\nMunicipal\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "service_category",
+   "fieldtype": "Link",
+   "label": "Service Category",
+   "options": "Bill Payment Category"
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active",
+   "default": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "api_endpoint",
+   "fieldtype": "Data",
+   "label": "API Endpoint"
+  },
+  {
+   "fieldname": "api_key",
+   "fieldtype": "Password",
+   "label": "API Key"
+  },
+  {
+   "fieldname": "commission_rate",
+   "fieldtype": "Percent",
+   "label": "Commission Rate"
+  },
+  {
+   "fieldname": "section_plans",
+   "fieldtype": "Section Break",
+   "label": "Plans"
+  },
+  {
+   "fieldname": "available_plans_json",
+   "fieldtype": "Code",
+   "label": "Available Plans (JSON)",
+   "options": "JSON"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Payments",
+ "name": "Recharge Provider",
+ "naming_rule": "By Naming Series",
+ "autoname": "field:provider_name",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Payments Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "provider_name"
+}

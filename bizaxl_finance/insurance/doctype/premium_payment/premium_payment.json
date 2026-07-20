@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "insurance_policy",
+  "customer",
+  "customer_name",
+  "premium_due_date",
+  "column_break_1",
+  "premium_amount",
+  "paid_date",
+  "status",
+  "receipt_number"
+ ],
+ "fields": [
+  {
+   "fieldname": "insurance_policy",
+   "fieldtype": "Link",
+   "label": "Insurance Policy",
+   "options": "Insurance Policy",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "premium_due_date",
+   "fieldtype": "Date",
+   "label": "Premium Due Date"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "premium_amount",
+   "fieldtype": "Currency",
+   "label": "Premium Amount"
+  },
+  {
+   "fieldname": "paid_date",
+   "fieldtype": "Date",
+   "label": "Paid Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nPaid\nOverdue\nGrace Period",
+   "default": "Pending"
+  },
+  {
+   "fieldname": "receipt_number",
+   "fieldtype": "Data",
+   "label": "Receipt Number"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Insurance",
+ "name": "Premium Payment",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "PP-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Insurance Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

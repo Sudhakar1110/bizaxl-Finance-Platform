@@ -1,0 +1,104 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "insurance_policy",
+  "customer",
+  "customer_name",
+  "claim_type",
+  "column_break_1",
+  "claim_amount",
+  "approved_amount",
+  "claim_date",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "insurance_policy",
+   "fieldtype": "Link",
+   "label": "Insurance Policy",
+   "options": "Insurance Policy",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "claim_type",
+   "fieldtype": "Select",
+   "label": "Claim Type",
+   "options": "Death Claim\nMaturity Claim\nDisability Claim\nCritical Illness\nHospitalization\nAccident Claim\nSurrender\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "claim_amount",
+   "fieldtype": "Currency",
+   "label": "Claim Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "approved_amount",
+   "fieldtype": "Currency",
+   "label": "Approved Amount"
+  },
+  {
+   "fieldname": "claim_date",
+   "fieldtype": "Date",
+   "label": "Claim Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Filed\nUnder Review\nApproved\nRejected\nSettled\nPaid",
+   "default": "Filed"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Insurance",
+ "name": "Insurance Claim",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "CLM-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Insurance Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "claim_type"
+}

@@ -1,0 +1,70 @@
+/* Bizaxl Finance Platform - Custom Styles */
+
+/* Dashboard cards */
+.bizaxl-dashboard-card {
+    background: linear-gradient(135deg, #1a73e8, #0d47a1);
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.bizaxl-balance-card {
+    background: linear-gradient(135deg, #00897b, #00695c);
+}
+
+.bizaxl-investment-card {
+    background: linear-gradient(135deg, #7b1fa2, #4a148c);
+}
+
+.bizaxl-loan-card {
+    background: linear-gradient(135deg, #e65100, #bf360c);
+}
+
+.bizaxl-insurance-card {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+}
+
+/* Custom form styles */
+.bizaxl-form-section {
+    border-left: 3px solid #1a73e8;
+    padding-left: 15px;
+    margin: 10px 0;
+}
+
+/* Transaction status badges */
+.bizaxl-status-completed {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.bizaxl-status-pending {
+    background: #fff3e0;
+    color: #e65100;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.bizaxl-status-failed {
+    background: #ffebee;
+    color: #c62828;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+/* Portal styles */
+.bizaxl-portal-header {
+    background: linear-gradient(135deg, #1a73e8, #0d47a1);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* Table customizations */
+.bizaxl-table-row:hover {
+    background: #f5f5f5;
+    cursor: pointer;
+}

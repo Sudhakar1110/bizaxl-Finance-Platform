@@ -1,0 +1,116 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "loan_application",
+  "customer",
+  "collateral_type",
+  "description",
+  "column_break_1",
+  "estimated_value",
+  "verified_value",
+  "valuation_date",
+  "section_documents",
+  "document_number",
+  "document_attachment",
+  "verification_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer"
+  },
+  {
+   "fieldname": "collateral_type",
+   "fieldtype": "Select",
+   "label": "Collateral Type",
+   "options": "Property\nVehicle\nGold\nShares/Mutual Funds\nFixed Deposit\nInsurance Policy\nOther Securities",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "estimated_value",
+   "fieldtype": "Currency",
+   "label": "Estimated Value"
+  },
+  {
+   "fieldname": "verified_value",
+   "fieldtype": "Currency",
+   "label": "Verified Value"
+  },
+  {
+   "fieldname": "valuation_date",
+   "fieldtype": "Date",
+   "label": "Valuation Date"
+  },
+  {
+   "fieldname": "section_documents",
+   "fieldtype": "Section Break",
+   "label": "Documents"
+  },
+  {
+   "fieldname": "document_number",
+   "fieldtype": "Data",
+   "label": "Document Number"
+  },
+  {
+   "fieldname": "document_attachment",
+   "fieldtype": "Attach",
+   "label": "Document Attachment"
+  },
+  {
+   "fieldname": "verification_status",
+   "fieldtype": "Select",
+   "label": "Verification Status",
+   "options": "Pending\nVerified\nRejected",
+   "default": "Pending"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Loans",
+ "name": "Loan Collateral",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "COLL-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "collateral_type"
+}

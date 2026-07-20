@@ -1,0 +1,145 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "total_invested",
+  "total_current_value",
+  "column_break_1",
+  "total_returns",
+  "return_percentage",
+  "last_updated",
+  "section_breakdown",
+  "equity_percentage",
+  "debt_percentage",
+  "gold_percentage",
+  "column_break_2",
+  "fd_percentage",
+  "real_estate_percentage",
+  "cash_percentage",
+  "other_percentage"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "total_invested",
+   "fieldtype": "Currency",
+   "label": "Total Invested",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_current_value",
+   "fieldtype": "Currency",
+   "label": "Total Current Value",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_returns",
+   "fieldtype": "Currency",
+   "label": "Total Returns",
+   "read_only": 1
+  },
+  {
+   "fieldname": "return_percentage",
+   "fieldtype": "Percent",
+   "label": "Return Percentage",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_updated",
+   "fieldtype": "Datetime",
+   "label": "Last Updated",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_breakdown",
+   "fieldtype": "Section Break",
+   "label": "Asset Allocation"
+  },
+  {
+   "fieldname": "equity_percentage",
+   "fieldtype": "Percent",
+   "label": "Equity %"
+  },
+  {
+   "fieldname": "debt_percentage",
+   "fieldtype": "Percent",
+   "label": "Debt %"
+  },
+  {
+   "fieldname": "gold_percentage",
+   "fieldtype": "Percent",
+   "label": "Gold %"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fd_percentage",
+   "fieldtype": "Percent",
+   "label": "Fixed Deposit %"
+  },
+  {
+   "fieldname": "real_estate_percentage",
+   "fieldtype": "Percent",
+   "label": "Real Estate %"
+  },
+  {
+   "fieldname": "cash_percentage",
+   "fieldtype": "Percent",
+   "label": "Cash %"
+  },
+  {
+   "fieldname": "other_percentage",
+   "fieldtype": "Percent",
+   "label": "Other %"
+  }
+ ],
+ "issingle": 0,
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Portfolio Management",
+ "name": "Portfolio Summary",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Investment Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

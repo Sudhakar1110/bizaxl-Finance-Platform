@@ -1,0 +1,136 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "mutual_fund",
+  "customer",
+  "transaction_type",
+  "amount",
+  "units",
+  "column_break_1",
+  "nav_at_transaction",
+  "transaction_date",
+  "transaction_charges",
+  "remarks",
+  "section_payment",
+  "payment_account",
+  "is_sip",
+  "sip_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "mutual_fund",
+   "fieldtype": "Link",
+   "label": "Mutual Fund",
+   "options": "Mutual Fund",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer"
+  },
+  {
+   "fieldname": "transaction_type",
+   "fieldtype": "Select",
+   "label": "Transaction Type",
+   "options": "Purchase\nRedemption\nSwitch In\nSwitch Out\nDividend Reinvest\nDividend Payout\nSIP\nSTP",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "units",
+   "fieldtype": "Float",
+   "label": "Units",
+   "precision": 4
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "nav_at_transaction",
+   "fieldtype": "Currency",
+   "label": "NAV at Transaction",
+   "precision": 4
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "transaction_charges",
+   "fieldtype": "Currency",
+   "label": "Transaction Charges"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "section_payment",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "fieldname": "payment_account",
+   "fieldtype": "Link",
+   "label": "Payment Account",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "is_sip",
+   "fieldtype": "Check",
+   "label": "Is SIP"
+  },
+  {
+   "fieldname": "sip_id",
+   "fieldtype": "Data",
+   "label": "SIP ID"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Investments",
+ "name": "Mutual Fund Transaction",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "MFT-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Investment Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "transaction_type"
+}

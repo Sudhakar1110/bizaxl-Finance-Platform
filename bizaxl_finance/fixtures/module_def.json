@@ -1,0 +1,65 @@
+[
+  {
+    "doctype": "Module Def",
+    "name": "Bizaxl Finance",
+    "module_name": "Bizaxl Finance",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Banking",
+    "module_name": "Banking",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Payments",
+    "module_name": "Payments",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Investments",
+    "module_name": "Investments",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Loans",
+    "module_name": "Loans",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Insurance",
+    "module_name": "Insurance",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Credit Management",
+    "module_name": "Credit Management",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Portfolio Management",
+    "module_name": "Portfolio Management",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Customer Management",
+    "module_name": "Customer Management",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  }
+]

@@ -1,0 +1,192 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "communication_type",
+  "channel",
+  "column_break_1",
+  "subject",
+  "status",
+  "direction",
+  "section_content",
+  "message_body",
+  "column_break_2",
+  "attachments",
+  "response_required",
+  "response_by",
+  "response",
+  "section_metadata",
+  "sent_on",
+  "delivered_on",
+  "read_on",
+  "column_break_3",
+  "delivery_status",
+  "reference_doctype",
+  "reference_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "communication_type",
+   "fieldtype": "Select",
+   "label": "Communication Type",
+   "options": "Notification\nAlert\nReminder\nMarketing\nSupport\nTransaction\nPromotional\nOTP\nKYC Update",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "channel",
+   "fieldtype": "Select",
+   "label": "Channel",
+   "options": "Email\nSMS\nWhatsApp\nApp Notification\nIn-App Message\nPush Notification",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "Subject",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nQueued\nSent\nDelivered\nFailed\nRead",
+   "default": "Draft"
+  },
+  {
+   "fieldname": "direction",
+   "fieldtype": "Select",
+   "label": "Direction",
+   "options": "Outbound\nInbound",
+   "default": "Outbound"
+  },
+  {
+   "fieldname": "section_content",
+   "fieldtype": "Section Break",
+   "label": "Content"
+  },
+  {
+   "fieldname": "message_body",
+   "fieldtype": "Text Editor",
+   "label": "Message Body",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attachments",
+   "fieldtype": "Attach",
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "response_required",
+   "fieldtype": "Check",
+   "label": "Response Required",
+   "default": 0
+  },
+  {
+   "fieldname": "response_by",
+   "fieldtype": "Datetime",
+   "label": "Response By"
+  },
+  {
+   "fieldname": "response",
+   "fieldtype": "Text Editor",
+   "label": "Response"
+  },
+  {
+   "fieldname": "section_metadata",
+   "fieldtype": "Section Break",
+   "label": "Delivery Metadata"
+  },
+  {
+   "fieldname": "sent_on",
+   "fieldtype": "Datetime",
+   "label": "Sent On"
+  },
+  {
+   "fieldname": "delivered_on",
+   "fieldtype": "Datetime",
+   "label": "Delivered On"
+  },
+  {
+   "fieldname": "read_on",
+   "fieldtype": "Datetime",
+   "label": "Read On"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "delivery_status",
+   "fieldtype": "Select",
+   "label": "Delivery Status",
+   "options": "Pending\nSent\nDelivered\nFailed\nBounced\nRead"
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "label": "Reference DocType",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Reference Name",
+   "options": "reference_doctype"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Customer Management",
+ "name": "Customer Communication",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "COM-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Customer Service Representative",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "subject",
+ "track_changes": 1
+}

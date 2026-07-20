@@ -1,0 +1,180 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company_name",
+  "default_currency",
+  "column_break_1",
+  "enable_upi",
+  "enable_netbanking",
+  "enable_auto_pay",
+  "section_limits",
+  "max_upi_daily",
+  "max_upi_per_transaction",
+  "max_netbanking_daily",
+  "column_break_2",
+  "min_balance_alert",
+  "interest_rate_savings",
+  "interest_rate_fd",
+  "section_notifications",
+  "enable_transaction_alerts",
+  "enable_balance_alerts",
+  "alert_email",
+  "column_break_3",
+  "enable_otp_verification",
+  "enable_kyc_check",
+  "enable_risk_assessment"
+ ],
+ "fields": [
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Company Name",
+   "reqd": 1,
+   "default": "Bizaxl Finance"
+  },
+  {
+   "fieldname": "default_currency",
+   "fieldtype": "Link",
+   "label": "Default Currency",
+   "options": "Currency",
+   "default": "INR"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "enable_upi",
+   "fieldtype": "Check",
+   "label": "Enable UPI",
+   "default": 1
+  },
+  {
+   "fieldname": "enable_netbanking",
+   "fieldtype": "Check",
+   "label": "Enable Net Banking",
+   "default": 1
+  },
+  {
+   "fieldname": "enable_auto_pay",
+   "fieldtype": "Check",
+   "label": "Enable Auto Pay",
+   "default": 0
+  },
+  {
+   "fieldname": "section_limits",
+   "fieldtype": "Section Break",
+   "label": "Transaction Limits"
+  },
+  {
+   "fieldname": "max_upi_daily",
+   "fieldtype": "Currency",
+   "label": "Max UPI Daily Limit",
+   "default": 100000
+  },
+  {
+   "fieldname": "max_upi_per_transaction",
+   "fieldtype": "Currency",
+   "label": "Max UPI Per Transaction",
+   "default": 10000
+  },
+  {
+   "fieldname": "max_netbanking_daily",
+   "fieldtype": "Currency",
+   "label": "Max Net Banking Daily",
+   "default": 500000
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "min_balance_alert",
+   "fieldtype": "Currency",
+   "label": "Min Balance Alert",
+   "default": 1000
+  },
+  {
+   "fieldname": "interest_rate_savings",
+   "fieldtype": "Percent",
+   "label": "Interest Rate (Savings)",
+   "default": 3.5
+  },
+  {
+   "fieldname": "interest_rate_fd",
+   "fieldtype": "Percent",
+   "label": "Interest Rate (Fixed Deposit)",
+   "default": 7.0
+  },
+  {
+   "fieldname": "section_notifications",
+   "fieldtype": "Section Break",
+   "label": "Notifications & Security"
+  },
+  {
+   "fieldname": "enable_transaction_alerts",
+   "fieldtype": "Check",
+   "label": "Enable Transaction Alerts",
+   "default": 1
+  },
+  {
+   "fieldname": "enable_balance_alerts",
+   "fieldtype": "Check",
+   "label": "Enable Balance Alerts",
+   "default": 1
+  },
+  {
+   "fieldname": "alert_email",
+   "fieldtype": "Data",
+   "label": "Alert Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "enable_otp_verification",
+   "fieldtype": "Check",
+   "label": "Enable OTP Verification",
+   "default": 1
+  },
+  {
+   "fieldname": "enable_kyc_check",
+   "fieldtype": "Check",
+   "label": "Enable KYC Check",
+   "default": 1
+  },
+  {
+   "fieldname": "enable_risk_assessment",
+   "fieldtype": "Check",
+   "label": "Enable Risk Assessment",
+   "default": 1
+  }
+ ],
+ "issingle": 1,
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Banking",
+ "name": "Banking Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1
+  },
+  {
+   "role": "Banking Manager",
+   "read": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

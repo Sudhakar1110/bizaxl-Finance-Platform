@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "category_name",
+  "description",
+  "icon",
+  "column_break_1",
+  "is_active",
+  "sort_order",
+  "section_providers",
+  "default_providers",
+  "section_commission",
+  "commission_percentage",
+  "commission_fixed"
+ ],
+ "fields": [
+  {
+   "fieldname": "category_name",
+   "fieldtype": "Data",
+   "label": "Category Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "icon",
+   "fieldtype": "Data",
+   "label": "Icon"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active",
+   "default": 1
+  },
+  {
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "Sort Order"
+  },
+  {
+   "fieldname": "section_providers",
+   "fieldtype": "Section Break",
+   "label": "Providers"
+  },
+  {
+   "fieldname": "default_providers",
+   "fieldtype": "Select",
+   "label": "Default Providers",
+   "options": "Provider 1\nProvider 2\nProvider 3"
+  },
+  {
+   "fieldname": "section_commission",
+   "fieldtype": "Section Break",
+   "label": "Commission"
+  },
+  {
+   "fieldname": "commission_percentage",
+   "fieldtype": "Percent",
+   "label": "Commission Percentage",
+   "default": 0
+  },
+  {
+   "fieldname": "commission_fixed",
+   "fieldtype": "Currency",
+   "label": "Commission Fixed"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Payments",
+ "name": "Bill Payment Category",
+ "naming_rule": "By Naming Series",
+ "autoname": "field:category_name",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Payments Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "sort_order",
+ "sort_order": "ASC",
+ "title_field": "category_name"
+}

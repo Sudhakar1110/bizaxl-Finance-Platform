@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "credit_score",
+  "changed_on",
+  "change_reason",
+  "previous_score"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "credit_score",
+   "fieldtype": "Int",
+   "label": "Credit Score",
+   "reqd": 1
+  },
+  {
+   "fieldname": "changed_on",
+   "fieldtype": "Datetime",
+   "label": "Changed On",
+   "default": "Now"
+  },
+  {
+   "fieldname": "change_reason",
+   "fieldtype": "Small Text",
+   "label": "Change Reason"
+  },
+  {
+   "fieldname": "previous_score",
+   "fieldtype": "Int",
+   "label": "Previous Score"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Credit Management",
+ "name": "Credit Score History",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "CSH-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Credit Analyst",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "changed_on",
+ "sort_order": "DESC",
+ "title_field": "credit_score"
+}

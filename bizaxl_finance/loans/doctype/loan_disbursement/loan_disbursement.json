@@ -1,0 +1,175 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "loan_application",
+  "customer",
+  "customer_name",
+  "disbursement_amount",
+  "column_break_1",
+  "disbursement_date",
+  "interest_rate",
+  "tenure_months",
+  "status",
+  "section_payment",
+  "disbursement_account",
+  "transaction_reference",
+  "mode_of_payment",
+  "column_break_2",
+  "processing_fee_amount",
+  "gst_amount",
+  "net_disbursement",
+  "section_repayment",
+  "first_emi_date",
+  "total_emi_count"
+ ],
+ "fields": [
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "disbursement_amount",
+   "fieldtype": "Currency",
+   "label": "Disbursement Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "disbursement_date",
+   "fieldtype": "Date",
+   "label": "Disbursement Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Percent",
+   "label": "Interest Rate (p.a.)",
+   "reqd": 1,
+   "fetch_from": "loan_application.interest_rate"
+  },
+  {
+   "fieldname": "tenure_months",
+   "fieldtype": "Int",
+   "label": "Tenure (Months)",
+   "fetch_from": "loan_application.tenure_months"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nDisbursed\nFailed",
+   "default": "Pending"
+  },
+  {
+   "fieldname": "section_payment",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "fieldname": "disbursement_account",
+   "fieldtype": "Link",
+   "label": "Disbursement Account",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "transaction_reference",
+   "fieldtype": "Data",
+   "label": "Transaction Reference"
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode of Payment",
+   "options": "Bank Transfer\nCheque\nCash\nDirect Credit"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "processing_fee_amount",
+   "fieldtype": "Currency",
+   "label": "Processing Fee Amount"
+  },
+  {
+   "fieldname": "gst_amount",
+   "fieldtype": "Currency",
+   "label": "GST Amount"
+  },
+  {
+   "fieldname": "net_disbursement",
+   "fieldtype": "Currency",
+   "label": "Net Disbursement",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_repayment",
+   "fieldtype": "Section Break",
+   "label": "Repayment Schedule"
+  },
+  {
+   "fieldname": "first_emi_date",
+   "fieldtype": "Date",
+   "label": "First EMI Date"
+  },
+  {
+   "fieldname": "total_emi_count",
+   "fieldtype": "Int",
+   "label": "Total EMI Count",
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Loans",
+ "name": "Loan Disbursement",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "LD-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "loan_application"
+}

@@ -1,0 +1,247 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "transaction_type",
+  "transaction_category",
+  "amount",
+  "column_break_1",
+  "transaction_date",
+  "value_date",
+  "status",
+  "reference_number",
+  "section_accounts",
+  "from_account",
+  "to_account",
+  "column_break_2",
+  "from_upi",
+  "to_upi",
+  "section_details",
+  "description",
+  "remarks",
+  "column_break_3",
+  "payment_method",
+  "instrument_number",
+  "instrument_date",
+  "section_metadata",
+  "balance_before_transaction",
+  "balance_after_transaction",
+  "column_break_4",
+  "bank_reference",
+  "reversal_of"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "transaction_type",
+   "fieldtype": "Select",
+   "label": "Transaction Type",
+   "options": "Credit\nDebit\nTransfer\nPayment\nDeposit\nWithdrawal\nRefund\nInterest\nFee\nCharge\nReversal",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "transaction_category",
+   "fieldtype": "Select",
+   "label": "Transaction Category",
+   "options": "UPI Transfer\nNEFT\nRTGS\nIMPS\nCheque\nCash\nCredit Card\nDebit Card\nNet Banking\nWallet\nAuto Pay\nBill Payment\nLoan Disbursement\nLoan Repayment\nInsurance Premium\nInvestment\nSalary\nRewards\nRefund\nOther",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Datetime",
+   "label": "Transaction Date",
+   "default": "Now",
+   "reqd": 1
+  },
+  {
+   "fieldname": "value_date",
+   "fieldtype": "Date",
+   "label": "Value Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nCompleted\nFailed\nReversed\nCancelled\nRefunded",
+   "default": "Pending",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "reference_number",
+   "fieldtype": "Data",
+   "label": "Reference Number",
+   "unique": 1
+  },
+  {
+   "fieldname": "section_accounts",
+   "fieldtype": "Section Break",
+   "label": "Account Details"
+  },
+  {
+   "fieldname": "from_account",
+   "fieldtype": "Link",
+   "label": "From Account",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "to_account",
+   "fieldtype": "Link",
+   "label": "To Account",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_upi",
+   "fieldtype": "Link",
+   "label": "From UPI",
+   "options": "UPI ID"
+  },
+  {
+   "fieldname": "to_upi",
+   "fieldtype": "Data",
+   "label": "To UPI ID"
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break",
+   "label": "Transaction Details"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Link",
+   "label": "Payment Method",
+   "options": "Payment Method"
+  },
+  {
+   "fieldname": "instrument_number",
+   "fieldtype": "Data",
+   "label": "Instrument Number"
+  },
+  {
+   "fieldname": "instrument_date",
+   "fieldtype": "Date",
+   "label": "Instrument Date"
+  },
+  {
+   "fieldname": "section_metadata",
+   "fieldtype": "Section Break",
+   "label": "Balance & Reference"
+  },
+  {
+   "fieldname": "balance_before_transaction",
+   "fieldtype": "Currency",
+   "label": "Balance Before Transaction",
+   "read_only": 1
+  },
+  {
+   "fieldname": "balance_after_transaction",
+   "fieldtype": "Currency",
+   "label": "Balance After Transaction",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_reference",
+   "fieldtype": "Data",
+   "label": "Bank Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reversal_of",
+   "fieldtype": "Link",
+   "label": "Reversal Of",
+   "options": "Transaction"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Banking",
+ "name": "Transaction",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "TXN-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "Banking Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "transaction_date",
+ "sort_order": "DESC",
+ "title_field": "reference_number",
+ "track_changes": 1,
+ "track_seen": 1
+}

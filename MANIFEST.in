@@ -1,0 +1,6 @@
+include *.txt
+include *.json
+include *.md
+recursive-include bizaxl_finance *
+recursive-exclude *__pycache__*
+recursive-exclude *.pyc

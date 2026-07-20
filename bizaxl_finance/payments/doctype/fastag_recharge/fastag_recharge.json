@@ -1,0 +1,164 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "vehicle_number",
+  "tag_id",
+  "issuer",
+  "column_break_1",
+  "recharge_amount",
+  "recharge_date",
+  "status",
+  "transaction_reference",
+  "section_details",
+  "current_balance",
+  "low_balance_threshold",
+  "auto_recharge",
+  "column_break_2",
+  "auto_recharge_amount",
+  "valid_upto",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "vehicle_number",
+   "fieldtype": "Data",
+   "label": "Vehicle Number",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tag_id",
+   "fieldtype": "Data",
+   "label": "Tag ID"
+  },
+  {
+   "fieldname": "issuer",
+   "fieldtype": "Select",
+   "label": "Issuer",
+   "options": "Indian Highways\nICICI Bank\nHDFC Bank\nSBI\nAxis Bank\nPaytm\nAirtel Payments Bank\nOther"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "recharge_amount",
+   "fieldtype": "Currency",
+   "label": "Recharge Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "recharge_date",
+   "fieldtype": "Date",
+   "label": "Recharge Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nCompleted\nFailed\nRefunded",
+   "default": "Pending"
+  },
+  {
+   "fieldname": "transaction_reference",
+   "fieldtype": "Data",
+   "label": "Transaction Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break",
+   "label": "Additional Details"
+  },
+  {
+   "fieldname": "current_balance",
+   "fieldtype": "Currency",
+   "label": "Current Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "low_balance_threshold",
+   "fieldtype": "Currency",
+   "label": "Low Balance Threshold",
+   "default": 100
+  },
+  {
+   "fieldname": "auto_recharge",
+   "fieldtype": "Check",
+   "label": "Auto Recharge",
+   "default": 0
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "auto_recharge_amount",
+   "fieldtype": "Currency",
+   "label": "Auto Recharge Amount",
+   "depends_on": "eval:doc.auto_recharge"
+  },
+  {
+   "fieldname": "valid_upto",
+   "fieldtype": "Date",
+   "label": "Valid Upto"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Payments",
+ "name": "FASTag Recharge",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "FASTAG-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Payments Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "vehicle_number"
+}

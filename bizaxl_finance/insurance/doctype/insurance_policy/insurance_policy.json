@@ -1,0 +1,160 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "insurance_product",
+  "policy_number",
+  "column_break_1",
+  "sum_assured",
+  "premium_amount",
+  "premium_frequency",
+  "status",
+  "section_terms",
+  "policy_start_date",
+  "policy_end_date",
+  "nominee",
+  "column_break_2",
+  "insured_name",
+  "insured_age",
+  "add_on_rider"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "insurance_product",
+   "fieldtype": "Link",
+   "label": "Insurance Product",
+   "options": "Insurance Product",
+   "reqd": 1
+  },
+  {
+   "fieldname": "policy_number",
+   "fieldtype": "Data",
+   "label": "Policy Number",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sum_assured",
+   "fieldtype": "Currency",
+   "label": "Sum Assured",
+   "reqd": 1
+  },
+  {
+   "fieldname": "premium_amount",
+   "fieldtype": "Currency",
+   "label": "Premium Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "premium_frequency",
+   "fieldtype": "Select",
+   "label": "Premium Frequency",
+   "options": "Monthly\nQuarterly\nHalf Yearly\nYearly\nSingle"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nLapsed\nMatured\nSurrendered\nClaimed\nCancelled",
+   "default": "Active",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_terms",
+   "fieldtype": "Section Break",
+   "label": "Term & Coverage"
+  },
+  {
+   "fieldname": "policy_start_date",
+   "fieldtype": "Date",
+   "label": "Policy Start Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "policy_end_date",
+   "fieldtype": "Date",
+   "label": "Policy End Date"
+  },
+  {
+   "fieldname": "nominee",
+   "fieldtype": "Data",
+   "label": "Nominee"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insured_name",
+   "fieldtype": "Data",
+   "label": "Insured Name"
+  },
+  {
+   "fieldname": "insured_age",
+   "fieldtype": "Int",
+   "label": "Insured Age"
+  },
+  {
+   "fieldname": "add_on_rider",
+   "fieldtype": "Data",
+   "label": "Add-On Rider"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Insurance",
+ "name": "Insurance Policy",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "POL-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Insurance Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "policy_number",
+ "track_changes": 1,
+ "track_seen": 1
+}

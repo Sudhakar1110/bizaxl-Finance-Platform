@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "goal_name",
+  "target_score",
+  "current_score",
+  "column_break_1",
+  "target_date",
+  "status",
+  "action_plan"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "goal_name",
+   "fieldtype": "Data",
+   "label": "Goal Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "target_score",
+   "fieldtype": "Int",
+   "label": "Target Score",
+   "reqd": 1
+  },
+  {
+   "fieldname": "current_score",
+   "fieldtype": "Int",
+   "label": "Current Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "target_date",
+   "fieldtype": "Date",
+   "label": "Target Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nAchieved\nMissed",
+   "default": "Active"
+  },
+  {
+   "fieldname": "action_plan",
+   "fieldtype": "Small Text",
+   "label": "Action Plan"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Credit Management",
+ "name": "Credit Goal",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "CG-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Credit Analyst",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "goal_name"
+}

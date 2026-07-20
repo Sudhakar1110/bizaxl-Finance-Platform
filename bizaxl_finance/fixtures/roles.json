@@ -1,0 +1,56 @@
+[
+  {
+    "doctype": "Role",
+    "name": "Banking Manager",
+    "role_name": "Banking Manager",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Payments Manager",
+    "role_name": "Payments Manager",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Investment Manager",
+    "role_name": "Investment Manager",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Loan Manager",
+    "role_name": "Loan Manager",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Insurance Manager",
+    "role_name": "Insurance Manager",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Credit Analyst",
+    "role_name": "Credit Analyst",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Customer",
+    "role_name": "Customer",
+    "desk_access": 0
+  },
+  {
+    "doctype": "Role",
+    "name": "Customer Service Representative",
+    "role_name": "Customer Service Representative",
+    "desk_access": 1
+  },
+  {
+    "doctype": "Role",
+    "name": "Compliance Officer",
+    "role_name": "Compliance Officer",
+    "desk_access": 1
+  }
+]

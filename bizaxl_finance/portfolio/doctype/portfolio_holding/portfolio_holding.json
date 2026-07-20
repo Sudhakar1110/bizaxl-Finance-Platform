@@ -1,0 +1,166 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "asset_class",
+  "holding_name",
+  "asset_type",
+  "column_break_1",
+  "invested_amount",
+  "current_value",
+  "quantity",
+  "return_percentage",
+  "section_details",
+  "purchase_date",
+  "maturity_date",
+  "isin",
+  "column_break_2",
+  "provider",
+  "account_reference",
+  "status",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "asset_class",
+   "fieldtype": "Link",
+   "label": "Asset Class",
+   "options": "Asset Class"
+  },
+  {
+   "fieldname": "holding_name",
+   "fieldtype": "Data",
+   "label": "Holding Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "asset_type",
+   "fieldtype": "Select",
+   "label": "Asset Type",
+   "options": "Mutual Fund\nStock\nETF\nFixed Deposit\nDigital Gold\nBond\nDebenture\nPPF\nNPS\nSSY\nReal Estate\nOther",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "invested_amount",
+   "fieldtype": "Currency",
+   "label": "Invested Amount"
+  },
+  {
+   "fieldname": "current_value",
+   "fieldtype": "Currency",
+   "label": "Current Value"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "label": "Quantity",
+   "precision": 4
+  },
+  {
+   "fieldname": "return_percentage",
+   "fieldtype": "Percent",
+   "label": "Return (%)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "purchase_date",
+   "fieldtype": "Date",
+   "label": "Purchase Date"
+  },
+  {
+   "fieldname": "maturity_date",
+   "fieldtype": "Date",
+   "label": "Maturity Date"
+  },
+  {
+   "fieldname": "isin",
+   "fieldtype": "Data",
+   "label": "ISIN"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "provider",
+   "fieldtype": "Data",
+   "label": "Provider"
+  },
+  {
+   "fieldname": "account_reference",
+   "fieldtype": "Data",
+   "label": "Account Reference"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nClosed\nTransferred",
+   "default": "Active"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Portfolio Management",
+ "name": "Portfolio Holding",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "PH-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Investment Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "holding_name",
+ "track_changes": 1
+}

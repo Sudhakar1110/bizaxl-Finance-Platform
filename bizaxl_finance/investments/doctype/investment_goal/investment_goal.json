@@ -1,0 +1,110 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "goal_name",
+  "goal_category",
+  "target_amount",
+  "column_break_1",
+  "current_savings",
+  "monthly_contribution",
+  "target_date",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "goal_name",
+   "fieldtype": "Data",
+   "label": "Goal Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "goal_category",
+   "fieldtype": "Select",
+   "label": "Goal Category",
+   "options": "Retirement\nEducation\nHome Purchase\nVacation\nEmergency Fund\nWedding\nVehicle Purchase\nWealth Creation\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "target_amount",
+   "fieldtype": "Currency",
+   "label": "Target Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "current_savings",
+   "fieldtype": "Currency",
+   "label": "Current Savings"
+  },
+  {
+   "fieldname": "monthly_contribution",
+   "fieldtype": "Currency",
+   "label": "Monthly Contribution"
+  },
+  {
+   "fieldname": "target_date",
+   "fieldtype": "Date",
+   "label": "Target Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nAchieved\nOn Hold\nCancelled",
+   "default": "Active"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Investments",
+ "name": "Investment Goal",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "GOAL-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Investment Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "goal_name"
+}
