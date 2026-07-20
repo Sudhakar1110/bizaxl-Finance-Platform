@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import frappe
 
 def get_bank_account_permission_query_conditions(user=None):

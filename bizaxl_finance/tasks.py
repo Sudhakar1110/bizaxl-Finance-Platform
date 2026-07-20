@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import frappe
 from frappe.utils import today, now_datetime, add_days, add_months, date_diff
 

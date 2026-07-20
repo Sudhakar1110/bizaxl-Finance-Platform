@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 app_name = "bizaxl_finance"
 app_title = "Bizaxl Finance Platform"
 app_publisher = "Bizaxl Technologies"

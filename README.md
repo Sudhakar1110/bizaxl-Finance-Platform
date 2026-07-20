@@ -67,23 +67,41 @@ A comprehensive financial services platform built on **Frappe Framework v15+** a
 - Frappe Framework v15+
 - ERPNext v15+
 
-### Steps
+### IMPORTANT: Correct Installation Steps
+
+> ⚠️ **Note:** The GitHub repo name (`bizaxl-Finance-Platform`) differs from the Python module name (`bizaxl_finance`). You MUST use the explicit app name when running `bench get-app`.
 
 ```bash
-# Navigate to bench directory
-cd ~/frappe-bench
+# STEP 1: Get the app with EXPLICIT app name mapping
+bench get-app bizaxl_finance https://github.com/Sudhakar1110/bizaxl-Finance-Platform.git --branch main
 
-# Get the app
-bench get-app https://github.com/Sudhakar1110/bizaxl-Finance-Platform.git
+# STEP 2: Install on your site
+bench --site finance.bizaxl.org install-app bizaxl_finance
 
-# Install on site
-bench --site yoursite.com install-app bizaxl_finance
-
-# Build assets
+# STEP 3: Build assets and migrate
 bench build
+bench --site finance.bizaxl.org migrate
+```
 
-# Migrate
-bench --site yoursite.com migrate
+### If you already ran get-app and got ModuleNotFoundError
+
+The error `No module named 'bizaxl_finance'` means the app directory wasn't properly created. Fix it:
+
+```bash
+# Remove old broken directory
+rm -rf apps/bizaxl-Finance-Platform
+
+# Re-fetch with explicit app name
+bench get-app bizaxl_finance https://github.com/Sudhakar1110/bizaxl-Finance-Platform.git --branch main
+
+# Now install
+bench --site finance.bizaxl.org install-app bizaxl_finance
+```
+
+### Alternative: Install from local path
+```bash
+bench get-app bizaxl_finance /path/to/cloned/repo
+bench --site finance.bizaxl.org install-app bizaxl_finance
 ```
 
 ## Modules
