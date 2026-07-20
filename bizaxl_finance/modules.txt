@@ -19,4 +19,4 @@ Invoice Finance
 Chit Fund
 Consumer Finance
 Collections
-Risk & Compliance
+Risk Compliance
