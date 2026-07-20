@@ -5,6 +5,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "customer",
   "customer_name",
   "fd_number",
@@ -25,6 +26,15 @@
   "remarks"
  ],
  "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "FD-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
   {
    "fieldname": "customer",
    "fieldtype": "Link",
@@ -64,7 +74,7 @@
    "fieldname": "interest_rate",
    "fieldtype": "Percent",
    "label": "Interest Rate",
-   "default": 7.0
+   "default": 7
   },
   {
    "fieldname": "tenure_months",

@@ -87,15 +87,9 @@ scheduler_events = {
 override_doctype_dashboards = {}
 
 # ── Document Events ───────────────────────────────────────────────────────────
-doc_events = {
-    "Loan Application": {
-        "before_save": "bizaxl_finance.loans.doctype.loan_application.loan_application.before_save",
-    },
-    "Transaction": {
-        "on_submit": "bizaxl_finance.banking.doctype.transaction.transaction.on_submit",
-        "on_cancel": "bizaxl_finance.banking.doctype.transaction.transaction.on_cancel",
-    },
-}
+# DocType events are handled via standard Frappe controller methods
+# (before_save, before_submit, on_submit, etc.) in each DocType's Python file
+doc_events = {}
 
 # ── Website ───────────────────────────────────────────────────────────────────
 website_route_rules = [
