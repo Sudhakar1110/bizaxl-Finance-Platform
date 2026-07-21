@@ -42,27 +42,23 @@ class GoldPledge(Document):
             self.disbursement_date = today()
 
     def _log_ltv_breach(self):
-        """Log LTV breach as a customer communication alert"""
+        """Log LTV breach. Gold Pledge has no direct Bizaxl Customer link,
+        so we log via frappe.log_error for manual review."""
         if not self.name:
             return
-        try:
-            frappe.get_doc({
-                "doctype": "Customer Communication",
-                "customer": self.name,
-                "subject": "LTV Breach Alert - Gold Loan",
-                "message_body": (
-                    f"Your Gold Loan LTV ratio is {self.ltv_ratio}%. "
-                    f"This exceeds the regulatory limit. Please make a partial repayment "
-                    f"or pledge additional gold to maintain compliance."
-                ),
-                "channel": "App Notification",
-                "communication_type": "Alert",
-                "status": "Draft",
-                "reference_doctype": "Gold Pledge",
-                "reference_name": self.name,
-            }).insert(ignore_permissions=True)
-        except Exception as e:
-            frappe.log_error(f"Failed to create LTV breach alert: {e}", "Gold Pledge")
+        frappe.log_error(
+            title="Gold LTV Breach",
+            message=(
+                f"Gold Pledge {self.name}: LTV {self.ltv_ratio}% exceeds 75%.\n"
+                f"Customer: {self.customer_name}, Amount: {self.loan_amount}"
+            )
+        )
+        # Also set a user-friendly message
+        frappe.msgprint(
+            f"⚠️ LTV Breach logged for {self.customer_name}. "
+            f"LTV ratio {self.ltv_ratio}% exceeds RBI 75% limit.",
+            alert=True, indicator="red"
+        )
 
     def on_submit(self):
         pass  # LTV monitoring handled via scheduler
@@ -79,20 +75,10 @@ def daily_ltv_monitoring():
         # In production: fetch live MCX rate and re-calculate LTV
         # live_rate = get_mcx_gold_rate()
         if loan.ltv_ratio and loan.ltv_ratio > 75:
-            try:
-                frappe.get_doc({
-                    "doctype": "Customer Communication",
-                    "customer": loan.name,
-                    "subject": "Daily LTV Alert - Action Required",
-                    "message_body": (
-                        f"Your Gold Loan LTV is {loan.ltv_ratio}%. "
-                        f"Please contact branch for options."
-                    ),
-                    "channel": "App Notification",
-                    "communication_type": "Alert",
-                    "status": "Draft",
-                    "reference_doctype": "Gold Pledge",
-                    "reference_name": loan.name,
-                }).insert(ignore_permissions=True)
-            except Exception as e:
-                frappe.log_error(f"Daily LTV alert failed for {loan.name}: {e}", "Gold LTV Monitor")
+            frappe.log_error(
+                title="Daily Gold LTV Alert",
+                message=(
+                    f"Gold Pledge {loan.name}: LTV {loan.ltv_ratio}% exceeds 75%.\n"
+                    f"Customer: {loan.customer_name}, Amount: {loan.loan_amount}"
+                )
+            )

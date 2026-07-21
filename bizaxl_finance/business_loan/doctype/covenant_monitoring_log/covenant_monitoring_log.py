@@ -67,23 +67,19 @@ class CovenantMonitoringLog(Document):
         self.remarks = f"Next review: {next_date}. Last check: {today()}. Result: {self.result}" if not self.remarks else self.remarks
 
     def _send_breach_alert(self):
-        """Send notification on covenant breach"""
+        """Log covenant breach — Covenant Monitoring Log has no direct
+        Bizaxl Customer link, so we log via frappe.log_error."""
         breach_type = "CRITICAL" if self.result == "Critical" else "BREACH"
-        try:
-            frappe.get_doc({
-                "doctype": "Customer Communication",
-                "customer": self.name,
-                "subject": f"Covenant {breach_type}: {self.covenant_type}",
-                "message_body": (
-                    f"Covenant {self.covenant_type}: Required "
-                    f"{self.required_value}, Actual {self.actual_value}. "
-                    f"Result: {self.result}"
-                ),
-                "channel": "App Notification",
-                "communication_type": "Alert",
-                "status": "Draft",
-                "reference_doctype": "Covenant Monitoring Log",
-                "reference_name": self.name,
-            }).insert(ignore_permissions=True)
-        except Exception as e:
-            frappe.log_error(f"Failed to send covenant breach alert: {e}", "Covenant Monitor")
+        frappe.log_error(
+            title=f"Covenant {breach_type}: {self.covenant_type}",
+            message=(
+                f"Covenant Monitoring Log {self.name}: {self.covenant_type}\n"
+                f"Required: {self.required_value}, Actual: {self.actual_value}\n"
+                f"Result: {self.result}. Remarks: {self.remarks or ''}"
+            )
+        )
+        frappe.msgprint(
+            f"⚠️ Covenant {breach_type}: {self.covenant_type} "
+            f"(Required {self.required_value}, Actual {self.actual_value})",
+            alert=True, indicator="red"
+        )
