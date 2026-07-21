@@ -26,6 +26,7 @@ def load_demo_data():
     # to inner function closures. These must be in the enclosing scope.
     import random
     import math
+    import json
     from frappe.utils import today, add_months, add_days, add_years
 
     # ── Helpers ─────────────────────────────────────────────────────────────
@@ -957,12 +958,63 @@ def load_demo_data():
         print("  ✅ NBFC data created")
 
     # ═══════════════════════════════════════════════════════════════════════════
+    # FIX MODULE DEFS (self-healing for "Module X not found" errors)
+    # ═══════════════════════════════════════════════════════════════════════════
+    def _fix_modules():
+        """Ensure all Module Defs exist with app_name='bizaxl_finance'."""
+        # Read the DocType JSON to extract module names
+        import os
+        base = frappe.get_app_path("bizaxl_finance")
+        modules_found = set()
+        for root, dirs, files in os.walk(os.path.join(base, "fixtures")):
+            for f in files:
+                if f == "module_def.json":
+                    with open(os.path.join(root, f)) as fp:
+                        for m in json.load(fp):
+                            modules_found.add(m["module_name"])
+        # Also scan doctype json files to find referenced modules
+        for root, dirs, files in os.walk(base):
+            for f in files:
+                if f.endswith(".json") and "doctype" in root:
+                    try:
+                        with open(os.path.join(root, f)) as fp:
+                            dt = json.load(fp)
+                            if "module" in dt:
+                                modules_found.add(dt["module"])
+                    except:
+                        pass
+        fixed = 0
+        for mod in sorted(modules_found):
+            if frappe.db.exists("Module Def", mod):
+                # Ensure app_name is correct
+                app = frappe.db.get_value("Module Def", mod, "app_name")
+                if app != "bizaxl_finance":
+                    frappe.db.set_value("Module Def", mod, "app_name", "bizaxl_finance")
+                    fixed += 1
+            else:
+                try:
+                    doc = frappe.get_doc({
+                        "doctype": "Module Def",
+                        "module_name": mod,
+                        "app_name": "bizaxl_finance",
+                        "custom": 1
+                    })
+                    doc.insert(ignore_permissions=True)
+                    fixed += 1
+                except Exception:
+                    pass
+        frappe.db.commit()
+        if fixed:
+            print(f"  🔧 Fixed {fixed} module mappings")
+
+    # ═══════════════════════════════════════════════════════════════════════════
     # EXECUTE ALL
     # ═══════════════════════════════════════════════════════════════════════════
     print("=" * 60)
     print("📦 BIZAXL FINANCE — DEMO DATA LOADER")
     print("=" * 60)
 
+    _fix_modules()
     _load_foundation()
     _load_customers()
     _load_banking()
