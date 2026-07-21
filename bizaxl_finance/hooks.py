@@ -103,6 +103,9 @@ scheduler_events = {
         "bizaxl_finance.tasks.update_credit_scores",
         "bizaxl_finance.tasks.process_recurring_bill_payments",
         "bizaxl_finance.tasks.send_due_payment_reminders",
+        "bizaxl_finance.tasks.monitor_gold_loan_ltv_daily",
+        "bizaxl_finance.tasks.monitor_covenant_compliance",
+        "bizaxl_finance.tasks.process_vehicle_insurance_renewals",
     ],
     "weekly": [
         "bizaxl_finance.tasks.generate_portfolio_summaries",
@@ -111,6 +114,7 @@ scheduler_events = {
     "monthly": [
         "bizaxl_finance.tasks.generate_maturity_alerts",
         "bizaxl_finance.tasks.calculate_commission_payouts",
+        "bizaxl_finance.tasks.generate_scheduled_reports",
     ],
 }
 

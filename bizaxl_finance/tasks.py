@@ -272,3 +272,76 @@ def calculate_commission_payouts():
     """Calculate commission payouts (placeholder for partner/agent commissions)"""
     # Placeholder for future implementation
     pass
+
+
+def monitor_gold_loan_ltv_daily():
+    """Daily: Monitor gold loan LTV ratios and send breach alerts"""
+    from bizaxl_finance.gold_loan.doctype.gold_pledge.gold_pledge import daily_ltv_monitoring
+    daily_ltv_monitoring()
+
+
+def monitor_covenant_compliance():
+    """Daily: Check covenant compliance for all active business loans"""
+    covenants = frappe.db.sql("""
+        SELECT cl.name, cl.covenant_type, cl.required_value, cl.actual_value,
+               cl.result, cl.monitoring_date
+        FROM `tabCovenant Monitoring Log` cl
+        WHERE cl.result IN ('Compliant', 'Not Monitored')
+          AND (cl.monitoring_date IS NULL OR cl.monitoring_date <= CURDATE())
+    """, as_dict=True)
+
+    for cov in covenants:
+        doc = frappe.get_doc("Covenant Monitoring Log", cov.name)
+        doc.save(ignore_permissions=True)
+
+
+def generate_scheduled_reports():
+    """Monthly: Auto-generate regulatory reports (CRILC, FPC, PSL)"""
+    report_types = ["CRILC", "NPA", "PSL"]
+    for rtype in report_types:
+        existing = frappe.db.exists("Regulatory Report", {
+            "report_type": rtype,
+            "period_end": ["between", [add_months(today(), -1), today()]]
+        })
+        if not existing:
+            report = frappe.get_doc({
+                "doctype": "Regulatory Report",
+                "report_type": rtype,
+                "report_name": f"{rtype} - {today()}",
+                "period_start": add_months(today(), -1),
+                "period_end": today(),
+                "reporting_period": "Monthly",
+            })
+            report.insert(ignore_permissions=True)
+
+
+def process_vehicle_insurance_renewals():
+    """Daily: Check vehicle insurance expiry and send renewal reminders"""
+    import datetime
+    thirty_days = add_days(today(), 30)
+    vehicles = frappe.db.sql("""
+        SELECT vd.name, vd.registration_number, vd.insurance_expiry,
+               vd.make, vd.model, la.customer
+        FROM `tabVehicle Detail` vd
+        INNER JOIN `tabLoan Application` la ON la.vehicle_detail = vd.name
+        WHERE vd.status = 'Active'
+          AND vd.insurance_expiry IS NOT NULL
+          AND vd.insurance_expiry <= %s
+          AND vd.insurance_expiry >= CURDATE()
+    """, thirty_days, as_dict=True)
+
+    for v in vehicles:
+        try:
+            frappe.get_doc({
+                "doctype": "Customer Communication",
+                "customer": v.customer,
+                "subject": f"Insurance Renewal: {v.make} {v.model}",
+                "message_body": f"Your vehicle insurance for {v.registration_number} expires on {v.insurance_expiry}. Please renew at your earliest.",
+                "channel": "App Notification",
+                "communication_type": "Reminder",
+                "status": "Draft",
+                "reference_doctype": "Vehicle Detail",
+                "reference_name": v.name,
+            }).insert(ignore_permissions=True)
+        except Exception as e:
+            frappe.log_error(f"Insurance renewal alert failed for {v.name}: {e}", "Vehicle Insurance")
