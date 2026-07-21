@@ -56,10 +56,10 @@ def sync_workspace_from_fixture():
         # Create workspace via SQL (bypasses ORM validation)
         frappe.db.sql("""
             INSERT INTO `tabWorkspace` (
-                name, doctype, title, label, module, icon, is_default, is_standard,
+                name, title, label, module, icon, is_default, is_standard,
                 is_hidden, public, sequence_id, owner, creation, modified, content
             ) VALUES (
-                'Bizaxl Finance', 'Workspace', 'Bizaxl Finance', 'Bizaxl Finance',
+                'Bizaxl Finance', 'Bizaxl Finance', 'Bizaxl Finance',
                 'Bizaxl Finance', 'credit-card', 1, 0, 0, 1, 1.0, 'Administrator',
                 NOW(), NOW(), %s
             )
