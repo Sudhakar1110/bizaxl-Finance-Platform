@@ -54,6 +54,29 @@ def sync_workspace_from_fixture():
         # ── Step 1: Ensure the workspace row exists in tabWorkspace ──
         workspace_name = "Bizaxl Finance"
 
+        # ── Step 0: Ensure 'Bizaxl Finance' Module Def has a package ──
+        # Frappe v15 requires custom modules to have a package set.
+        # Without it, the workspace page API might fail with 400 errors.
+        package_name = "Bizaxl"
+        module_name = "Bizaxl Finance"
+        
+        if not frappe.db.exists("Package", package_name):
+            package = frappe.get_doc({
+                "doctype": "Package",
+                "name": package_name,
+                "package_name": package_name.lower(),
+            })
+            package.insert(ignore_permissions=True)
+            frappe.db.commit()
+            print(f"  ✅ Package '{package_name}' created")
+        
+        # Set package on the Module Def if not already set
+        module_def = frappe.get_doc("Module Def", module_name)
+        if not module_def.package:
+            module_def.db_set("package", package_name)
+            print(f"  ✅ Module '{module_name}' now has package '{package_name}'")
+        
+        # ── Step 1: Ensure the workspace row exists in tabWorkspace ──
         if not frappe.db.exists("Workspace", workspace_name):
             # Create minimal workspace row via SQL
             now = frappe.utils.now()
@@ -68,19 +91,17 @@ def sync_workspace_from_fixture():
             frappe.db.commit()
             print(f"  ✅ Workspace row created via SQL")
         else:
-            # Update content directly via SQL
-            # NOTE: Setting module='' to bypass module lookup issues with custom modules
-            # Frappe v15 workspace API might fail when module is a custom module without package
+            # Update content directly via SQL (module kept as 'Bizaxl Finance')
             frappe.db.sql("""
                 UPDATE `tabWorkspace`
                 SET `content` = %s,
-                    `module` = '',
+                    `module` = 'Bizaxl Finance',
                     `label` = 'Bizaxl Finance',
                     `title` = 'Bizaxl Finance',
                     `modified` = NOW()
                 WHERE `name` = %s
             """, (content, workspace_name))
-            print(f"  ✅ Workspace content updated via SQL (module='')")
+            print(f"  ✅ Workspace content updated via SQL")
 
         # ── Step 2: Replace all links ──
         frappe.db.sql("DELETE FROM `tabWorkspace Link` WHERE `parent` = %s", workspace_name)
