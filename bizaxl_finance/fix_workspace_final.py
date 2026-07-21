@@ -86,7 +86,7 @@ def fix_workspace_final():
             col_map[col] = 1.0
         elif col in ("is_hidden", "is_standard"):
             col_map[col] = 0
-        elif col in ("_user_tags", "_comments", "_assign", "_liked_by", "):
+        elif col in ("_user_tags", "_comments", "_assign", "_liked_by"):
             col_map[col] = ""
 
     # Execute INSERT
