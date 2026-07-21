@@ -206,11 +206,11 @@ def sync_workspace_from_fixture():
             # Test 1: Basic doc load
             ws_check = frappe.get_doc("Workspace", workspace_name)
             content_check = json.loads(ws_check.content)
-            print(f"  🔍 [1/4] frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
+            print(f"  🔍 [1/5] frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
 
             # Test 2: Links count
             link_check = frappe.db.count("Workspace Link", {"parent": workspace_name})
-            print(f"  🔍 [2/4] {link_check} links in database")
+            print(f"  🔍 [2/5] {link_check} links in database")
 
             # Test 3: Call get_workspace_sidebar_items WITHOUT request context
             from frappe.desk.desktop import get_workspace_sidebar_items
