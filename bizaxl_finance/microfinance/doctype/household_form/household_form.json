@@ -1,0 +1,432 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "member",
+  "member_name",
+  "center",
+  "group_name",
+  "assessment_date",
+  "column_break_1",
+  "household_size",
+  "dependents_count",
+  "earning_members_count",
+  "residence_type",
+  "section_income",
+  "monthly_income",
+  "primary_income_source",
+  "secondary_income_source",
+  "income_frequency",
+  "column_break_2",
+  "seasonal_income",
+  "spouse_income",
+  "other_household_income",
+  "total_monthly_income",
+  "section_expenses",
+  "monthly_food_expenses",
+  "monthly_rent",
+  "monthly_utilities",
+  "monthly_transport",
+  "monthly_education",
+  "monthly_healthcare",
+  "column_break_3",
+  "monthly_other_expenses",
+  "total_monthly_expenses",
+  "monthly_surplus",
+  "section_assets",
+  "land_owned_sqft",
+  "land_value",
+  "house_owned",
+  "house_value",
+  "column_break_4",
+  "vehicle_owned",
+  "vehicle_value",
+  "livestock_value",
+  "other_assets_value",
+  "total_asset_value",
+  "section_liabilities",
+  "existing_loan_1_type",
+  "existing_loan_1_amount",
+  "existing_loan_2_type",
+  "existing_loan_2_amount",
+  "column_break_5",
+  "total_existing_obligations",
+  "monthly_obligation_payment",
+  "section_bureau",
+  "bureau_checked",
+  "bureau_score",
+  "bureau_report_reference",
+  "column_break_6",
+  "multiple_lending_check",
+  "multi_lender_count",
+  "rs_2l_cap_compliant",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "HH-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "label": "MFI Member",
+   "options": "MFI Member",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Read Only",
+   "label": "Member Name",
+   "fetch_from": "member.member_name"
+  },
+  {
+   "fieldname": "center",
+   "fieldtype": "Read Only",
+   "label": "Center",
+   "fetch_from": "member.center"
+  },
+  {
+   "fieldname": "group_name",
+   "fieldtype": "Read Only",
+   "label": "Group",
+   "fetch_from": "member.group"
+  },
+  {
+   "fieldname": "assessment_date",
+   "fieldtype": "Date",
+   "label": "Assessment Date",
+   "default": "Today",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "household_size",
+   "fieldtype": "Int",
+   "label": "Household Size",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dependents_count",
+   "fieldtype": "Int",
+   "label": "Number of Dependents"
+  },
+  {
+   "fieldname": "earning_members_count",
+   "fieldtype": "Int",
+   "label": "Earning Members"
+  },
+  {
+   "fieldname": "residence_type",
+   "fieldtype": "Select",
+   "label": "Residence Type",
+   "options": "Self-Owned\nRented\nLeased\nGovernment Provided\nTemporary Shelter\nOther"
+  },
+  {
+   "fieldname": "section_income",
+   "fieldtype": "Section Break",
+   "label": "Income Assessment"
+  },
+  {
+   "fieldname": "monthly_income",
+   "fieldtype": "Currency",
+   "label": "Primary Earner Monthly Income",
+   "reqd": 1
+  },
+  {
+   "fieldname": "primary_income_source",
+   "fieldtype": "Select",
+   "label": "Primary Income Source",
+   "options": "Agriculture\nDaily Wage\nSmall Business\nSalaried Employment\nRemittances\nPension\nOther"
+  },
+  {
+   "fieldname": "secondary_income_source",
+   "fieldtype": "Select",
+   "label": "Secondary Income Source",
+   "options": "Agriculture\nDaily Wage\nSmall Business\nSalaried Employment\nRemittances\nPension\nOther\nNone"
+  },
+  {
+   "fieldname": "income_frequency",
+   "fieldtype": "Select",
+   "label": "Income Frequency",
+   "options": "Daily\nWeekly\nFortnightly\nMonthly\nSeasonal\nIrregular",
+   "default": "Monthly"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "seasonal_income",
+   "fieldtype": "Currency",
+   "label": "Estimated Seasonal/Annual Income"
+  },
+  {
+   "fieldname": "spouse_income",
+   "fieldtype": "Currency",
+   "label": "Spouse Monthly Income"
+  },
+  {
+   "fieldname": "other_household_income",
+   "fieldtype": "Currency",
+   "label": "Other Household Income (Monthly)"
+  },
+  {
+   "fieldname": "total_monthly_income",
+   "fieldtype": "Currency",
+   "label": "Total Monthly Income",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_expenses",
+   "fieldtype": "Section Break",
+   "label": "Expense Assessment"
+  },
+  {
+   "fieldname": "monthly_food_expenses",
+   "fieldtype": "Currency",
+   "label": "Monthly Food Expenses"
+  },
+  {
+   "fieldname": "monthly_rent",
+   "fieldtype": "Currency",
+   "label": "Monthly Rent"
+  },
+  {
+   "fieldname": "monthly_utilities",
+   "fieldtype": "Currency",
+   "label": "Utilities (Electricity/Water)"
+  },
+  {
+   "fieldname": "monthly_transport",
+   "fieldtype": "Currency",
+   "label": "Transportation"
+  },
+  {
+   "fieldname": "monthly_education",
+   "fieldtype": "Currency",
+   "label": "Education Expenses"
+  },
+  {
+   "fieldname": "monthly_healthcare",
+   "fieldtype": "Currency",
+   "label": "Healthcare Expenses"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "monthly_other_expenses",
+   "fieldtype": "Currency",
+   "label": "Other Monthly Expenses"
+  },
+  {
+   "fieldname": "total_monthly_expenses",
+   "fieldtype": "Currency",
+   "label": "Total Monthly Expenses",
+   "read_only": 1
+  },
+  {
+   "fieldname": "monthly_surplus",
+   "fieldtype": "Currency",
+   "label": "Monthly Surplus/Deficit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_assets",
+   "fieldtype": "Section Break",
+   "label": "Asset Assessment"
+  },
+  {
+   "fieldname": "land_owned_sqft",
+   "fieldtype": "Float",
+   "label": "Land Owned (Sq.Ft.)"
+  },
+  {
+   "fieldname": "land_value",
+   "fieldtype": "Currency",
+   "label": "Land Estimated Value"
+  },
+  {
+   "fieldname": "house_owned",
+   "fieldtype": "Check",
+   "label": "Owns House"
+  },
+  {
+   "fieldname": "house_value",
+   "fieldtype": "Currency",
+   "label": "House Estimated Value"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle_owned",
+   "fieldtype": "Check",
+   "label": "Owns Vehicle"
+  },
+  {
+   "fieldname": "vehicle_value",
+   "fieldtype": "Currency",
+   "label": "Vehicle Value"
+  },
+  {
+   "fieldname": "livestock_value",
+   "fieldtype": "Currency",
+   "label": "Livestock Value"
+  },
+  {
+   "fieldname": "other_assets_value",
+   "fieldtype": "Currency",
+   "label": "Other Assets Value"
+  },
+  {
+   "fieldname": "total_asset_value",
+   "fieldtype": "Currency",
+   "label": "Total Asset Value",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_liabilities",
+   "fieldtype": "Section Break",
+   "label": "Liability Assessment"
+  },
+  {
+   "fieldname": "existing_loan_1_type",
+   "fieldtype": "Select",
+   "label": "Existing Loan 1 Type",
+   "options": "MFI\nBank\nNBFC\nChit Fund\nPrivate Lender\nSHG\nOther\nNone"
+  },
+  {
+   "fieldname": "existing_loan_1_amount",
+   "fieldtype": "Currency",
+   "label": "Existing Loan 1 Amount"
+  },
+  {
+   "fieldname": "existing_loan_2_type",
+   "fieldtype": "Select",
+   "label": "Existing Loan 2 Type",
+   "options": "MFI\nBank\nNBFC\nChit Fund\nPrivate Lender\nSHG\nOther\nNone"
+  },
+  {
+   "fieldname": "existing_loan_2_amount",
+   "fieldtype": "Currency",
+   "label": "Existing Loan 2 Amount"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_existing_obligations",
+   "fieldtype": "Currency",
+   "label": "Total Existing Obligations",
+   "read_only": 1
+  },
+  {
+   "fieldname": "monthly_obligation_payment",
+   "fieldtype": "Currency",
+   "label": "Monthly Obligation Payment",
+   "read_only": 1,
+   "description": "Estimated monthly EMI for existing loans"
+  },
+  {
+   "fieldname": "section_bureau",
+   "fieldtype": "Section Break",
+   "label": "Bureau Check"
+  },
+  {
+   "fieldname": "bureau_checked",
+   "fieldtype": "Check",
+   "label": "Bureau Checked"
+  },
+  {
+   "fieldname": "bureau_score",
+   "fieldtype": "Int",
+   "label": "Bureau Score"
+  },
+  {
+   "fieldname": "bureau_report_reference",
+   "fieldtype": "Data",
+   "label": "Bureau Report Reference"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "multiple_lending_check",
+   "fieldtype": "Check",
+   "label": "Multiple Lending Check Done"
+  },
+  {
+   "fieldname": "multi_lender_count",
+   "fieldtype": "Int",
+   "label": "Number of Active Lenders"
+  },
+  {
+   "fieldname": "rs_2l_cap_compliant",
+   "fieldtype": "Check",
+   "label": "Rs.2L Cap Compliant",
+   "description": "RBI MFI regulation: total exposure per member ≤ Rs.2,00,000"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Microfinance",
+ "name": "Household Form",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "HH-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Field Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Credit Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "member_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

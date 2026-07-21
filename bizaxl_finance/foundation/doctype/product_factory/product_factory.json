@@ -1,0 +1,416 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "product_name",
+  "vertical",
+  "product_code",
+  "is_active",
+  "column_break_1",
+  "product_category",
+  "description",
+  "section_interest",
+  "interest_rate_type",
+  "base_interest_rate",
+  "interest_method",
+  "rate_slabs_json",
+  "column_break_2",
+  "min_interest_rate",
+  "max_interest_rate",
+  "penal_interest_rate",
+  "section_amount",
+  "min_loan_amount",
+  "max_loan_amount",
+  "default_loan_amount",
+  "column_break_3",
+  "min_tenure_months",
+  "max_tenure_months",
+  "default_tenure_months",
+  "section_fees",
+  "processing_fee_type",
+  "processing_fee_value",
+  "processing_fee_gst",
+  "prepayment_penalty",
+  "column_break_4",
+  "late_payment_penalty",
+  "foreclosure_charges",
+  "documentation_charges",
+  "section_eligibility",
+  "min_age",
+  "max_age",
+  "min_credit_score",
+  "min_monthly_income",
+  "column_break_5",
+  "collateral_required",
+  "income_multiple",
+  "max_foir_percent",
+  "max_dti_ratio",
+  "section_features",
+  "allow_top_up",
+  "allow_restructuring",
+  "allow_prepayment",
+  "allow_partial_disbursement",
+  "column_break_6",
+  "has_moratorium",
+  "moratorium_period_months",
+  "has_co_lending",
+  "co_lending_eligible",
+  "section_dsa",
+  "dsa_commission_percent",
+  "column_break_7",
+  "referral_commission_percent"
+ ],
+ "fields": [
+  {
+   "fieldname": "product_name",
+   "fieldtype": "Data",
+   "label": "Product Name",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "vertical",
+   "fieldtype": "Select",
+   "label": "Lending Vertical",
+   "options": "Personal Loan\nHome Loan\nVehicle Loan\nGold Loan\nBusiness Loan\nEducation Loan\nBNPL\nConsumer Finance\nInvoice Finance\nMFI\nChit Fund\nNBFC",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "product_code",
+   "fieldtype": "Data",
+   "label": "Product Code",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Active",
+   "default": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "product_category",
+   "fieldtype": "Select",
+   "label": "Category",
+   "options": "Secured\nUnsecured\nSemi-Secured",
+   "default": "Unsecured"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "fieldname": "section_interest",
+   "fieldtype": "Section Break",
+   "label": "Interest Configuration"
+  },
+  {
+   "fieldname": "interest_rate_type",
+   "fieldtype": "Select",
+   "label": "Interest Rate Type",
+   "options": "Fixed\nFloating (MCLR)\nFloating (Repo)\nHybrid\nReducing Balance\nFlat",
+   "default": "Reducing Balance",
+   "reqd": 1
+  },
+  {
+   "fieldname": "base_interest_rate",
+   "fieldtype": "Percent",
+   "label": "Base Interest Rate % p.a.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "interest_method",
+   "fieldtype": "Select",
+   "label": "Interest Calculation Method",
+   "options": "Monthly Reducing\nDaily Reducing\nAnnual Rest\nFlat",
+   "default": "Monthly Reducing"
+  },
+  {
+   "fieldname": "rate_slabs_json",
+   "fieldtype": "Code",
+   "label": "Rate Slabs (JSON)",
+   "options": "JSON",
+   "description": "JSON array of amount brackets with applicable rates"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "min_interest_rate",
+   "fieldtype": "Percent",
+   "label": "Minimum Rate %",
+   "description": "Floor rate for floating products"
+  },
+  {
+   "fieldname": "max_interest_rate",
+   "fieldtype": "Percent",
+   "label": "Maximum Rate %",
+   "description": "Ceiling rate for floating products"
+  },
+  {
+   "fieldname": "penal_interest_rate",
+   "fieldtype": "Percent",
+   "label": "Penal Interest Rate %",
+   "description": "Additional rate charged on delinquent accounts"
+  },
+  {
+   "fieldname": "section_amount",
+   "fieldtype": "Section Break",
+   "label": "Loan Amount & Tenure"
+  },
+  {
+   "fieldname": "min_loan_amount",
+   "fieldtype": "Currency",
+   "label": "Minimum Loan Amount"
+  },
+  {
+   "fieldname": "max_loan_amount",
+   "fieldtype": "Currency",
+   "label": "Maximum Loan Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_loan_amount",
+   "fieldtype": "Currency",
+   "label": "Default Loan Amount"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "min_tenure_months",
+   "fieldtype": "Int",
+   "label": "Minimum Tenure (Months)",
+   "default": 1
+  },
+  {
+   "fieldname": "max_tenure_months",
+   "fieldtype": "Int",
+   "label": "Maximum Tenure (Months)",
+   "default": 60
+  },
+  {
+   "fieldname": "default_tenure_months",
+   "fieldtype": "Int",
+   "label": "Default Tenure (Months)",
+   "default": 12
+  },
+  {
+   "fieldname": "section_fees",
+   "fieldtype": "Section Break",
+   "label": "Fee Structure"
+  },
+  {
+   "fieldname": "processing_fee_type",
+   "fieldtype": "Select",
+   "label": "Processing Fee Type",
+   "options": "Percentage\nFlat Amount\nNil",
+   "default": "Percentage"
+  },
+  {
+   "fieldname": "processing_fee_value",
+   "fieldtype": "Data",
+   "label": "Processing Fee Value",
+   "description": "Enter percentage (e.g., 2.5) or flat amount based on type selected"
+  },
+  {
+   "fieldname": "processing_fee_gst",
+   "fieldtype": "Check",
+   "label": "GST Applicable on Processing Fee",
+   "default": 1
+  },
+  {
+   "fieldname": "prepayment_penalty",
+   "fieldtype": "Percent",
+   "label": "Prepayment Penalty %"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "late_payment_penalty",
+   "fieldtype": "Currency",
+   "label": "Late Payment Penalty (per day)"
+  },
+  {
+   "fieldname": "foreclosure_charges",
+   "fieldtype": "Percent",
+   "label": "Foreclosure Charges %"
+  },
+  {
+   "fieldname": "documentation_charges",
+   "fieldtype": "Currency",
+   "label": "Documentation Charges"
+  },
+  {
+   "fieldname": "section_eligibility",
+   "fieldtype": "Section Break",
+   "label": "Eligibility Criteria"
+  },
+  {
+   "fieldname": "min_age",
+   "fieldtype": "Int",
+   "label": "Minimum Age",
+   "default": 21
+  },
+  {
+   "fieldname": "max_age",
+   "fieldtype": "Int",
+   "label": "Maximum Age at Maturity",
+   "default": 65
+  },
+  {
+   "fieldname": "min_credit_score",
+   "fieldtype": "Int",
+   "label": "Minimum Credit Score",
+   "default": 650
+  },
+  {
+   "fieldname": "min_monthly_income",
+   "fieldtype": "Currency",
+   "label": "Minimum Monthly Income"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "collateral_required",
+   "fieldtype": "Check",
+   "label": "Collateral Required",
+   "default": 0
+  },
+  {
+   "fieldname": "income_multiple",
+   "fieldtype": "Float",
+   "label": "Income Multiple",
+   "description": "Max loan = monthly income × multiple"
+  },
+  {
+   "fieldname": "max_foir_percent",
+   "fieldtype": "Percent",
+   "label": "Max FOIR %",
+   "description": "Fixed Obligation to Income Ratio ceiling"
+  },
+  {
+   "fieldname": "max_dti_ratio",
+   "fieldtype": "Percent",
+   "label": "Max DTI Ratio %",
+   "description": "Debt to Income ratio ceiling"
+  },
+  {
+   "fieldname": "section_features",
+   "fieldtype": "Section Break",
+   "label": "Product Features"
+  },
+  {
+   "fieldname": "allow_top_up",
+   "fieldtype": "Check",
+   "label": "Allow Top-Up"
+  },
+  {
+   "fieldname": "allow_restructuring",
+   "fieldtype": "Check",
+   "label": "Allow Restructuring"
+  },
+  {
+   "fieldname": "allow_prepayment",
+   "fieldtype": "Check",
+   "label": "Allow Prepayment",
+   "default": 1
+  },
+  {
+   "fieldname": "allow_partial_disbursement",
+   "fieldtype": "Check",
+   "label": "Allow Partial Disbursement"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "has_moratorium",
+   "fieldtype": "Check",
+   "label": "Has Moratorium Period"
+  },
+  {
+   "fieldname": "moratorium_period_months",
+   "fieldtype": "Int",
+   "label": "Moratorium Period (Months)",
+   "depends_on": "eval:doc.has_moratorium"
+  },
+  {
+   "fieldname": "has_co_lending",
+   "fieldtype": "Check",
+   "label": "Co-lending Eligible"
+  },
+  {
+   "fieldname": "co_lending_eligible",
+   "fieldtype": "Check",
+   "label": "Eligible for Co-lending Partnerships"
+  },
+  {
+   "fieldname": "section_dsa",
+   "fieldtype": "Section Break",
+   "label": "Channel Partner Commission"
+  },
+  {
+   "fieldname": "dsa_commission_percent",
+   "fieldtype": "Percent",
+   "label": "Default DSA Commission %",
+   "description": "Commission rate on disbursed loan amount"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "referral_commission_percent",
+   "fieldtype": "Percent",
+   "label": "Referral Commission %"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Foundation",
+ "name": "Product Factory",
+ "naming_rule": "By Naming Series",
+ "autoname": "field:product_code",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "product_name",
+ "track_changes": 1,
+ "track_seen": 1
+}
