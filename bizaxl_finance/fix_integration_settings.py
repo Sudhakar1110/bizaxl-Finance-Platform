@@ -68,17 +68,14 @@ def fix():
     else:
         print(f"⏭️ DocType '{doctype_name}' already exists in database")
 
-    # Step 2: Create single record (get_single auto-creates if missing)
+    # Step 2: Create single record using raw DB insert (bypasses meta validation)
     try:
-        frappe.flags.in_import = True
-        settings = frappe.get_single(doctype_name)
-        settings.save(ignore_permissions=True)
+        # Direct insert into tabSingles to bypass Module Def validation
+        frappe.db.set_single_value(doctype_name, "scorecard_enabled", 0)
         frappe.db.commit()
-        frappe.flags.in_import = False
-        print(f"✅ Single record for '{doctype_name}' is ready")
+        print(f"✅ Single record for '{doctype_name}' created in database")
     except Exception as e:
         frappe.db.rollback()
-        frappe.flags.in_import = False
         print(f"❌ Failed to create single record: {str(e)}")
 
     print("=" * 60)
