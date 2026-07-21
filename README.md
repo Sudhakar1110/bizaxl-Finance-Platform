@@ -431,6 +431,104 @@ The platform exposes REST APIs for all major operations:
 
 ---
 
+## 🧪 Demo Data Loader
+
+A comprehensive demo data loader is included to populate all 70+ DocTypes with realistic Indian demo data.
+
+### Features
+- **300+ records** across 22 modules
+- Realistic names, addresses, PAN/Aadhaar numbers, and financial amounts
+- All verticals covered: NBFC, MFI, Gold, Vehicle, Home, Personal, Business, Education, BNPL, Invoice, Chit, Consumer
+- Safe to run multiple times (skips duplicates automatically)
+- Shows progress with ✅/⚠️ indicators per module
+
+### Usage
+
+```bash
+# Open site console
+bench --site your-site.com console
+```
+
+Paste this single line inside the console:
+```python
+exec(open("../apps/bizaxl_finance/bizaxl_finance/load_demo_data.py").read())
+```
+
+Or run via bench execute:
+```bash
+bench --site your-site.com execute bizaxl_finance.load_demo_data.load_demo_data
+```
+
+Then clear cache and refresh:
+```bash
+bench --site your-site.com clear-cache
+bench clear-cache
+bench restart
+```
+
+### Sample Data Created
+
+| Module | Records | Includes |
+|--------|---------|----------|
+| Foundation | 14 | 2 Company Configs, 6 Branches, 4 Rate Engines, 4 Charges |
+| Customers | 18 | 6 Customers, 5 Leads, 2 DSAs, KYC Docs, Nominations |
+| Banking | 25+ | Bank Accounts, UPI IDs, Transactions |
+| Loans | 40+ | 6 Products, Applications, Disbursements, EMIs, Repayments |
+| Insurance | 12 | 3 Products, Policies, Premiums |
+| Investments | 20+ | Accounts, 5 Mutual Funds, FDs, Goals |
+| Portfolio | 20+ | 6 Asset Classes, Holdings, Financial Goals |
+| Gold Loan | 10+ | Pledges, Vault, Auctioneer |
+| Vehicle | 12+ | Dealers, Vehicles, Repossessions |
+| Home Loan | 15+ | Properties, Tranches, PMAY, Legal Opinions |
+| Business Loan | 10+ | Profiles, Covenants |
+| Education | 8+ | Institutions, Courses |
+| BNPL | 12+ | Limits, Transactions |
+| Invoice Finance | 8+ | Anchors, Invoices |
+| Chit Fund | 15+ | Groups, Subscribers, Auctions |
+| Consumer Finance | 10+ | Retailers, POS Transactions |
+| Collections | 25+ | NACH, Records, NPA, SARFAESI |
+| Risk & Compliance | 15+ | AML, Fraud Alerts, Reports |
+| Accounting | 12+ | Provisioning, Funds, Co-lending |
+| Credit Mgmt | 15+ | Reports, Scores, Goals |
+| Microfinance | 20+ | Centers, JLG Groups, Members |
+| NBFC | 3 | Loan Applications |
+
+---
+
+## 🛠️ Helper Scripts
+
+### fix_integration_settings.py
+
+Creates the `Integration Settings` Single DocType record in the database. Use this if the Integration Settings link in the workspace shows "Module Bizaxl Finance not found".
+
+```bash
+bench --site your-site.com console
+```
+
+```python
+exec(open("../apps/bizaxl_finance/bizaxl_finance/fix_integration_settings.py").read())
+```
+
+Then:
+```bash
+bench --site your-site.com clear-cache
+bench restart
+```
+
+### migrate_workspace.py
+
+Force-syncs the workspace fixture to restore all 24 card sections with all links.
+
+```bash
+bench --site your-site.com console
+```
+
+```python
+exec(open("../apps/bizaxl_finance/bizaxl_finance/migrate_workspace.py").read())
+```
+
+---
+
 ## 📄 License
 
 MIT
