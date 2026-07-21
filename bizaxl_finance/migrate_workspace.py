@@ -224,23 +224,40 @@ def sync_workspace_from_fixture():
                 ws_no_cards = 0
             print(f"  🔍 [3/4] Without request context: {ws_no_cards} cards (expected 0 - no request)")
             
-            # Test 4: Set request context and call again
+            # Test 4: Set request context and call again (raw name with space)
             from frappe import form_dict
             original_workspace = form_dict.get("workspace")
-            form_dict["workspace"] = workspace_name
+            
+            form_dict["workspace"] = workspace_name  # "Bizaxl Finance"
             sidebar_data2 = get_workspace_sidebar_items()
             ws_with_ctx = sidebar_data2.get("workspace", {}).get("content", "[]")
             if isinstance(ws_with_ctx, str):
-                ws_cards = len(json.loads(ws_with_ctx))
+                ws_fullname = len(json.loads(ws_with_ctx))
             elif isinstance(ws_with_ctx, list):
-                ws_cards = len(ws_with_ctx)
+                ws_fullname = len(ws_with_ctx)
             else:
-                ws_cards = 0
+                ws_fullname = 0
             ws_name = sidebar_data2.get("workspace", {}).get("name", "")
-            # Restore original
-            if original_workspace:
-                form_dict["workspace"] = original_workspace
+            print(f"  🔍 [4/4] WITH raw name '{workspace_name}': {ws_fullname} cards, name='{ws_name}'")
+            
+            # Test 5: Also test with scrubbed name (frontend might use this)
+            scrubbed_name = workspace_name.lower().replace(" ", "_")
+            form_dict["workspace"] = scrubbed_name  # "bizaxl_finance"
+            sidebar_data3 = get_workspace_sidebar_items()
+            ws_sc = sidebar_data3.get("workspace", {}).get("content", "[]")
+            if isinstance(ws_sc, str):
+                ws_scrubbed = len(json.loads(ws_sc))
+            elif isinstance(ws_sc, list):
+                ws_scrubbed = len(ws_sc)
             else:
+                ws_scrubbed = 0
+            ws_name3 = sidebar_data3.get("workspace", {}).get("name", "")
+            print(f"  🔍 [5/5] WITH scrubbed name '{scrubbed_name}': {ws_scrubbed} cards, name='{ws_name3}'")
+            
+            # Restore original
+            if original_workspace is not None:
+                form_dict["workspace"] = original_workspace
+            elif "workspace" in form_dict:
                 form_dict.pop("workspace", None)
             
             print(f"  🔍 [4/4] WITH workspace='{workspace_name}': {ws_cards} cards, name='{ws_name}'")
