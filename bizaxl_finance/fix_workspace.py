@@ -81,9 +81,14 @@ def fix_workspace():
             "hidden": shortcut.get("hidden", 0),
         })
 
-    # Bypass link validation for DocTypes that may not exist yet
+    # Bypass link validation + temporarily disable developer mode
+    # to prevent Workspace.on_update() from trying to export to files
+    # (custom modules without a 'package' field cause 'Package must be set' error)
     ws.flags.ignore_links = True
+    original_dev_mode = frappe.conf.developer_mode
+    frappe.conf.developer_mode = 0
     ws.save(ignore_permissions=True)
+    frappe.conf.developer_mode = original_dev_mode
     frappe.db.commit()
 
     # Verify
