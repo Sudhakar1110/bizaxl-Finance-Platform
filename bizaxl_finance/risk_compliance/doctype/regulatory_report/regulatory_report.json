@@ -39,7 +39,7 @@
    "fieldname": "report_type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "RBI NPA Return\nCRILC\nFPC Report\nPSL Report\nFIU-IND CTR\nFIU-IND STR\nROC Return\nBoard Report"
+   "options": "RBI NPA Return\nCRILC\nFPC Report\nPSL Report\nFIU-IND CTR\nFIU-IND STR\nROC Return\nBoard Report\nALM Report"
   },
   {
    "fieldname": "cb",

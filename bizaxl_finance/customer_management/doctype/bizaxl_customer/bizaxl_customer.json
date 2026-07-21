@@ -25,6 +25,7 @@
   "risk_profile",
   "onboarded_on",
   "onboarded_by",
+  "lead_reference",
   "section_address",
   "address_line_1",
   "city",
@@ -182,6 +183,13 @@
    "fieldtype": "Link",
    "label": "Onboarded By",
    "options": "User"
+  },
+  {
+   "fieldname": "lead_reference",
+   "fieldtype": "Link",
+   "label": "Lead Reference",
+   "options": "Lead",
+   "read_only": 1
   },
   {
    "fieldname": "section_address",

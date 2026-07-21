@@ -1,0 +1,285 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "dsa_name",
+  "dsa_code",
+  "dsa_type",
+  "column_break_1",
+  "mobile_number",
+  "email",
+  "pan_number",
+  "status",
+  "section_commission",
+  "commission_rate_percent",
+  "total_leads_submitted",
+  "total_conversions",
+  "column_break_2",
+  "total_commission_earned",
+  "commission_paid",
+  "commission_outstanding",
+  "section_bank",
+  "bank_account_name",
+  "bank_account_number",
+  "ifsc_code",
+  "column_break_3",
+  "bank_name",
+  "branch_name",
+  "section_address",
+  "address_line_1",
+  "city",
+  "state",
+  "pincode",
+  "section_kyc",
+  "kyc_status",
+  "kyc_document",
+  "column_break_4",
+  "agreement_date",
+  "agreement_document",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "DSA-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "dsa_name",
+   "fieldtype": "Data",
+   "label": "DSA/Agent Name",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "dsa_code",
+   "fieldtype": "Data",
+   "label": "DSA Code",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "dsa_type",
+   "fieldtype": "Select",
+   "label": "DSA Type",
+   "options": "Individual\nCorporate\nPartnership Firm\nNGO",
+   "default": "Individual",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "label": "Mobile Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "pan_number",
+   "fieldtype": "Data",
+   "label": "PAN Number"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive\nBlacklisted\nSuspended\nDormant",
+   "default": "Active",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_commission",
+   "fieldtype": "Section Break",
+   "label": "Commission Tracking"
+  },
+  {
+   "fieldname": "commission_rate_percent",
+   "fieldtype": "Percent",
+   "label": "Default Commission Rate %",
+   "description": "Default commission rate on loan amount"
+  },
+  {
+   "fieldname": "total_leads_submitted",
+   "fieldtype": "Int",
+   "label": "Total Leads Submitted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_conversions",
+   "fieldtype": "Int",
+   "label": "Total Conversions",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_commission_earned",
+   "fieldtype": "Currency",
+   "label": "Total Commission Earned",
+   "read_only": 1
+  },
+  {
+   "fieldname": "commission_paid",
+   "fieldtype": "Currency",
+   "label": "Commission Paid",
+   "read_only": 1
+  },
+  {
+   "fieldname": "commission_outstanding",
+   "fieldtype": "Currency",
+   "label": "Commission Outstanding",
+   "read_only": 1,
+   "description": "Auto-calculated: Total Earned - Paid"
+  },
+  {
+   "fieldname": "section_bank",
+   "fieldtype": "Section Break",
+   "label": "Bank Details"
+  },
+  {
+   "fieldname": "bank_account_name",
+   "fieldtype": "Data",
+   "label": "Account Holder Name"
+  },
+  {
+   "fieldname": "bank_account_number",
+   "fieldtype": "Data",
+   "label": "Account Number"
+  },
+  {
+   "fieldname": "ifsc_code",
+   "fieldtype": "Data",
+   "label": "IFSC Code"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "branch_name",
+   "fieldtype": "Data",
+   "label": "Branch Name"
+  },
+  {
+   "fieldname": "section_address",
+   "fieldtype": "Section Break",
+   "label": "Address"
+  },
+  {
+   "fieldname": "address_line_1",
+   "fieldtype": "Data",
+   "label": "Address"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "label": "Pincode"
+  },
+  {
+   "fieldname": "section_kyc",
+   "fieldtype": "Section Break",
+   "label": "KYC & Agreement"
+  },
+  {
+   "fieldname": "kyc_status",
+   "fieldtype": "Select",
+   "label": "KYC Status",
+   "options": "Pending\nSubmitted\nVerified\nRejected",
+   "default": "Pending"
+  },
+  {
+   "fieldname": "kyc_document",
+   "fieldtype": "Attach",
+   "label": "KYC Document"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "agreement_date",
+   "fieldtype": "Date",
+   "label": "Agreement Date"
+  },
+  {
+   "fieldname": "agreement_document",
+   "fieldtype": "Attach",
+   "label": "Signed Agreement"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Customer Management",
+ "name": "DSA Master",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "DSA-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Relationship Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Branch Manager",
+   "read": 1,
+   "write": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "dsa_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

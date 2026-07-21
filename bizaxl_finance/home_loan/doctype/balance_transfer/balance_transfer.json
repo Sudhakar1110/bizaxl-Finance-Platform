@@ -1,0 +1,290 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "loan_application",
+  "customer",
+  "customer_name",
+  "property_detail",
+  "column_break_1",
+  "transfer_type",
+  "transfer_date",
+  "status",
+  "section_old_loan",
+  "old_lender_name",
+  "old_lender_loan_number",
+  "old_outstanding_amount",
+  "old_interest_rate",
+  "column_break_2",
+  "old_tenure_remaining",
+  "old_monthly_emi",
+  "old_loan_sanctioned_amount",
+  "section_new_loan",
+  "new_loan_amount",
+  "new_interest_rate",
+  "new_tenure_months",
+  "new_monthly_emi",
+  "total_processing_fee",
+  "column_break_3",
+  "net_disbursement_amount",
+  "disbursement_account",
+  "disbursement_date",
+  "section_top_up",
+  "top_up_amount",
+  "top_up_purpose",
+  "column_break_4",
+  "top_up_disbursed",
+  "section_approval",
+  "approved_by",
+  "approved_on",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "BT-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "property_detail",
+   "fieldtype": "Link",
+   "label": "Property",
+   "options": "Property Detail"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transfer_type",
+   "fieldtype": "Select",
+   "label": "Transfer Type",
+   "options": "Balance Transfer\nBalance Transfer with Top-Up\nTop-Up Only\nTakeover",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "transfer_date",
+   "fieldtype": "Date",
+   "label": "Transfer Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Initiated\nDocuments Collected\nOld Lender NOC Received\nDisbursed\nCompleted\nRejected",
+   "default": "Initiated",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_old_loan",
+   "fieldtype": "Section Break",
+   "label": "Existing Loan Details"
+  },
+  {
+   "fieldname": "old_lender_name",
+   "fieldtype": "Data",
+   "label": "Old Lender Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "old_lender_loan_number",
+   "fieldtype": "Data",
+   "label": "Old Loan Number"
+  },
+  {
+   "fieldname": "old_outstanding_amount",
+   "fieldtype": "Currency",
+   "label": "Outstanding Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "old_interest_rate",
+   "fieldtype": "Percent",
+   "label": "Old Interest Rate %"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "old_tenure_remaining",
+   "fieldtype": "Int",
+   "label": "Tenure Remaining (Months)"
+  },
+  {
+   "fieldname": "old_monthly_emi",
+   "fieldtype": "Currency",
+   "label": "Old Monthly EMI"
+  },
+  {
+   "fieldname": "old_loan_sanctioned_amount",
+   "fieldtype": "Currency",
+   "label": "Original Sanctioned Amount"
+  },
+  {
+   "fieldname": "section_new_loan",
+   "fieldtype": "Section Break",
+   "label": "New Loan Details"
+  },
+  {
+   "fieldname": "new_loan_amount",
+   "fieldtype": "Currency",
+   "label": "New Loan Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "new_interest_rate",
+   "fieldtype": "Percent",
+   "label": "New Interest Rate %",
+   "reqd": 1
+  },
+  {
+   "fieldname": "new_tenure_months",
+   "fieldtype": "Int",
+   "label": "New Tenure (Months)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "new_monthly_emi",
+   "fieldtype": "Currency",
+   "label": "New Monthly EMI",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_processing_fee",
+   "fieldtype": "Currency",
+   "label": "Processing Fee"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "net_disbursement_amount",
+   "fieldtype": "Currency",
+   "label": "Net Disbursement",
+   "read_only": 1,
+   "description": "New Loan Amount - Outstanding to old lender - Processing fee"
+  },
+  {
+   "fieldname": "disbursement_account",
+   "fieldtype": "Link",
+   "label": "Disbursement Account",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "disbursement_date",
+   "fieldtype": "Date",
+   "label": "Disbursement Date"
+  },
+  {
+   "fieldname": "section_top_up",
+   "fieldtype": "Section Break",
+   "label": "Top-Up Details"
+  },
+  {
+   "fieldname": "top_up_amount",
+   "fieldtype": "Currency",
+   "label": "Top-Up Amount"
+  },
+  {
+   "fieldname": "top_up_purpose",
+   "fieldtype": "Small Text",
+   "label": "Top-Up Purpose"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "top_up_disbursed",
+   "fieldtype": "Check",
+   "label": "Top-Up Disbursed"
+  },
+  {
+   "fieldname": "section_approval",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User"
+  },
+  {
+   "fieldname": "approved_on",
+   "fieldtype": "Datetime",
+   "label": "Approved On"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Home Loan",
+ "name": "Balance Transfer",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "BT-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "customer_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

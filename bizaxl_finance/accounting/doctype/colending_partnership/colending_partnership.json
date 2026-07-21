@@ -1,0 +1,240 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "partnership_name",
+  "partner_type",
+  "partner_entity",
+  "column_break_1",
+  "partner_share_percent",
+  "status",
+  "agreement_date",
+  "section_terms",
+  "lead_participation_percent",
+  "partner_participation_percent",
+  "lead_interest_rate",
+  "partner_interest_rate",
+  "column_break_2",
+  "lead_processing_fee_share",
+  "partner_processing_fee_share",
+  "risk_share_lead_percent",
+  "risk_share_partner_percent",
+  "section_portfolio",
+  "total_loans_funded",
+  "total_disbursed_amount",
+  "total_interest_earned_lead",
+  "total_interest_earned_partner",
+  "column_break_3",
+  "total_principal_collected_lead",
+  "total_principal_collected_partner",
+  "total_npa_amount",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "COLEND-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "partnership_name",
+   "fieldtype": "Data",
+   "label": "Partnership Name",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "partner_type",
+   "fieldtype": "Select",
+   "label": "Partner Type",
+   "options": "Bank\nNBFC\nHFC\nMFI\nFintech\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "partner_entity",
+   "fieldtype": "Data",
+   "label": "Partner Entity Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "partner_share_percent",
+   "fieldtype": "Percent",
+   "label": "Partner Share %",
+   "reqd": 1,
+   "description": "E.g. 80% for partner bank in priority sector co-lending"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nSuspended\nTerminated\nUnder Review",
+   "default": "Active",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "agreement_date",
+   "fieldtype": "Date",
+   "label": "Agreement Date"
+  },
+  {
+   "fieldname": "section_terms",
+   "fieldtype": "Section Break",
+   "label": "Financial Terms"
+  },
+  {
+   "fieldname": "lead_participation_percent",
+   "fieldtype": "Percent",
+   "label": "Lead Participation %",
+   "default": 20
+  },
+  {
+   "fieldname": "partner_participation_percent",
+   "fieldtype": "Percent",
+   "label": "Partner Participation %",
+   "default": 80
+  },
+  {
+   "fieldname": "lead_interest_rate",
+   "fieldtype": "Percent",
+   "label": "Lead Interest Rate %"
+  },
+  {
+   "fieldname": "partner_interest_rate",
+   "fieldtype": "Percent",
+   "label": "Partner Interest Rate %"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lead_processing_fee_share",
+   "fieldtype": "Percent",
+   "label": "Lead Processing Fee Share %",
+   "default": 100,
+   "description": "Lead retains % of processing fee"
+  },
+  {
+   "fieldname": "partner_processing_fee_share",
+   "fieldtype": "Percent",
+   "label": "Partner Processing Fee Share %",
+   "default": 0
+  },
+  {
+   "fieldname": "risk_share_lead_percent",
+   "fieldtype": "Percent",
+   "label": "Lead Risk Share %",
+   "default": 20,
+   "description": "First-loss risk share"
+  },
+  {
+   "fieldname": "risk_share_partner_percent",
+   "fieldtype": "Percent",
+   "label": "Partner Risk Share %",
+   "default": 80
+  },
+  {
+   "fieldname": "section_portfolio",
+   "fieldtype": "Section Break",
+   "label": "Portfolio Summary"
+  },
+  {
+   "fieldname": "total_loans_funded",
+   "fieldtype": "Int",
+   "label": "Total Loans Funded",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_disbursed_amount",
+   "fieldtype": "Currency",
+   "label": "Total Disbursed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_interest_earned_lead",
+   "fieldtype": "Currency",
+   "label": "Lead Interest Earned",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_interest_earned_partner",
+   "fieldtype": "Currency",
+   "label": "Partner Interest Earned",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_principal_collected_lead",
+   "fieldtype": "Currency",
+   "label": "Lead Principal Collected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_principal_collected_partner",
+   "fieldtype": "Currency",
+   "label": "Partner Principal Collected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_npa_amount",
+   "fieldtype": "Currency",
+   "label": "Total NPA Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Accounting",
+ "name": "Co-lending Partnership",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "COLEND-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Auditor",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "partnership_name",
+ "track_changes": 1,
+ "track_seen": 1
+}
