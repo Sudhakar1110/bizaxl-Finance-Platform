@@ -20,5 +20,4 @@ Chit Fund
 Consumer Finance
 Collections
 Risk Compliance
-Integrations
 Accounting
