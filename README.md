@@ -433,7 +433,7 @@ The platform exposes REST APIs for all major operations:
 
 ## 🧪 Demo Data Loader
 
-A comprehensive demo data loader is included to populate all 70+ DocTypes with realistic Indian demo data.
+A comprehensive demo data loader is included to populate **70+ of the 106 DocTypes** with realistic Indian demo data. (Child tables, single DocTypes, and system-level DocTypes are excluded as they handle configuration or data entry.)
 
 ### Features
 - **300+ records** across 22 modules
