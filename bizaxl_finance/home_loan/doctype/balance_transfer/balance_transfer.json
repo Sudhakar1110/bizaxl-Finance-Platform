@@ -269,13 +269,15 @@
    "read": 1,
    "write": 1,
    "create": 1,
-   "delete": 1
+   "delete": 1,
+   "submit": 1
   },
   {
    "role": "Loan Manager",
    "read": 1,
    "write": 1,
-   "create": 1
+   "create": 1,
+   "submit": 1
   },
   {
    "role": "Customer",
