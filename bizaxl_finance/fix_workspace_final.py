@@ -1,13 +1,11 @@
 """
-Bizaxl Finance — FINAL Workspace Fix
-=====================================
-Hybrid approach:
-- Direct SQL (with DESCRIBE) to create workspace record
-- ORM with ignore_links to add child table links
-- Bypasses ALL Frappe hooks on the workspace save
+Bizaxl Finance — SIMPLEST Workspace Fix
+========================================
+Uses the ORM end-to-end (no direct SQL) with all bypass flags.
+Works because migrate_workspace.py (after_migrate hook) now also
+has the same bypass flags, so migration won't break it.
 
-Usage:
-    bench --site your-site console
+Usage: bench --site your-site console
     exec(open("../apps/bizaxl_finance/bizaxl_finance/fix_workspace_final.py").read())
     exit
     bench --site your-site clear-cache
@@ -21,13 +19,12 @@ import os
 
 def fix_workspace_final():
     print("=" * 60)
-    print("📦 BIZAXL FINANCE — FINAL WORKSPACE FIX")
+    print("📦 BIZAXL FINANCE — SIMPLEST WORKSPACE FIX")
     print("=" * 60)
 
-    # ── Read fixture ───────────────────────────────────────────────────────
+    # Read fixture
     base = frappe.get_app_path("bizaxl_finance")
     fixture_path = os.path.join(base, "workspace", "bizaxl_finance", "bizaxl_finance.json")
-
     if not os.path.exists(fixture_path):
         print(f"❌ Fixture not found: {fixture_path}")
         return
@@ -35,78 +32,39 @@ def fix_workspace_final():
     with open(fixture_path) as f:
         fixture = json.load(f)
 
-    content = fixture.get("content", "[]")
-    all_links = fixture.get("links", [])
+    print(f"\n📋 Fixture: {len(json.loads(fixture['content']))} cards, {len(fixture['links'])} links, {len(fixture.get('shortcuts',[]))} shortcuts")
 
-    cards = len(json.loads(content))
-    print(f"\n📋 Fixture: {cards} cards, {len(all_links)} links, 0 shortcuts")
-
-    # ── Step 1: DELETE old workspace completely ────────────────────────────
-    print("\n🔧 Step 1/4: Deleting old workspace...")
-    exists = False
+    # Delete old workspace using ORM
+    print("\n🔧 Step 1/3: Deleting old workspace...")
     if frappe.db.exists("Workspace", "Bizaxl Finance"):
-        exists = True
-        # Delete child records first
-        frappe.db.sql("DELETE FROM `tabWorkspace Link` WHERE parent = %s AND parenttype = 'Workspace'", "Bizaxl Finance")
-        frappe.db.sql("DELETE FROM `tabWorkspace Shortcut` WHERE parent = %s AND parenttype = 'Workspace'", "Bizaxl Finance")
-        frappe.db.sql("DELETE FROM `tabWorkspace` WHERE name = %s", "Bizaxl Finance")
+        frappe.get_doc("Workspace", "Bizaxl Finance").delete()
         frappe.db.commit()
         print("  ✅ Old workspace deleted")
     else:
         print("  ⏭️ No old workspace to delete")
 
-    # ── Step 2: Discover columns & create workspace via SQL ────────────────
-    print("\n🔧 Step 2/4: Discovering columns and creating workspace...")
-
-    columns = [row[0] for row in frappe.db.sql("DESCRIBE `tabWorkspace`")]
-    print(f"  Found {len(columns)} columns in tabWorkspace")
-
-    now = frappe.utils.now()
-
-    # Build column-value pairs
-    col_map = {}
-    for col in columns:
-        if col in ("name",):
-            col_map[col] = "Bizaxl Finance"
-        elif col in ("owner", "modified_by"):
-            col_map[col] = "Administrator"
-        elif col in ("creation", "modified"):
-            col_map[col] = now
-        elif col in ("docstatus", "idx"):
-            col_map[col] = 0
-        elif col in ("title", "module", "label"):
-            col_map[col] = "Bizaxl Finance"
-        elif col == "icon":
-            col_map[col] = "credit-card"
-        elif col == "content":
-            col_map[col] = content
-        elif col in ("is_default", "public"):
-            col_map[col] = 1
-        elif col in ("sequence_id",):
-            col_map[col] = 1.0
-        elif col in ("is_hidden", "is_standard"):
-            col_map[col] = 0
-        elif col in ("_user_tags", "_comments", "_assign", "_liked_by"):
-            col_map[col] = ""
-
-    # Execute INSERT
-    col_names = list(col_map.keys())
-    placeholders = ["%s"] * len(col_names)
-    values = [col_map[c] for c in col_names]
-    quoted = [f"`{c}`" for c in col_names]
-
-    sql = f"INSERT INTO `tabWorkspace` ({', '.join(quoted)}) VALUES ({', '.join(placeholders)})"
-    frappe.db.sql(sql, values)
-    frappe.db.commit()
-    print(f"  ✅ Workspace created with {len(col_names)} columns")
-
-    # ── Step 3: Add links via ORM (handles child table correctly) ──────────
-    print(f"\n🔧 Step 3/4: Adding {len(all_links)} links via ORM...")
-
-    ws = frappe.get_doc("Workspace", "Bizaxl Finance")
-    ws.flags.ignore_links = True
-
-    for link in all_links:
+    # Create new workspace using ORM
+    print("\n🔧 Step 2/3: Creating new workspace via ORM...")
+    
+    doc_data = {
+        "doctype": "Workspace",
+        "name": "Bizaxl Finance",
+        "title": "Bizaxl Finance",
+        "module": "Bizaxl Finance",
+        "label": "Bizaxl Finance",
+        "icon": "credit-card",
+        "is_hidden": 0,
+        "is_standard": 0,
+        "is_default": 1,
+        "public": 1,
+        "sequence_id": 1.0,
+        "content": fixture["content"],
+    }
+    
+    ws = frappe.get_doc(doc_data)
+    
+    # Add links
+    for link in fixture.get("links", []):
         ws.append("links", {
             "type": link.get("type", ""),
             "label": link.get("label", ""),
@@ -118,40 +76,41 @@ def fix_workspace_final():
             "dependencies": link.get("dependencies", ""),
         })
 
+    # Save with all bypass flags
+    ws.flags.ignore_links = True
     original_dev_mode = frappe.conf.developer_mode
     try:
         frappe.conf.developer_mode = 0
-        ws.save(ignore_permissions=True)
+        ws.insert(ignore_permissions=True, ignore_if_duplicate=True)
     finally:
         frappe.conf.developer_mode = original_dev_mode
-
+    
     frappe.db.commit()
-    print(f"  ✅ Links added via ORM")
+    print("  ✅ Workspace created via ORM")
 
-    # ── Step 4: Verify ─────────────────────────────────────────────────────
-    print("\n🔧 Step 4/4: Verifying...")
+    # Verify
+    print("\n🔧 Step 3/3: Verifying...")
     ws = frappe.get_doc("Workspace", "Bizaxl Finance")
-    final_cards = len(json.loads(ws.content))
-    final_links = len(ws.links)
-    final_shortcuts = len(ws.shortcuts)
+    cards = len(json.loads(ws.content))
+    links = len(ws.links)
+    shortcuts = len(ws.shortcuts)
 
     print(f"\n✅ WORKSPACE CREATED SUCCESSFULLY!")
-    print(f"   Cards: {final_cards}")
-    print(f"   Links: {final_links}")
-    print(f"   Shortcuts: {final_shortcuts}")
+    print(f"   Cards: {cards}")
+    print(f"   Links: {links}")
+    print(f"   Shortcuts: {shortcuts}")
 
-    if final_cards >= 24:
+    if cards >= 24:
         print("✅ All 24+ cards are present!")
-    if final_links >= 100:
-        print(f"✅ All {final_links} links present!")
+    if links >= 100:
+        print(f"✅ All {links} links present!")
 
     print("\n📋 Next steps:")
     print("   1. Exit console (Ctrl+D)")
     print("   2. bench --site your-site clear-cache")
     print("   3. bench restart")
-    print("   4. Refresh browser (F5)")
-
-    return ws
+    print("   4. Open INCOGNITO browser window")
+    print("   5. Login and check Bizaxl Finance workspace")
 
 
 fix_workspace_final()
