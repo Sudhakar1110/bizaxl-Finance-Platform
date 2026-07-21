@@ -254,15 +254,15 @@ def sync_workspace_from_fixture():
             ws_name3 = sidebar_data3.get("workspace", {}).get("name", "")
             print(f"  🔍 [5/6] WITH scrubbed name '{scrubbed_name}': {ws_scrubbed} cards, name='{ws_name3}'")
             
-            # Test 6: Check what sidebar_items contains - is Bizaxl Finance even in the list?
-            all_workspaces = sidebar_data.get("sidebar_items", [])
+            # Test 6: Check sidebar_items WITH request context - is Bizaxl in the list?
+            all_workspaces = sidebar_data2.get("sidebar_items", [])
             found = [w for w in all_workspaces if "Bizaxl" in w.get("label", "") or "Bizaxl" in w.get("name", "")]
             print(f"  🔍 [6/6] Sidebar has {len(all_workspaces)} workspaces total, 'Bizaxl' in sidebar: {len(found)}")
             if found:
                 for f in found[:3]:
-                    print(f"         - name='{f.get('name','')}', label='{f.get('label','')}', cards={len(json.loads(f.get('content','[]')))} ")
+                    print(f"         - name='{f.get('name','')}', label='{f.get('label','')}' ")
             else:
-                print(f"         ➡ Our workspace is NOT in the sidebar list at all!")
+                print(f"         ➡ OUR WORKSPACE IS NOT IN THE SIDEBAR LIST!")
             
             # Restore original
             if original_workspace is not None:
