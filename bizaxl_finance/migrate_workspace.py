@@ -19,6 +19,7 @@ Called by the after_migrate hook in hooks.py
 """
 
 import frappe
+import frappe.client
 import json
 import os
 
@@ -211,7 +212,6 @@ def sync_workspace_from_fixture():
             # Test 3: Call the EXACT API the browser frontend calls
             # The workspace page uses the REST endpoint /api/resource/Workspace/{name}
             # which internally calls frappe.client.get(doctype, name)
-            import frappe.client
             api_doc = frappe.client.get("Workspace", workspace_name)
             api_content = json.loads(api_doc.get("content", "[]"))
             print(f"  🔍 [3/3] REST API frappe.client.get OK — {len(api_content)} cards")
