@@ -1363,5 +1363,7 @@ def load_demo_data():
     print("=" * 60)
 
 
-if __name__ == "__main__":
-    load_demo_data()
+# Note: In Frappe console, exec() may not set __name__ to "__main__",
+# so we always call load_demo_data() without the guard.
+# This script is designed ONLY for exec() — never import it.
+load_demo_data()
