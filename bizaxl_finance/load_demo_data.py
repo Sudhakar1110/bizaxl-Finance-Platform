@@ -27,6 +27,7 @@ def load_demo_data():
     import random
     import math
     import json
+    import os
     from frappe.utils import today, add_months, add_days, add_years
 
     # ── Helpers ─────────────────────────────────────────────────────────────
