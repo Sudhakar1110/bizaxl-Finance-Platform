@@ -54,16 +54,43 @@ def sync_workspace_from_fixture():
         frappe.db.commit()
 
         # Create workspace via SQL (bypasses ORM validation)
-        frappe.db.sql("""
-            INSERT INTO `tabWorkspace` (
-                name, title, label, module, icon, is_default, is_standard,
-                is_hidden, public, sequence_id, owner, creation, modified, content
-            ) VALUES (
-                'Bizaxl Finance', 'Bizaxl Finance', 'Bizaxl Finance',
-                'Bizaxl Finance', 'credit-card', 1, 0, 0, 1, 1.0, 'Administrator',
-                NOW(), NOW(), %s
-            )
-        """, (content,))
+        # Get actual columns from the table
+        cols = [r[0] for r in frappe.db.sql("SHOW COLUMNS FROM `tabWorkspace`")]
+        
+        insert_cols = ["name", "title", "label", "module", "icon", "is_standard", "is_hidden", "public", "sequence_id", "owner", "creation", "modified", "content"]
+        insert_cols = [c for c in insert_cols if c in cols]
+        
+        values = ["%s"] * len(insert_cols)
+        placeholders = ", ".join(["`%s`"] * len(insert_cols)) % tuple(insert_cols)
+        
+        if "is_standard" not in cols:
+            # Use different column names for older Frappe versions
+            insert_cols = ["name", "title", "label", "module", "icon", "public", "sequence_id", "owner", "creation", "modified", "content"]
+            insert_cols = [c for c in insert_cols if c in cols]
+        
+        placeholders = ", ".join(["`%s`"] * len(insert_cols)) % tuple(insert_cols)
+        
+        insert_sql = f"""
+            INSERT INTO `tabWorkspace` ({placeholders}) VALUES ({", ".join(["%s"] * len(insert_cols))})
+        """
+        
+        vals = []
+        for c in insert_cols:
+            if c == "name": vals.append("Bizaxl Finance")
+            elif c == "title": vals.append("Bizaxl Finance")
+            elif c == "label": vals.append("Bizaxl Finance")
+            elif c == "module": vals.append("Bizaxl Finance")
+            elif c == "icon": vals.append("credit-card")
+            elif c == "public": vals.append(1)
+            elif c == "sequence_id": vals.append(1.0)
+            elif c == "owner": vals.append("Administrator")
+            elif c == "creation": vals.append(frappe.utils.now())
+            elif c == "modified": vals.append(frappe.utils.now())
+            elif c == "content": vals.append(content)
+            elif c == "is_standard": vals.append(0)
+            elif c == "is_hidden": vals.append(0)
+        
+        frappe.db.sql(insert_sql, vals)
 
         # Add valid links via SQL
         for idx, link in enumerate(valid_links):
