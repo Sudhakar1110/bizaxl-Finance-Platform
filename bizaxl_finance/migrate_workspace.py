@@ -6,7 +6,9 @@ Frappe's sync behavior.
 Called by the after_migrate hook in hooks.py
 """
 
-import frappe, json, os
+import frappe
+import json
+import os
 
 
 def sync_workspace_from_fixture():
@@ -36,27 +38,45 @@ def sync_workspace_from_fixture():
         # Rebuild links from fixture
         ws.set("links", [])
         for link in fixture.get("links", []):
-            link_to = link.get("link_to", "")
-            # Skip links to DocTypes that don't exist in the database
-            if link.get("link_type") == "DocType" and link_to:
-                if not frappe.db.exists("DocType", link_to):
-                    continue
             ws.append("links", {
                 "type": link.get("type"),
                 "label": link.get("label"),
-                "link_to": link_to,
+                "link_to": link.get("link_to", ""),
                 "link_type": link.get("link_type", ""),
                 "hidden": link.get("hidden", 0),
                 "is_query_report": link.get("is_query_report", 0),
                 "onboard": link.get("onboard", 0),
             })
 
+        # Rebuild shortcuts from fixture
+        ws.set("shortcuts", [])
+        for shortcut in fixture.get("shortcuts", []):
+            ws.append("shortcuts", {
+                "type": shortcut.get("type", "DocType"),
+                "label": shortcut.get("label", ""),
+                "link_to": shortcut.get("link_to", ""),
+                "doc_view": shortcut.get("doc_view", "List"),
+                "hidden": shortcut.get("hidden", 0),
+            })
+
+        # Bypass link validation (DocTypes may not exist yet during first migration)
+        ws.flags.ignore_links = True
+
+        # Disable developer_mode temporarily to prevent Workspace.on_update()
+        # from trying to export to files (custom modules need a 'package' field)
+        original_dev_mode = frappe.conf.developer_mode
+        frappe.conf.developer_mode = 0
+
         ws.save(ignore_permissions=True)
+
+        frappe.conf.developer_mode = original_dev_mode
         frappe.db.commit()
 
         cards = len(json.loads(ws.content))
         links = len(ws.links)
-        print(f"  ✅ Workspace synced: {cards} cards, {links} links")
+        shortcuts = len(ws.shortcuts)
+        print(f"  ✅ Workspace synced: {cards} cards, {links} links, {shortcuts} shortcuts")
 
     except Exception as e:
         frappe.log_error(f"Workspace sync failed: {e}", "Workspace Sync")
+        print(f"  ⚠️ Workspace sync failed: {e}")
