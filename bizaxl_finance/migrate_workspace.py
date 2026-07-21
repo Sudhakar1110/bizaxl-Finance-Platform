@@ -82,35 +82,42 @@ def sync_workspace_from_fixture():
         # ── Step 2: Replace all links ──
         frappe.db.sql("DELETE FROM `tabWorkspace Link` WHERE `parent` = %s", workspace_name)
         
-        # Batch insert links
-        link_fields = ["parent", "parenttype", "parentfield", "idx", "type", "label",
-                        "link_to", "link_type", "hidden", "is_query_report", "onboard", "dependencies"]
-        
-        # Check which columns actually exist in tabWorkspace Link
-        existing_cols = [r[0] for r in frappe.db.sql("DESCRIBE `tabWorkspace Link`")]
-        link_fields = [f for f in link_fields if f in existing_cols]
+        # Discover actual columns in tabWorkspace Link
+        link_cols = [r[0] for r in frappe.db.sql("DESCRIBE `tabWorkspace Link`")]
         
         for idx, link in enumerate(links):
-            values = []
-            for field in link_fields:
-                if field == "parent":
-                    values.append(workspace_name)
-                elif field == "parenttype":
-                    values.append("Workspace")
-                elif field == "parentfield":
-                    values.append("links")
-                elif field == "idx":
-                    values.append(idx + 1)
-                elif field in ("hidden", "is_query_report", "onboard"):
-                    values.append(link.get(field, 0))
+            values = {}
+            for col in link_cols:
+                if col == "parent":
+                    values[col] = workspace_name
+                elif col == "parenttype":
+                    values[col] = "Workspace"
+                elif col == "parentfield":
+                    values[col] = "links"
+                elif col == "name":
+                    # Generate unique name for child table - required in strict mode
+                    values[col] = f"bizaxl-finance-link-{idx+1:05d}"
+                elif col == "idx":
+                    values[col] = idx + 1
+                elif col in ("creation", "modified"):
+                    values[col] = frappe.utils.now()
+                elif col in ("owner", "modified_by"):
+                    values[col] = "Administrator"
+                elif col == "docstatus":
+                    values[col] = 0
+                elif col in ("hidden", "is_query_report", "onboard"):
+                    values[col] = link.get(col, 0)
+                elif col in ("_user_tags", "_comments", "_assign", "_liked_by"):
+                    values[col] = ""
                 else:
-                    values.append(link.get(field, ""))
+                    values[col] = link.get(col, "")
             
-            placeholders = ", ".join(["%s"] * len(link_fields))
-            cols = ", ".join(f"`{c}`" for c in link_fields)
+            cols_sql = ", ".join(f"`{c}`" for c in link_cols)
+            placeholders = ", ".join(["%s"] * len(link_cols))
+            vals_sql = tuple(values.get(c, "") for c in link_cols)
             frappe.db.sql(
-                f"INSERT INTO `tabWorkspace Link` ({cols}) VALUES ({placeholders})",
-                values
+                f"INSERT INTO `tabWorkspace Link` ({cols_sql}) VALUES ({placeholders})",
+                vals_sql
             )
         
         print(f"  ✅ {links_count} links synced")
@@ -118,32 +125,42 @@ def sync_workspace_from_fixture():
         # ── Step 3: Replace all shortcuts ──
         frappe.db.sql("DELETE FROM `tabWorkspace Shortcut` WHERE `parent` = %s", workspace_name)
         
-        shortcut_fields = ["parent", "parenttype", "parentfield", "idx", "type", "label",
-                           "link_to", "doc_view", "hidden"]
-        existing_sc_cols = [r[0] for r in frappe.db.sql("DESCRIBE `tabWorkspace Shortcut`")]
-        shortcut_fields = [f for f in shortcut_fields if f in existing_sc_cols]
+        # Discover actual columns in tabWorkspace Shortcut
+        sc_cols = [r[0] for r in frappe.db.sql("DESCRIBE `tabWorkspace Shortcut`")]
         
         for idx, shortcut in enumerate(shortcuts):
-            values = []
-            for field in shortcut_fields:
-                if field == "parent":
-                    values.append(workspace_name)
-                elif field == "parenttype":
-                    values.append("Workspace")
-                elif field == "parentfield":
-                    values.append("shortcuts")
-                elif field == "idx":
-                    values.append(idx + 1)
-                elif field == "hidden":
-                    values.append(shortcut.get(field, 0))
+            values = {}
+            for col in sc_cols:
+                if col == "parent":
+                    values[col] = workspace_name
+                elif col == "parenttype":
+                    values[col] = "Workspace"
+                elif col == "parentfield":
+                    values[col] = "shortcuts"
+                elif col == "name":
+                    # Generate unique name for child table - required in strict mode
+                    values[col] = f"bizaxl-finance-shortcut-{idx+1:05d}"
+                elif col == "idx":
+                    values[col] = idx + 1
+                elif col in ("creation", "modified"):
+                    values[col] = frappe.utils.now()
+                elif col in ("owner", "modified_by"):
+                    values[col] = "Administrator"
+                elif col == "docstatus":
+                    values[col] = 0
+                elif col == "hidden":
+                    values[col] = shortcut.get(col, 0)
+                elif col in ("_user_tags", "_comments", "_assign", "_liked_by"):
+                    values[col] = ""
                 else:
-                    values.append(shortcut.get(field, ""))
+                    values[col] = shortcut.get(col, "")
             
-            placeholders = ", ".join(["%s"] * len(shortcut_fields))
-            cols = ", ".join(f"`{c}`" for c in shortcut_fields)
+            cols_sql = ", ".join(f"`{c}`" for c in sc_cols)
+            placeholders = ", ".join(["%s"] * len(sc_cols))
+            vals_sql = tuple(values.get(c, "") for c in sc_cols)
             frappe.db.sql(
-                f"INSERT INTO `tabWorkspace Shortcut` ({cols}) VALUES ({placeholders})",
-                values
+                f"INSERT INTO `tabWorkspace Shortcut` ({cols_sql}) VALUES ({placeholders})",
+                vals_sql
             )
         
         frappe.db.commit()
