@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
+  "loan_application",
   "tranche_number",
   "tranche_amount",
   "tranche_purpose",
@@ -26,6 +27,12 @@
    "reqd": 1,
    "in_list_view": 1,
    "in_standard_filter": 1
+  },
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application"
   },
   {
    "fieldname": "tranche_number",

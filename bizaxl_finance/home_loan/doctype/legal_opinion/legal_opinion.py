@@ -24,13 +24,25 @@ class LegalOpinion(Document):
             )
 
     def update_loan_application_status(self):
-        """Update linked Loan Application with legal opinion status"""
+        """Update linked Loan Application with legal opinion status (appends to existing remarks)"""
         if self.loan_application and self.legal_opinion_status:
+            existing_remarks = frappe.db.get_value(
+                "Loan Application", self.loan_application, "remarks"
+            ) or ""
+            new_remark = (
+                f"Legal Opinion: {self.legal_opinion_status}"
+                f" - {self.legal_opinion_summary or 'No summary'}"
+            )
+            if existing_remarks:
+                if new_remark not in existing_remarks:
+                    updated_remarks = f"{existing_remarks}\n{new_remark}"
+                else:
+                    updated_remarks = existing_remarks
+            else:
+                updated_remarks = new_remark
+
             frappe.db.set_value(
-                "Loan Application",
-                self.loan_application,
-                "remarks",
-                f"Legal Opinion: {self.legal_opinion_status} - {self.legal_opinion_summary or 'No summary'}"
+                "Loan Application", self.loan_application, "remarks", updated_remarks
             )
             frappe.msgprint(
                 f"Legal opinion updated for Loan Application {self.loan_application}",

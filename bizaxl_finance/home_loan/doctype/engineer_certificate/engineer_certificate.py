@@ -66,6 +66,7 @@ class EngineerCertificate(Document):
         tranches = frappe.get_all(
             "Tranche Disbursement",
             filters={
+                "loan_application": self.loan_application,
                 "tranche_purpose": tranche_purpose,
                 "status": ["in", ["Planned", "Approved"]]
             },
