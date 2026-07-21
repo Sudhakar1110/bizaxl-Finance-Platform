@@ -122,6 +122,11 @@ scheduler_events = {
     ],
 }
 
+# ── after_migrate hook to restore workspace layout ────────────────────────
+after_migrate = [
+    "bizaxl_finance.migrate_workspace.sync_workspace_from_fixture",
+]
+
 # ── Dashboard Configuration ──────────────────────────────────────────────────
 override_doctype_dashboards = {}
 
