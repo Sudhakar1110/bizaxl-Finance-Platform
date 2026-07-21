@@ -25,7 +25,7 @@
         "link_to": "Bizaxl Customer",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -37,7 +37,7 @@
         "link_to": "KYC Document",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -49,7 +49,7 @@
         "link_to": "Customer Communication",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -61,7 +61,7 @@
         "link_to": "Customer Nomination",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -73,7 +73,7 @@
         "link_to": "Bank Account",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -85,7 +85,7 @@
         "link_to": "Transaction",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -97,7 +97,7 @@
         "link_to": "UPI ID",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -109,7 +109,7 @@
         "link_to": "Payment Method",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -121,7 +121,7 @@
         "link_to": "Banking Settings",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -133,7 +133,7 @@
         "link_to": "Bill Payment",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -145,7 +145,7 @@
         "link_to": "Mobile Recharge",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -157,7 +157,7 @@
         "link_to": "FASTag Recharge",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -169,7 +169,7 @@
         "link_to": "Bill Payment Category",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -181,7 +181,7 @@
         "link_to": "Recharge Provider",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -193,7 +193,7 @@
         "link_to": "Investment Account",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -205,7 +205,7 @@
         "link_to": "Mutual Fund",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -217,7 +217,7 @@
         "link_to": "Mutual Fund Transaction",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -229,7 +229,7 @@
         "link_to": "Fixed Deposit",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -241,7 +241,7 @@
         "link_to": "Digital Gold",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -253,7 +253,7 @@
         "link_to": "Investment Goal",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -265,7 +265,7 @@
         "link_to": "Loan Product",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -277,7 +277,7 @@
         "link_to": "Loan Application",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -289,7 +289,7 @@
         "link_to": "Loan Disbursement",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -301,7 +301,7 @@
         "link_to": "Loan Repayment",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -313,7 +313,7 @@
         "link_to": "Loan Collateral",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -325,7 +325,7 @@
         "link_to": "Insurance Product",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -337,7 +337,7 @@
         "link_to": "Insurance Policy",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -349,7 +349,7 @@
         "link_to": "Insurance Claim",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -361,7 +361,7 @@
         "link_to": "Premium Payment",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -373,7 +373,7 @@
         "link_to": "Insurance Nominee",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -385,7 +385,7 @@
         "link_to": "Credit Report",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -397,7 +397,7 @@
         "link_to": "Credit Score History",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -409,7 +409,7 @@
         "link_to": "Credit Goal",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -421,7 +421,7 @@
         "link_to": "Portfolio Holding",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -433,7 +433,7 @@
         "link_to": "Portfolio Summary",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -445,7 +445,7 @@
         "link_to": "Financial Goal",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
@@ -457,7 +457,7 @@
         "link_to": "Asset Class",
         "hidden": 0,
         "is_query_report": 0,
-        "type": "link",
+        "type": "Link",
         "parent": "Bizaxl Finance",
         "parentfield": "links",
         "parenttype": "Workspace"
