@@ -184,7 +184,7 @@ All integrations follow a **stub-to-live pattern** — they work without API key
 ### Insurance (6)
 `Insurance Bundle Tracker`, `Insurance Claim`, `Insurance Nominee`, `Insurance Policy`, `Insurance Product`, `Premium Payment`
 
-### Integrations (7)
+### Integrations (8)
 `Integration Settings`, `Integration Request`, `OAuth Client`, `OAuth Scope`, `OAuth Bearer Token`, `OAuth Authorization Code`, `Webhook Data`, `Webhook Request Log`
 
 ### Investments (6)
@@ -193,7 +193,7 @@ All integrations follow a **stub-to-live pattern** — they work without API key
 ### Invoice Finance (2)
 `Anchor Master`, `Invoice Finance`
 
-### Loans (12)
+### Loans (13)
 `Credit Committee Decision`, `EMI Schedule`, `Loan Application`, `Loan Collateral`, `Loan Disbursement`, `Loan Product`, `Loan Repayment`, `Loan Restructure`, `Personal Loan Application`, `Prepayment Request`, `Rate Reset Log`, `Sanction Letter`, `Scorecard Config`
 
 ### Microfinance (6)
