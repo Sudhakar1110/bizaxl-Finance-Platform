@@ -23,21 +23,19 @@ import frappe
 import os
 import json
 
-# Module names from fixtures/module_def.json
-ALL_MODULE_NAMES = [
-    "Bizaxl Finance", "Customer Management", "Banking", "Payments",
-    "Investments", "Loans", "Insurance", "Credit Management",
-    "Portfolio Management", "Foundation", "NBFC Lending", "Gold Loan",
-    "Microfinance", "Vehicle Loan", "Home Loan", "Business Loan",
-    "Education Loan", "BNPL", "Invoice Finance", "Chit Fund",
-    "Consumer Finance", "Collections", "Risk Compliance",
-    "Risk & Compliance", "Accounting",
-]
-
-APP_NAME = "bizaxl_finance"
-
-
 def fix_modules():
+    # Module names from fixtures/module_def.json
+    # Inside function for exec() compatibility (exec doesn't propagate module-level vars)
+    ALL_MODULE_NAMES = [
+        "Bizaxl Finance", "Customer Management", "Banking", "Payments",
+        "Investments", "Loans", "Insurance", "Credit Management",
+        "Portfolio Management", "Foundation", "NBFC Lending", "Gold Loan",
+        "Microfinance", "Vehicle Loan", "Home Loan", "Business Loan",
+        "Education Loan", "BNPL", "Invoice Finance", "Chit Fund",
+        "Consumer Finance", "Collections", "Risk Compliance",
+        "Risk & Compliance", "Accounting",
+    ]
+    APP_NAME = "bizaxl_finance"
     print("=" * 60)
     print("📦 BIZAXL FINANCE — FIX MODULE & DOCTYPE MAPPINGS")
     print("=" * 60)
@@ -125,8 +123,5 @@ def fix_modules():
     print("  4. Run demo data script again")
 
 
-if __name__ == "__main__":
-    fix_modules()
-
-# For exec() in Frappe console
+# For exec() in Frappe console (__name__ != __main__ there)
 fix_modules()
