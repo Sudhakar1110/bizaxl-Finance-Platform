@@ -20,8 +20,8 @@
   "interest_amount",
   "column_break_2",
   "penalty_amount",
-  "outstanding_balance",
-  "transaction_reference"
+  "outstanding_balance",   "transaction_reference",
+   "gl_entry_reference"
  ],
  "fields": [
   {
@@ -122,6 +122,12 @@
    "fieldname": "transaction_reference",
    "fieldtype": "Data",
    "label": "Transaction Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gl_entry_reference",
+   "fieldtype": "Data",
+   "label": "GL Entry Reference",
    "read_only": 1
   }
  ],

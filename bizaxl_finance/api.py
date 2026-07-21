@@ -236,6 +236,40 @@ def create_loan_repayment(loan_application, amount, repayment_type="Scheduled EM
     return repayment.name
 
 
+# ── Portal APIs ─────────────────────────────────────────────────────────────
+
+@frappe.whitelist(allow_guest=False)
+def submit_loan_application_from_portal(loan_product, loan_amount, tenure_months, interest_rate, purpose=""):
+    """Submit loan application from the customer portal"""
+    customer = frappe.db.get_value("Bizaxl Customer", {"email": frappe.session.user}, "name")
+    if not customer:
+        return {"error": "Customer profile not found"}
+    
+    loan = frappe.get_doc({
+        "doctype": "Loan Application",
+        "customer": customer,
+        "loan_product": loan_product,
+        "loan_amount": frappe.utils.flt(loan_amount),
+        "tenure_months": int(tenure_months),
+        "interest_rate": frappe.utils.flt(interest_rate),
+        "purpose": purpose,
+        "status": "Draft",
+    })
+    loan.insert(ignore_permissions=True)
+    
+    frappe.get_doc({
+        "doctype": "Customer Communication",
+        "customer": customer,
+        "subject": "Loan Application Submitted",
+        "message_body": f"Your loan application for ₹{loan.loan_amount:,.2f} has been submitted.",
+        "channel": "App Notification",
+        "communication_type": "Notification",
+        "status": "Sent",
+    }).insert(ignore_permissions=True)
+    
+    return {"success": True, "loan_id": loan.name, "message": "Application submitted"}
+
+
 # ── Notification APIs ─────────────────────────────────────────────────────
 
 @frappe.whitelist()

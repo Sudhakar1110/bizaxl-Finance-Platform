@@ -234,9 +234,14 @@ def _get_accounting_settings():
     try:
         settings = frappe.get_single_doc("GL Settings")
         if not settings.company or not settings.loan_receivable_account:
+            frappe.log_error(
+                "GL Settings not fully configured — set Company and Loan Receivable Account",
+                "Accounting"
+            )
             return None
         return settings
-    except Exception:
+    except Exception as e:
+        frappe.log_error(f"Failed to load GL Settings: {e}", "Accounting")
         return None
 
 

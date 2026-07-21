@@ -124,6 +124,7 @@ def initiate_esign(document_id, file_url, aadhaar_number, customer):
     return result
 
 
+@frappe.whitelist(allow_guest=False)
 def esign_callback(**kwargs):
     """Callback after e-Sign is completed
     

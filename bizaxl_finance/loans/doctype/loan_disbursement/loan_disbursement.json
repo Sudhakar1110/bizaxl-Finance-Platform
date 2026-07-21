@@ -24,8 +24,8 @@
   "gst_amount",
   "net_disbursement",
   "section_repayment",
-  "first_emi_date",
-  "total_emi_count"
+  "first_emi_date",   "total_emi_count",
+   "gl_entry_reference"
  ],
  "fields": [
   {
@@ -150,6 +150,12 @@
    "fieldname": "total_emi_count",
    "fieldtype": "Int",
    "label": "Total EMI Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gl_entry_reference",
+   "fieldtype": "Data",
+   "label": "GL Entry Reference",
    "read_only": 1
   }
  ],

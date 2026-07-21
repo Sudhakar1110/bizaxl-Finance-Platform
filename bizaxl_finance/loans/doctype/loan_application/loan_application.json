@@ -38,8 +38,11 @@
   "approved_by",
   "column_break_4",
   "rejection_reason",
-  "remarks",
-  "purpose"
+  "remarks",   "purpose",
+   "workflow_state",
+   "esign_status",
+   "esign_reference",
+   "esign_date"
  ],
  "fields": [
   {
@@ -104,7 +107,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Draft\nUnder Review\nApproved\nRejected\nDisbursed\nClosed\nDefaulted",
+   "options": "Draft\nUnder Review\nCredit Committee\nApproved\nRejected\nDisbursed\nClosed\nDefaulted",
    "default": "Draft",
    "in_list_view": 1,
    "in_standard_filter": 1
@@ -241,6 +244,31 @@
    "fieldname": "purpose",
    "fieldtype": "Small Text",
    "label": "Purpose of Loan"
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Data",
+   "label": "Workflow State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "esign_status",
+   "fieldtype": "Select",
+   "label": "e-Sign Status",
+   "options": "Pending\nSent\nSigned\nExpired\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "esign_reference",
+   "fieldtype": "Data",
+   "label": "e-Sign Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "esign_date",
+   "fieldtype": "Date",
+   "label": "e-Sign Date",
+   "read_only": 1
   }
  ],
  "is_submittable": 0,
