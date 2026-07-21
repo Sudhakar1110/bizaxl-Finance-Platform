@@ -133,18 +133,21 @@ def sync_workspace_from_fixture():
         frappe.cache().delete_key("bootinfo")
 
         # ── Step 5: Diagnostic - verify workspace appears in sidebar API ──
-        from frappe.desk.desktop import get_workspace_sidebar_items
-        sidebar = get_workspace_sidebar_items()
-        page_count = len(sidebar.get("pages", []))
-        bizaxl_found = any(
-            p.get("name") == workspace_name or "Bizaxl" in p.get("title", "")
-            for p in sidebar.get("pages", [])
-        )
-        if bizaxl_found:
-            print(f"  ✅ Sidebar API: {page_count} pages, 'Bizaxl Finance' FOUND")
-        else:
-            print(f"  ⚠️ Sidebar API: {page_count} pages, 'Bizaxl Finance' NOT FOUND")
-            print(f"     Pages in list: {[p.get('title') for p in sidebar.get('pages', [])[:5]]}")
+        try:
+            from frappe.desk.desktop import get_workspace_sidebar_items
+            sidebar = get_workspace_sidebar_items()
+            page_count = len(sidebar.get("pages", []))
+            bizaxl_found = any(
+                p.get("name") == workspace_name or "Bizaxl" in p.get("title", "")
+                for p in sidebar.get("pages", [])
+            )
+            if bizaxl_found:
+                print(f"  ✅ Sidebar API: {page_count} pages, 'Bizaxl Finance' FOUND")
+            else:
+                print(f"  ⚠️ Sidebar API: {page_count} pages, 'Bizaxl Finance' NOT FOUND")
+                print(f"     Pages: {[p.get('title') for p in sidebar.get('pages', [])[:5]]}")
+        except Exception as diag_e:
+            print(f"  ⚠️ Sidebar diagnostic skipped: {diag_e}")
 
         # ── Step 6: Final verification ──
         ws_final = frappe.get_doc("Workspace", workspace_name)
