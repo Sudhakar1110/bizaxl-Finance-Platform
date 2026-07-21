@@ -72,5 +72,5 @@ def run():
             name = f_result.split(":")[1].split("-")[0].strip()
             print(f"  python -c \"... create {name} ...\"")
 
-if __name__ == "__main__":
-    run()
+# Calling run() directly since this script is meant to be exec()'d in bench console
+run()
