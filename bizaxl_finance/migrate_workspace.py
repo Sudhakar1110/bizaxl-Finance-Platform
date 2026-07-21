@@ -65,11 +65,12 @@ def sync_workspace_from_fixture():
         # Disable developer_mode temporarily to prevent Workspace.on_update()
         # from trying to export to files (custom modules need a 'package' field)
         original_dev_mode = frappe.conf.developer_mode
-        frappe.conf.developer_mode = 0
+        try:
+            frappe.conf.developer_mode = 0
+            ws.save(ignore_permissions=True)
+        finally:
+            frappe.conf.developer_mode = original_dev_mode
 
-        ws.save(ignore_permissions=True)
-
-        frappe.conf.developer_mode = original_dev_mode
         frappe.db.commit()
 
         cards = len(json.loads(ws.content))

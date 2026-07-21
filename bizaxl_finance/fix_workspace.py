@@ -86,9 +86,11 @@ def fix_workspace():
     # (custom modules without a 'package' field cause 'Package must be set' error)
     ws.flags.ignore_links = True
     original_dev_mode = frappe.conf.developer_mode
-    frappe.conf.developer_mode = 0
-    ws.save(ignore_permissions=True)
-    frappe.conf.developer_mode = original_dev_mode
+    try:
+        frappe.conf.developer_mode = 0
+        ws.save(ignore_permissions=True)
+    finally:
+        frappe.conf.developer_mode = original_dev_mode
     frappe.db.commit()
 
     # Verify
