@@ -63,16 +63,14 @@ def fix_workspace_final():
     frappe.db.sql("""
         INSERT INTO `tabWorkspace` (
             `name`, `owner`, `creation`, `modified`, `modified_by`,
-            `docstatus`, `idx`, `title`, `module`, `icon`, `is_hidden`,
-            `is_standard`, `is_default`, `public`, `sequence_id`,
-            `label`, `content`, `_user_tags`, `_comments`, `_assign`,
-            `_liked_by`
+            `docstatus`, `idx`, `title`, `module`, `icon`,
+            `is_default`, `public`, `sequence_id`,
+            `label`, `content`
         ) VALUES (
             %s, %s, %s, %s, %s,
-            0, 0, %s, %s, %s, 0,
-            0, 1, 1, 1.0,
-            %s, %s, '', '', '',
-            ''
+            0, 0, %s, %s, %s,
+            1, 1, 1.0,
+            %s, %s
         )
     """, (
         "Bizaxl Finance",
@@ -108,16 +106,23 @@ def fix_workspace_final():
             link.get("dependencies", ""),
         ))
 
-    # Batch insert links
-    frappe.db.sql("""
-        INSERT INTO `tabWorkspace Link`
-            (`parent`, `parenttype`, `parentfield`, `idx`,
-             `type`, `label`, `link_to`, `link_type`,
-             `hidden`, `is_query_report`, `onboard`, `dependencies`)
-        VALUES {}
-    """.format(",".join(["(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"] * len(link_values))),
-        [val for row in link_values for val in row]
-    )
+    # Batch insert links - insert in chunks of 50 to avoid SQL size limits
+    chunk_size = 50
+    for chunk_start in range(0, len(link_values), chunk_size):
+        chunk = link_values[chunk_start:chunk_start + chunk_size]
+        placeholders = ",".join(["(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"] * len(chunk))
+        frappe.db.sql(f"""
+            INSERT INTO `tabWorkspace Link`
+                (`parent`, `parenttype`, `parentfield`, `idx`,
+                 `type`, `label`, `link_to`, `link_type`,
+                 `hidden`, `is_query_report`, `onboard`, `dependencies`)
+            VALUES {placeholders}
+        """, [val for row in chunk for val in row])
+        print(f"    Inserted links {chunk_start+1}-{chunk_start+len(chunk)}")
+        frappe.db.commit()
+
+    print(f"  ✅ {len(all_links)} links inserted")
+    frappe.db.commit()
 
     print(f"  ✅ {len(all_links)} links inserted")
     frappe.db.commit()
@@ -128,13 +133,10 @@ def fix_workspace_final():
     final_cards = len(json.loads(ws.content))
     final_links = len(ws.links)
     final_shortcuts = len(ws.shortcuts)
-    is_std = ws.is_standard
-
     print(f"\n✅ WORKSPACE CREATED SUCCESSFULLY!")
     print(f"   Cards: {final_cards}")
     print(f"   Links: {final_links}")
     print(f"   Shortcuts: {final_shortcuts}")
-    print(f"   Standard: {is_std} (0 = non-standard = won't be overridden!)")
 
     if final_cards >= 24:
         print("✅ All 24+ cards are present!")
