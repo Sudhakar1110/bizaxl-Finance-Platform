@@ -18,11 +18,13 @@ def before_uninstall():
         pluck="module_name"
     )
     
+    total = 0
     for module in bizaxl_modules:
         doctypes = frappe.get_all("DocType", 
             filters={"module": module},
             pluck="name"
         )
+        total += len(doctypes)
         for dt in doctypes:
             try:
                 frappe.delete_doc("DocType", dt, ignore_on_trash=True, force=True)
@@ -33,4 +35,4 @@ def before_uninstall():
                 frappe.db.sql(f"DROP TABLE IF EXISTS `tab{dt.replace(' ', '_')}`")
         
     frappe.db.commit()
-    print(f"✅ Cleaned up {sum(1 for m in bizaxl_modules for _ in frappe.get_all('DocType', filters={'module': m}, pluck='name'))} doctypes")
+    print(f"✅ Cleaned up {total} doctypes")
