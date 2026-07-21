@@ -4,26 +4,33 @@ import frappe
 
 
 def before_uninstall():
-    """Change module references on all doctypes before uninstall.
+    """Delete bizaxl_finance custom doctypes before modules are deleted.
     
-    Frappe deletes modules before doctypes during uninstall-app.
-    This causes errors when doctypes reference custom modules
-    that have already been deleted. This hook reassigns them
-    to a built-in module before the uninstall process begins.
+    During uninstall-app, Frappe deletes modules before doctypes.
+    This causes errors when doctypes reference modules already deleted.
+    
+    This hook pre-deletes the doctypes via direct SQL before Frappe
+    starts the module deletion process.
     """
-    modules_to_fix = frappe.get_all("DocType", 
-        filters={"module": ["in", ["Bizaxl Finance", "Foundation", "Banking", "Payments", 
-                                   "Investments", "Loans", "Insurance", "Credit Management",
-                                   "Portfolio Management", "Customer Management", "NBFC Lending",
-                                   "Gold Loan", "Microfinance", "Vehicle Loan", "Home Loan",
-                                   "Business Loan", "Education Loan", "BNPL", "Invoice Finance",
-                                   "Chit Fund", "Consumer Finance", "Collections", "Risk Compliance",
-                                   "Risk & Compliance", "Accounting"]]},
-        pluck="name"
+    # Get all doctypes belonging to bizaxl_finance modules
+    bizaxl_modules = frappe.get_all("Module Def", 
+        filters={"app_name": "bizaxl_finance"},
+        pluck="module_name"
     )
     
-    for doctype in modules_to_fix:
-        frappe.db.set_value("DocType", doctype, "module", "Setup")
-    
+    for module in bizaxl_modules:
+        doctypes = frappe.get_all("DocType", 
+            filters={"module": module},
+            pluck="name"
+        )
+        for dt in doctypes:
+            try:
+                frappe.delete_doc("DocType", dt, ignore_on_trash=True, force=True)
+                print(f"  Deleted DocType: {dt}")
+            except Exception:
+                # Fallback to direct SQL
+                frappe.db.sql(f"DELETE FROM `tabDocType` WHERE `name` = %s", dt)
+                frappe.db.sql(f"DROP TABLE IF EXISTS `tab{dt.replace(' ', '_')}`")
+        
     frappe.db.commit()
-    print(f"✅ Changed module for {len(modules_to_fix)} doctypes to 'Setup'")
+    print(f"✅ Cleaned up {sum(1 for m in bizaxl_modules for _ in frappe.get_all('DocType', filters={'module': m}, pluck='name'))} doctypes")
