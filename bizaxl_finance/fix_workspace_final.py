@@ -1,8 +1,10 @@
 """
 Bizaxl Finance — FINAL Workspace Fix
 =====================================
-Uses direct database operations to force-update the workspace.
-Auto-discovers table columns so it works on ANY Frappe version.
+Hybrid approach:
+- Direct SQL (with DESCRIBE) to create workspace record
+- ORM with ignore_links to add child table links
+- Bypasses ALL Frappe hooks on the workspace save
 
 Usage:
     bench --site your-site console
@@ -39,9 +41,12 @@ def fix_workspace_final():
     cards = len(json.loads(content))
     print(f"\n📋 Fixture: {cards} cards, {len(all_links)} links, 0 shortcuts")
 
-    # ── Step 1: DELETE old workspace ───────────────────────────────────────
-    print("\n🔧 Step 1/3: Deleting old workspace...")
+    # ── Step 1: DELETE old workspace completely ────────────────────────────
+    print("\n🔧 Step 1/4: Deleting old workspace...")
+    exists = False
     if frappe.db.exists("Workspace", "Bizaxl Finance"):
+        exists = True
+        # Delete child records first
         frappe.db.sql("DELETE FROM `tabWorkspace Link` WHERE parent = %s AND parenttype = 'Workspace'", "Bizaxl Finance")
         frappe.db.sql("DELETE FROM `tabWorkspace Shortcut` WHERE parent = %s AND parenttype = 'Workspace'", "Bizaxl Finance")
         frappe.db.sql("DELETE FROM `tabWorkspace` WHERE name = %s", "Bizaxl Finance")
@@ -50,96 +55,81 @@ def fix_workspace_final():
     else:
         print("  ⏭️ No old workspace to delete")
 
-    # ── Step 2: Discover columns & create workspace ────────────────────────
-    print("\n🔧 Step 2/3: Discovering columns and creating workspace...")
+    # ── Step 2: Discover columns & create workspace via SQL ────────────────
+    print("\n🔧 Step 2/4: Discovering columns and creating workspace...")
 
-    # Get actual columns from the table
     columns = [row[0] for row in frappe.db.sql("DESCRIBE `tabWorkspace`")]
-    print(f"  Found columns: {', '.join(columns[:10])}... ({len(columns)} total)")
+    print(f"  Found {len(columns)} columns in tabWorkspace")
 
     now = frappe.utils.now()
 
-    # Build column-value pairs dynamically based on what exists
-    col_map = {
-        "name": "Bizaxl Finance",
-        "owner": "Administrator",
-        "creation": now,
-        "modified": now,
-        "modified_by": "Administrator",
-        "docstatus": 0,
-        "idx": 0,
-        "title": "Bizaxl Finance",
-        "module": "Bizaxl Finance",
-        "icon": "credit-card",
-        "label": "Bizaxl Finance",
-        "content": content,
-    }
+    # Build column-value pairs
+    col_map = {}
+    for col in columns:
+        if col in ("name",):
+            col_map[col] = "Bizaxl Finance"
+        elif col in ("owner", "modified_by"):
+            col_map[col] = "Administrator"
+        elif col in ("creation", "modified"):
+            col_map[col] = now
+        elif col in ("docstatus", "idx"):
+            col_map[col] = 0
+        elif col in ("title", "module", "label"):
+            col_map[col] = "Bizaxl Finance"
+        elif col == "icon":
+            col_map[col] = "credit-card"
+        elif col == "content":
+            col_map[col] = content
+        elif col in ("is_default", "public"):
+            col_map[col] = 1
+        elif col in ("sequence_id",):
+            col_map[col] = 1.0
+        elif col in ("is_hidden", "is_standard"):
+            col_map[col] = 0
+        elif col in ("_user_tags", "_comments", "_assign", "_liked_by", "):
+            col_map[col] = ""
 
-    # Add optional columns only if they exist
-    optional_fields = {
-        "is_default": 1,
-        "public": 1,
-        "sequence_id": 1.0,
-        "is_hidden": 0,
-        "is_standard": 0,
-    }
-    for field, value in optional_fields.items():
-        if field in columns:
-            col_map[field] = value
-
-    # Build and execute INSERT
+    # Execute INSERT
     col_names = list(col_map.keys())
     placeholders = ["%s"] * len(col_names)
     values = [col_map[c] for c in col_names]
-
     quoted = [f"`{c}`" for c in col_names]
-    sql = f"INSERT INTO `tabWorkspace` ({', '.join(quoted)}) VALUES ({', '.join(placeholders)})"
 
+    sql = f"INSERT INTO `tabWorkspace` ({', '.join(quoted)}) VALUES ({', '.join(placeholders)})"
     frappe.db.sql(sql, values)
     frappe.db.commit()
     print(f"  ✅ Workspace created with {len(col_names)} columns")
 
-    # ── Step 3: Insert links in chunks ─────────────────────────────────────
-    print(f"\n🔧 Step 3/3: Inserting {len(all_links)} links...")
+    # ── Step 3: Add links via ORM (handles child table correctly) ──────────
+    print(f"\n🔧 Step 3/4: Adding {len(all_links)} links via ORM...")
 
-    link_cols = ["parent", "parenttype", "parentfield", "idx",
-                 "type", "label", "link_to", "link_type",
-                 "hidden", "is_query_report", "onboard", "dependencies"]
+    ws = frappe.get_doc("Workspace", "Bizaxl Finance")
+    ws.flags.ignore_links = True
 
-    link_values = []
-    for i, link in enumerate(all_links):
-        link_values.append((
-            "Bizaxl Finance",        # parent
-            "Workspace",             # parenttype
-            "links",                 # parentfield
-            i,                       # idx
-            link.get("type", ""),
-            link.get("label", ""),
-            link.get("link_to", ""),
-            link.get("link_type", ""),
-            link.get("hidden", 0),
-            link.get("is_query_report", 0),
-            link.get("onboard", 0),
-            link.get("dependencies", ""),
-        ))
+    for link in all_links:
+        ws.append("links", {
+            "type": link.get("type", ""),
+            "label": link.get("label", ""),
+            "link_to": link.get("link_to", ""),
+            "link_type": link.get("link_type", ""),
+            "hidden": link.get("hidden", 0),
+            "is_query_report": link.get("is_query_report", 0),
+            "onboard": link.get("onboard", 0),
+            "dependencies": link.get("dependencies", ""),
+        })
 
-    # Insert in chunks of 50
-    chunk_size = 50
-    for chunk_start in range(0, len(link_values), chunk_size):
-        chunk = link_values[chunk_start:chunk_start + chunk_size]
-        quoted = [f"`{c}`" for c in link_cols]
-        ph = ",".join(["(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"] * len(chunk))
-        frappe.db.sql(
-            f"INSERT INTO `tabWorkspace Link` ({', '.join(quoted)}) VALUES {ph}",
-            [val for row in chunk for val in row]
-        )
-        frappe.db.commit()
-        print(f"    Inserted links {chunk_start+1}-{chunk_start+len(chunk)}")
+    original_dev_mode = frappe.conf.developer_mode
+    try:
+        frappe.conf.developer_mode = 0
+        ws.save(ignore_permissions=True)
+    finally:
+        frappe.conf.developer_mode = original_dev_mode
 
-    print(f"  ✅ {len(all_links)} links inserted")
+    frappe.db.commit()
+    print(f"  ✅ Links added via ORM")
 
-    # ── Verify ─────────────────────────────────────────────────────────────
-    print("\n🔧 Verifying...")
+    # ── Step 4: Verify ─────────────────────────────────────────────────────
+    print("\n🔧 Step 4/4: Verifying...")
     ws = frappe.get_doc("Workspace", "Bizaxl Finance")
     final_cards = len(json.loads(ws.content))
     final_links = len(ws.links)
@@ -160,6 +150,8 @@ def fix_workspace_final():
     print("   2. bench --site your-site clear-cache")
     print("   3. bench restart")
     print("   4. Refresh browser (F5)")
+
+    return ws
 
 
 fix_workspace_final()
