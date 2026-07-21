@@ -46,15 +46,12 @@ def fix():
     else:
         print(f"⏭️ DocType '{doctype_name}' already exists in database")
 
-    # Step 2: Create single record if it doesn't exist
+    # Step 2: Create single record (get_single auto-creates if missing)
     try:
         settings = frappe.get_single(doctype_name)
-        if not settings.get("__islocal"):
-            print(f"⏭️ Single record for '{doctype_name}' already exists")
-        else:
-            settings.save(ignore_permissions=True)
-            frappe.db.commit()
-            print(f"✅ Created single record for {doctype_name}")
+        settings.save(ignore_permissions=True)
+        frappe.db.commit()
+        print(f"✅ Single record for '{doctype_name}' is ready")
     except Exception as e:
         frappe.db.rollback()
         print(f"❌ Failed to create single record: {str(e)}")
