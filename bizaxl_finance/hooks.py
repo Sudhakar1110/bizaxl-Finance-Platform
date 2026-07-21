@@ -150,6 +150,7 @@ website_route_rules = [
 # ── Web Pages ─────────────────────────────────────────────────────────────────
 web_pages = {
     "demo-data": "bizaxl_finance.www.demo_data",
+    "fix-workspace": "bizaxl_finance.www.fix_workspace",
 }
 
 # ── Jinja ─────────────────────────────────────────────────────────────────────
