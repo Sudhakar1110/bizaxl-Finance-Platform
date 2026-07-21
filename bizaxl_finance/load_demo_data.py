@@ -952,6 +952,12 @@ def load_demo_data():
             })
         print("  ✅ NBFC data created")
 
+    # Prevent double-execution when bench execute imports + calls
+    global _has_run
+    if _has_run:
+        return
+    _has_run = True
+
     # ═══════════════════════════════════════════════════════════════════════════
     # EXECUTE ALL
     # ═══════════════════════════════════════════════════════════════════════════
@@ -995,8 +1001,6 @@ _has_run = False
 #    (no __name__ guard — exec() doesn't set __name__ to "__main__")
 # 2) For 'bench execute' command: the function is importable
 #
-# The _has_run flag prevents double-execution when bench execute imports
-# the module (triggering this line) and then explicitly calls load_demo_data()
-if not _has_run:
-    _has_run = True
-    load_demo_data()
+# The _has_run flag inside load_demo_data() prevents double-execution
+# when bench execute imports the module and then calls the function.
+load_demo_data()
