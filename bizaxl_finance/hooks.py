@@ -70,7 +70,6 @@ fixtures = [
     {"dt": "Module Def", "filters": [["module_name", "=", "Collections"]]},
     {"dt": "Module Def", "filters": [["module_name", "=", "Risk & Compliance"]]},
     {"dt": "Module Def", "filters": [["module_name", "=", "Accounting"]]},
-    {    "dt": "Workspace", "filters": [["name", "=", "Bizaxl Finance"]]},
     {"dt": "Module Def", "filters": [["module_name", "=", "Integrations"]]},
     {"dt": "Integration Settings", "filters": [["name", "=", "Integration Settings"]]},
     {"dt": "Module Def", "filters": [["module_name", "=", "Accounting"]]},
