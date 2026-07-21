@@ -206,11 +206,11 @@ def sync_workspace_from_fixture():
             # Test 1: Basic doc load
             ws_check = frappe.get_doc("Workspace", workspace_name)
             content_check = json.loads(ws_check.content)
-            print(f"  🔍 [1/5] frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
+            print(f"  🔍 [1/6] frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
 
             # Test 2: Links count
             link_check = frappe.db.count("Workspace Link", {"parent": workspace_name})
-            print(f"  🔍 [2/5] {link_check} links in database")
+            print(f"  🔍 [2/6] {link_check} links in database")
 
             # Test 3: Call get_workspace_sidebar_items WITHOUT request context
             from frappe.desk.desktop import get_workspace_sidebar_items
@@ -222,7 +222,7 @@ def sync_workspace_from_fixture():
                 ws_no_cards = len(ws_no_ctx)
             else:
                 ws_no_cards = 0
-            print(f"  🔍 [3/5] Without request context: {ws_no_cards} cards (expected 0 - no request)")
+            print(f"  🔍 [3/6] Without request context: {ws_no_cards} cards (expected 0 - no request)")
             
             # Test 4: Set request context and call again (raw name with space)
             from frappe import form_dict
@@ -238,7 +238,7 @@ def sync_workspace_from_fixture():
             else:
                 ws_fullname = 0
             ws_name = sidebar_data2.get("workspace", {}).get("name", "")
-            print(f"  🔍 [4/5] WITH raw name '{workspace_name}': {ws_fullname} cards, name='{ws_name}'")
+            print(f"  🔍 [4/6] WITH raw name '{workspace_name}': {ws_fullname} cards, name='{ws_name}'")
             
             # Test 5: Also test with scrubbed name (frontend might use this)
             scrubbed_name = workspace_name.lower().replace(" ", "_")
@@ -252,7 +252,17 @@ def sync_workspace_from_fixture():
             else:
                 ws_scrubbed = 0
             ws_name3 = sidebar_data3.get("workspace", {}).get("name", "")
-            print(f"  🔍 [5/5] WITH scrubbed name '{scrubbed_name}': {ws_scrubbed} cards, name='{ws_name3}'")
+            print(f"  🔍 [5/6] WITH scrubbed name '{scrubbed_name}': {ws_scrubbed} cards, name='{ws_name3}'")
+            
+            # Test 6: Check what sidebar_items contains - is Bizaxl Finance even in the list?
+            all_workspaces = sidebar_data.get("sidebar_items", [])
+            found = [w for w in all_workspaces if "Bizaxl" in w.get("label", "") or "Bizaxl" in w.get("name", "")]
+            print(f"  🔍 [6/6] Sidebar has {len(all_workspaces)} workspaces total, 'Bizaxl' in sidebar: {len(found)}")
+            if found:
+                for f in found[:3]:
+                    print(f"         - name='{f.get('name','')}', label='{f.get('label','')}', cards={len(json.loads(f.get('content','[]')))} ")
+            else:
+                print(f"         ➡ Our workspace is NOT in the sidebar list at all!")
             
             # Restore original
             if original_workspace is not None:
