@@ -15,23 +15,26 @@ This is REQUIRED because Frappe console's exec() does not properly
 propagate module-level imports to function __globals__.
 """
 
-import frappe as _frappe  # keep bare minimum import at module level
+import frappe
+import random
+import math
 
 
 def load_demo_data():
-    # ── All imports inside the function to avoid exec() scoping issues ──
-    import random
-    import math
+    # ── All imports: module-level + inside function for exec() safety ──
+    # Frappe console's exec() must have imports at both levels:
+    # module-level for the outer function, and in the enclosing scope
+    # so inner functions can find them via closure or __globals__.
     from frappe.utils import today, add_months, add_days, add_years
 
     # ── Helpers ─────────────────────────────────────────────────────────────
     def _safe_insert(data, ignore_duplicate=True):
         try:
-            doc = _frappe.get_doc(data)
+            doc = frappe.get_doc(data)
             doc.insert(ignore_permissions=True, ignore_if_duplicate=ignore_duplicate)
             return doc.name
-        except _frappe.DuplicateEntryError:
-            return _frappe.db.get_value(
+        except frappe.DuplicateEntryError:
+            return frappe.db.get_value(
                 data["doctype"], data.get("name") or data.get(
                     data["doctype"].lower().replace(" ", "_")
                 )
@@ -177,7 +180,7 @@ def load_demo_data():
         print("  ✅ Bizaxl Customers created")
 
         for cust_name in ["Rajesh Kumar", "Priya Sharma", "Vikram Singh"]:
-            cust = _frappe.db.get_value("Bizaxl Customer", {"customer_name": cust_name})
+            cust = frappe.db.get_value("Bizaxl Customer", {"customer_name": cust_name})
             if cust:
                 _safe_insert({
                     "doctype": "Customer Nomination", "customer": cust,
@@ -187,7 +190,7 @@ def load_demo_data():
         print("  ✅ Customer Nominations created")
 
         for cust_name in ["Rajesh Kumar", "Priya Sharma", "Ananya Desai"]:
-            cust = _frappe.db.get_value("Bizaxl Customer", {"customer_name": cust_name})
+            cust = frappe.db.get_value("Bizaxl Customer", {"customer_name": cust_name})
             if cust:
                 _safe_insert({
                     "doctype": "KYC Document", "customer": cust,
@@ -201,7 +204,7 @@ def load_demo_data():
     # ═════════════════════════════════════════════════════════════════════════
     def _load_banking():
         print("\n🏦 BANKING MODULE")
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
         banks = ["HDFC Bank", "ICICI Bank", "State Bank of India", "Axis Bank", "Kotak Mahindra"]
         account_types = ["Savings", "Current", "Salary"]
 
@@ -268,7 +271,7 @@ def load_demo_data():
             _safe_insert({"doctype": "Loan Product", **p})
         print("  ✅ Loan Products created")
 
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name", "annual_income"])
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name", "annual_income"])
         statuses = ["Disbursed", "Disbursed", "Approved", "Under Review", "Disbursed", "Disbursed"]
 
         for i, cust in enumerate(customers[:6]):
@@ -313,7 +316,7 @@ def load_demo_data():
                         })
         print("  ✅ Loan Applications + Disbursements + Repayments created")
 
-        for la in _frappe.get_all("Loan Application", fields=["name", "customer_name", "loan_amount", "interest_rate", "tenure_months"]):
+        for la in frappe.get_all("Loan Application", fields=["name", "customer_name", "loan_amount", "interest_rate", "tenure_months"]):
             _safe_insert({
                 "doctype": "Sanction Letter", "loan_application": la.name, "customer_name": la.customer_name,
                 "sanctioned_amount": la.loan_amount, "interest_rate": la.interest_rate,
@@ -322,7 +325,7 @@ def load_demo_data():
             })
         print("  ✅ Sanction Letters created")
 
-        for la in _frappe.get_all("Loan Application", fields=["name"])[:4]:
+        for la in frappe.get_all("Loan Application", fields=["name"])[:4]:
             _safe_insert({
                 "doctype": "Credit Committee Decision", "naming_series": "CCD-.YYYY.-.####",
                 "loan_application": la.name, "decision": "Approved",
@@ -350,7 +353,7 @@ def load_demo_data():
             _safe_insert({"doctype": "Insurance Product", **p})
         print("  ✅ Insurance Products created")
 
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
         for cust in customers[:4]:
             policy = _safe_insert({
                 "doctype": "Insurance Policy", "customer": cust.name, "customer_name": cust.customer_name,
@@ -373,7 +376,7 @@ def load_demo_data():
     # ═════════════════════════════════════════════════════════════════════════
     def _load_investments():
         print("\n📈 INVESTMENTS MODULE")
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
 
         for cust in customers[:4]:
             _safe_insert({
@@ -419,7 +422,7 @@ def load_demo_data():
             _safe_insert({"doctype": "Asset Class", "asset_class_name": a, "risk_level": random.choice(["Low", "Medium", "High"])})
         print("  ✅ Asset Classes created")
 
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name"])
+        customers = frappe.get_all("Bizaxl Customer", fields=["name"])
         for cust in customers[:4]:
             for _ in range(random.randint(2, 4)):
                 _safe_insert({
@@ -454,7 +457,7 @@ def load_demo_data():
             _safe_insert({"doctype": "Auctioneer Register", "naming_series": "AUCTNR-.YYYY.-.####", **a})
         print("  ✅ Auctioneer Register created")
 
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
         for cust in customers[:4]:
             _safe_insert({
                 "doctype": "Vault Register", "customer_name": cust.customer_name, "branch": "Head Office - Mumbai",
@@ -495,7 +498,7 @@ def load_demo_data():
             _safe_insert({"doctype": "Dealer Master", "naming_series": "DLR-.YYYY.-.####", **d})
         print("  ✅ Dealer Masters created")
 
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
         for i, cust in enumerate(customers[:3]):
             vehicle_cat = random.choice(["2 Wheeler", "4 Wheeler - Hatchback", "4 Wheeler - Sedan", "4 Wheeler - SUV"])
             otr = _rand_amount(80000, 1500000) if "2 Wheeler" in vehicle_cat else _rand_amount(500000, 2500000)
@@ -517,7 +520,7 @@ def load_demo_data():
         print("  ✅ Vehicle Details created")
 
         for _ in range(2):
-            vehs = _frappe.get_all("Vehicle Detail", limit=1)
+            vehs = frappe.get_all("Vehicle Detail", limit=1)
             _safe_insert({
                 "doctype": "Vehicle Repossession", "naming_series": "REPO-.YYYY.-.####",
                 "vehicle": vehs[0].name if vehs else None,
@@ -535,7 +538,7 @@ def load_demo_data():
     # ═════════════════════════════════════════════════════════════════════════
     def _load_home_loan():
         print("\n🏠 HOME LOAN MODULE")
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
         for cust in customers[:3]:
             _safe_insert({
                 "doctype": "Property Detail", "naming_series": "PROP-.YYYY.-.####",
@@ -550,7 +553,7 @@ def load_demo_data():
             })
         print("  ✅ Property Details created")
 
-        loan_apps_hl = _frappe.get_all("Loan Application", filters={"loan_product": "Home Loan - DreamHome"}, limit=1)
+        loan_apps_hl = frappe.get_all("Loan Application", filters={"loan_product": "Home Loan - DreamHome"}, limit=1)
         for loan_app in loan_apps_hl:
             for stage_num, stage in enumerate(["Land Purchase", "Foundation", "Construction Stage 1", "Construction Stage 2", "Finishing"]):
                 _safe_insert({
@@ -570,7 +573,7 @@ def load_demo_data():
         })
         print("  ✅ PMAY Subsidies created")
 
-        all_loans = _frappe.get_all("Loan Application", limit=1)
+        all_loans = frappe.get_all("Loan Application", limit=1)
         if all_loans:
             _safe_insert({
                 "doctype": "Legal Opinion", "naming_series": "LEGAL-OP-.YYYY.-.####",
@@ -595,7 +598,7 @@ def load_demo_data():
     # ═════════════════════════════════════════════════════════════════════════
     def _load_business_loan():
         print("\n💼 BUSINESS LOAN MODULE")
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"])
         for cust in customers[:3]:
             _safe_insert({
                 "doctype": "Business Profile", "naming_series": "BIZ-.YYYY.-.####",
@@ -613,7 +616,7 @@ def load_demo_data():
             })
         print("  ✅ Business Profiles created")
 
-        loan_apps = _frappe.get_all("Loan Application", fields=["name"], limit=3)
+        loan_apps = frappe.get_all("Loan Application", fields=["name"], limit=3)
         for la in loan_apps:
             _safe_insert({
                 "doctype": "Loan Covenant", "loan_application": la.name,
@@ -638,7 +641,7 @@ def load_demo_data():
             _safe_insert({"doctype": "Institution Master", "naming_series": "INST-.YYYY.-.####", **inst})
         print("  ✅ Institution Masters created")
 
-        for inst in _frappe.get_all("Institution Master", limit=2):
+        for inst in frappe.get_all("Institution Master", limit=2):
             _safe_insert({
                 "doctype": "Course Detail", "course_name": random.choice(["B.Tech Computer Science", "MBA Finance", "MD General Medicine", "B.Sc Nursing"]),
                 "institution": inst.name, "course_duration_months": _rand_int(24, 60),
@@ -651,7 +654,7 @@ def load_demo_data():
     # ═════════════════════════════════════════════════════════════════════════
     def _load_bnpl():
         print("\n🛒 BNPL MODULE")
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=4)
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=4)
         for cust in customers:
             limit_amount = _rand_amount(5000, 500000)
             bnpl_limit = _safe_insert({
@@ -685,8 +688,8 @@ def load_demo_data():
             _safe_insert({"doctype": "Anchor Master", "naming_series": "ANCH-.YYYY.-.####", **a})
         print("  ✅ Anchor Masters created")
 
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=3)
-        anchors = _frappe.get_all("Anchor Master", limit=1)
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=3)
+        anchors = frappe.get_all("Anchor Master", limit=1)
         for cust in customers:
             amount = _rand_amount(100000, 1000000)
             _safe_insert({
@@ -720,10 +723,10 @@ def load_demo_data():
             })
         print("  ✅ Chit Groups created")
 
-        chit_groups = _frappe.get_all("Chit Group", limit=2)
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=6)
+        chit_groups = frappe.get_all("Chit Group", limit=2)
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=6)
         for cg in chit_groups:
-            group = _frappe.get_doc("Chit Group", cg.name)
+            group = frappe.get_doc("Chit Group", cg.name)
             for i, cust in enumerate(customers[:min(5, int(group.number_of_members))]):
                 _safe_insert({
                     "doctype": "Chit Subscriber", "chit_group": cg.name, "subscriber_name": cust.customer_name,
@@ -755,7 +758,7 @@ def load_demo_data():
             _safe_insert({"doctype": "Retailer Master", "naming_series": "RET-.YYYY.-.####", **r})
         print("  ✅ Retailer Masters created")
 
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=3)
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=3)
         for cust in customers:
             _safe_insert({
                 "doctype": "POS Transaction", "naming_series": "POS-.YYYY.-.####",
@@ -771,18 +774,18 @@ def load_demo_data():
     # ═════════════════════════════════════════════════════════════════════════
     def _load_collections():
         print("\n💸 COLLECTIONS MODULE")
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=4)
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=4)
         for cust in customers:
             _safe_insert({
                 "doctype": "NACH Mandate", "naming_series": "NACH-.YYYY.-.####",
                 "customer": cust.name, "customer_name": cust.customer_name, "mandate_type": "Physical",
-                "bank_account": _frappe.get_value("Bank Account", {"customer": cust.name}),
+                "bank_account": frappe.get_value("Bank Account", {"customer": cust.name}),
                 "maximum_amount": _rand_amount(10000, 100000),
                 "start_date": add_days(today(), -_rand_int(30, 90)),
                 "end_date": add_months(today(), _rand_int(6, 36)), "status": "Active",
             })
 
-        loan_apps = _frappe.get_all("Loan Application", fields=["name", "customer_name"], limit=5)
+        loan_apps = frappe.get_all("Loan Application", fields=["name", "customer_name"], limit=5)
         for la in loan_apps:
             _safe_insert({
                 "doctype": "Collection Record", "naming_series": "CL-.YYYY.-.####",
@@ -818,7 +821,7 @@ def load_demo_data():
     # ═════════════════════════════════════════════════════════════════════════
     def _load_risk_compliance():
         print("\n🛡️ RISK & COMPLIANCE MODULE")
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=4)
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=4)
         for cust in customers:
             _safe_insert({
                 "doctype": "AML Screening", "naming_series": "AML-.YYYY.-.####",
@@ -850,8 +853,8 @@ def load_demo_data():
     def _load_accounting():
         print("\n📊 ACCOUNTING MODULE")
         try:
-            gl = _frappe.get_single("GL Settings")
-            gl.company = _frappe.get_all("Company", limit=1)[0].name if _frappe.get_all("Company") else "Demo Company"
+            gl = frappe.get_single("GL Settings")
+            gl.company = frappe.get_all("Company", limit=1)[0].name if frappe.get_all("Company") else "Demo Company"
             gl.default_currency = "INR"
             gl.auto_post_to_gl = 1
             gl.auto_accrue_interest = 1
@@ -869,7 +872,7 @@ def load_demo_data():
         ]:
             _safe_insert({"doctype": "Provisioning Rule", **r})
 
-        for branch in _frappe.get_all("Branch Master", limit=3):
+        for branch in frappe.get_all("Branch Master", limit=3):
             _safe_insert({
                 "doctype": "Fund Account", "naming_series": "FA-.YYYY.-.####", "branch": branch.name,
                 "fund_name": f"Disbursement Fund - {branch.name}", "fund_type": "Disbursement",
@@ -887,7 +890,7 @@ def load_demo_data():
     # ═════════════════════════════════════════════════════════════════════════
     def _load_credit_mgmt():
         print("\n📋 CREDIT MANAGEMENT MODULE")
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=4)
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=4)
         for cust in customers:
             _safe_insert({
                 "doctype": "Credit Report", "customer": cust.name,
@@ -942,7 +945,7 @@ def load_demo_data():
     # ═════════════════════════════════════════════════════════════════════════
     def _load_nbfc():
         print("\n🏛️ NBFC LENDING MODULE")
-        customers = _frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=3)
+        customers = frappe.get_all("Bizaxl Customer", fields=["name", "customer_name"], limit=3)
         for cust in customers:
             _safe_insert({
                 "doctype": "NBFC Loan Application", "naming_series": "NBFC-LA-.YYYY.-.####",
@@ -951,12 +954,6 @@ def load_demo_data():
                 "tenure_months": _rand_int(12, 60), "status": "Under Review", "purpose": "Business Expansion",
             })
         print("  ✅ NBFC data created")
-
-    # Prevent double-execution when bench execute imports + calls
-    global _has_run
-    if _has_run:
-        return
-    _has_run = True
 
     # ═══════════════════════════════════════════════════════════════════════════
     # EXECUTE ALL
@@ -993,14 +990,9 @@ def load_demo_data():
     print("=" * 60)
 
 
-# ── Entry point flag ──────────────────────────────────────────────────────────
-_has_run = False
-
 # ── Entry point ─────────────────────────────────────────────────────────────────
-# 1) For direct exec() in Frappe console: always call load_demo_data()
-#    (no __name__ guard — exec() doesn't set __name__ to "__main__")
-# 2) For 'bench execute' command: the function is importable
-#
-# The _has_run flag inside load_demo_data() prevents double-execution
-# when bench execute imports the module and then calls the function.
+# For exec() in Frappe console: always call load_demo_data()
+# (no __name__ guard — exec() doesn't set __name__ to "__main__")
+# For bench execute: the function is imported and called explicitly.
+# Double-execution is harmless (ignore_if_duplicate skips duplicates).
 load_demo_data()
