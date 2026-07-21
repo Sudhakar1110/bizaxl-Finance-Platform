@@ -198,25 +198,41 @@ def sync_workspace_from_fixture():
 
         print(f"  ✅ BIZAXL FINANCE WORKSPACE: {cards_count} cards, {links_count} links, {shortcuts_count} shortcuts")
 
-        # ── Step 5: Diagnostic — simulate exactly what the frontend does ──
+        # ── Step 5: Diagnostic — call EXACT API the browser frontend uses ──
+        # The browser ONLY calls get_workspace_sidebar_items (from network tab evidence)
+        # This single API returns BOTH sidebar items AND workspace content
         try:
             # Test 1: Basic doc load
             ws_check = frappe.get_doc("Workspace", workspace_name)
             content_check = json.loads(ws_check.content)
-            print(f"  🔍 [1/3] frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
+            print(f"  🔍 [1/4] frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
 
             # Test 2: Links count
             link_check = frappe.db.count("Workspace Link", {"parent": workspace_name})
-            print(f"  🔍 [2/3] {link_check} links in database")
+            print(f"  🔍 [2/4] {link_check} links in database")
 
-            # Test 3: Call the EXACT API the browser frontend calls
-            # The workspace page uses the REST endpoint /api/resource/Workspace/{name}
-            # which internally calls frappe.client.get(doctype, name)
-            api_doc = frappe.client.get("Workspace", workspace_name)
-            api_content = json.loads(api_doc.get("content", "[]"))
-            print(f"  🔍 [3/3] REST API frappe.client.get OK — {len(api_content)} cards")
-            print(f"  ✅ ALL DIAGNOSTICS PASSED — Workspace is correct server-side")
-            print(f"     Browser not rendering = client/DNS issue (not code)")
+            # Test 3: Call get_workspace_sidebar_items (the EXACT API the frontend uses)
+            from frappe.desk.desktop import get_workspace_sidebar_items
+            sidebar_data = get_workspace_sidebar_items()
+            # This returns dict with keys like 'sidebar_items', 'workspace', etc.
+            ws_content_from_api = sidebar_data.get("workspace", {}).get("content", "[]")
+            if isinstance(ws_content_from_api, str):
+                ws_cards = len(json.loads(ws_content_from_api))
+            elif isinstance(ws_content_from_api, list):
+                ws_cards = len(ws_content_from_api)
+            else:
+                ws_cards = 0
+            print(f"  🔍 [3/4] get_workspace_sidebar_items returned workspace with {ws_cards} cards")
+            
+            # Test 4: Check key fields the API returns
+            ws_name_from_api = sidebar_data.get("workspace", {}).get("name", "")
+            ws_label = sidebar_data.get("workspace", {}).get("label", "")
+            print(f"  🔍 [4/4] Sidebar workspace: name='{ws_name_from_api}', label='{ws_label}'")
+            
+            if ws_cards >= 24 and ws_name_from_api == workspace_name:
+                print(f"  ✅ ALL DIAGNOSTICS PASSED — Workspace API returns 24 cards correctly")
+            else:
+                print(f"  ⚠️ MISMATCH — API returned {ws_cards} cards for '{ws_name_from_api}'")
 
         except Exception as diag_e:
             print(f"  ❌ Diagnostic FAILED: {diag_e}")
