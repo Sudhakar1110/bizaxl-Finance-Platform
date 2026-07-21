@@ -222,7 +222,7 @@ def sync_workspace_from_fixture():
                 ws_no_cards = len(ws_no_ctx)
             else:
                 ws_no_cards = 0
-            print(f"  🔍 [3/4] Without request context: {ws_no_cards} cards (expected 0 - no request)")
+            print(f"  🔍 [3/5] Without request context: {ws_no_cards} cards (expected 0 - no request)")
             
             # Test 4: Set request context and call again (raw name with space)
             from frappe import form_dict
@@ -238,7 +238,7 @@ def sync_workspace_from_fixture():
             else:
                 ws_fullname = 0
             ws_name = sidebar_data2.get("workspace", {}).get("name", "")
-            print(f"  🔍 [4/4] WITH raw name '{workspace_name}': {ws_fullname} cards, name='{ws_name}'")
+            print(f"  🔍 [4/5] WITH raw name '{workspace_name}': {ws_fullname} cards, name='{ws_name}'")
             
             # Test 5: Also test with scrubbed name (frontend might use this)
             scrubbed_name = workspace_name.lower().replace(" ", "_")
