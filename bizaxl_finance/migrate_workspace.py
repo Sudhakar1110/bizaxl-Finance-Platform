@@ -214,10 +214,9 @@ def sync_workspace_from_fixture():
                 frappe.conf.developer_mode = original_mode
             frappe.db.commit()
             
-            # Aggressive cache clearing
+            # Clear workspace data cache
             frappe.cache().delete_value(f"workspace:data:{workspace_name}")
             frappe.cache().hdel("workspace_data_keys", workspace_name)
-            frappe.cache().delete_keys("*workspace*")
             
             # Final verification
             ws_final = frappe.get_doc("Workspace", workspace_name)
