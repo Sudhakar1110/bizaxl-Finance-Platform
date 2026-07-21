@@ -111,8 +111,7 @@ def fix_workspace():
     return ws
 
 
-if __name__ == "__main__":
-    fix_workspace()
-
-# For exec() in Frappe console
+# For exec() in Frappe console (__name__ != __main__ there)
+# Also covers bench execute (import triggers this, then bench calls function again)
+# Idempotent - running twice just re-saves the same data
 fix_workspace()
