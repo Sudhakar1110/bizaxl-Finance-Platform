@@ -19,7 +19,6 @@ Called by the after_migrate hook in hooks.py
 """
 
 import frappe
-import frappe.client
 import json
 import os
 
@@ -198,91 +197,33 @@ def sync_workspace_from_fixture():
 
         print(f"  ✅ BIZAXL FINANCE WORKSPACE: {cards_count} cards, {links_count} links, {shortcuts_count} shortcuts")
 
-        # ── Step 5: Diagnostic — test EXACT API the browser frontend uses ──
-        # The browser calls get_workspace_sidebar_items which returns workspace
-        # content for the 'active' workspace (determined by HTTP request context).
-        # During migration there's no HTTP request, so we simulate it.
+        # ── Step 5: ORM save to properly register workspace with Frappe ──
+        # Direct SQL bypasses Frappe's registration mechanism. ORM save() 
+        # ensures workspace is registered in Frappe's internal systems
+        # so that get_workspace_sidebar_items() can find it.
         try:
-            # Test 1: Basic doc load
-            ws_check = frappe.get_doc("Workspace", workspace_name)
-            content_check = json.loads(ws_check.content)
-            print(f"  🔍 [1/6] frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
-
-            # Test 2: Links count
-            link_check = frappe.db.count("Workspace Link", {"parent": workspace_name})
-            print(f"  🔍 [2/6] {link_check} links in database")
-
-            # Test 3: Call get_workspace_sidebar_items WITHOUT request context
-            from frappe.desk.desktop import get_workspace_sidebar_items
-            sidebar_data = get_workspace_sidebar_items()
-            ws_no_ctx = sidebar_data.get("workspace", {}).get("content", "[]")
-            if isinstance(ws_no_ctx, str):
-                ws_no_cards = len(json.loads(ws_no_ctx))
-            elif isinstance(ws_no_ctx, list):
-                ws_no_cards = len(ws_no_ctx)
-            else:
-                ws_no_cards = 0
-            print(f"  🔍 [3/6] Without request context: {ws_no_cards} cards (expected 0 - no request)")
+            ws = frappe.get_doc("Workspace", workspace_name)
+            ws.flags.ignore_links = True
+            ws.content = content
+            original_mode = frappe.conf.developer_mode
+            try:
+                frappe.conf.developer_mode = 0
+                ws.save(ignore_permissions=True)
+                print(f"  ✅ ORM save OK — workspace registered properly")
+            finally:
+                frappe.conf.developer_mode = original_mode
+            frappe.db.commit()
             
-            # Test 4: Set request context and call again (raw name with space)
-            from frappe import form_dict
-            original_workspace = form_dict.get("workspace")
+            # Aggressive cache clearing
+            frappe.cache().delete_value(f"workspace:data:{workspace_name}")
+            frappe.cache().hdel("workspace_data_keys", workspace_name)
+            frappe.cache().delete_keys("*workspace*")
             
-            form_dict["workspace"] = workspace_name  # "Bizaxl Finance"
-            sidebar_data2 = get_workspace_sidebar_items()
-            ws_with_ctx = sidebar_data2.get("workspace", {}).get("content", "[]")
-            if isinstance(ws_with_ctx, str):
-                ws_fullname = len(json.loads(ws_with_ctx))
-            elif isinstance(ws_with_ctx, list):
-                ws_fullname = len(ws_with_ctx)
-            else:
-                ws_fullname = 0
-            ws_name = sidebar_data2.get("workspace", {}).get("name", "")
-            print(f"  🔍 [4/6] WITH raw name '{workspace_name}': {ws_fullname} cards, name='{ws_name}'")
-            
-            # Test 5: Also test with scrubbed name (frontend might use this)
-            scrubbed_name = workspace_name.lower().replace(" ", "_")
-            form_dict["workspace"] = scrubbed_name  # "bizaxl_finance"
-            sidebar_data3 = get_workspace_sidebar_items()
-            ws_sc = sidebar_data3.get("workspace", {}).get("content", "[]")
-            if isinstance(ws_sc, str):
-                ws_scrubbed = len(json.loads(ws_sc))
-            elif isinstance(ws_sc, list):
-                ws_scrubbed = len(ws_sc)
-            else:
-                ws_scrubbed = 0
-            ws_name3 = sidebar_data3.get("workspace", {}).get("name", "")
-            print(f"  🔍 [5/6] WITH scrubbed name '{scrubbed_name}': {ws_scrubbed} cards, name='{ws_name3}'")
-            
-            # Test 6: Check sidebar_items WITH request context - is Bizaxl in the list?
-            all_workspaces = sidebar_data2.get("sidebar_items", [])
-            found = [w for w in all_workspaces if "Bizaxl" in w.get("label", "") or "Bizaxl" in w.get("name", "")]
-            print(f"  🔍 [6/6] Sidebar has {len(all_workspaces)} workspaces total, 'Bizaxl' in sidebar: {len(found)}")
-            if found:
-                for f in found[:3]:
-                    print(f"         - name='{f.get('name','')}', label='{f.get('label','')}' ")
-            else:
-                print(f"         ➡ OUR WORKSPACE IS NOT IN THE SIDEBAR LIST!")
-            
-            # Restore original
-            if original_workspace is not None:
-                form_dict["workspace"] = original_workspace
-            elif "workspace" in form_dict:
-                form_dict.pop("workspace", None)
-            
-            print(f"  🔍 [4/4] WITH workspace='{workspace_name}': {ws_cards} cards, name='{ws_name}'")
-            
-            if ws_cards >= 24:
-                print(f"  ✅ API WORKS WITH REQUEST CONTEXT — {ws_cards} cards for '{ws_name}'")
-                print(f"     Browser issue = URL/request may pass wrong workspace name")
-            else:
-                print(f"  ❌ API RETURNS {ws_cards} cards EVEN WITH correct workspace param")
-                print(f"     This means get_workspace_sidebar_items can't find our workspace")
-
-        except Exception as diag_e:
-            print(f"  ❌ Diagnostic FAILED: {diag_e}")
-            import traceback
-            print(f"     {traceback.format_exc()}")
+            # Final verification
+            ws_final = frappe.get_doc("Workspace", workspace_name)
+            print(f"  ✅ Final: {len(json.loads(ws_final.content))} cards, {frappe.db.count('Workspace Link', {'parent': workspace_name})} links")
+        except Exception as e:
+            print(f"  ⚠️ ORM save optional: {e}")
 
     except Exception as e:
         frappe.log_error(f"Workspace sync failed: {str(e)}", "Workspace Sync")
