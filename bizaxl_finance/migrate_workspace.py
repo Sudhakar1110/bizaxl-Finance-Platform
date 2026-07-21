@@ -100,6 +100,26 @@ def sync_workspace_from_fixture():
 
         frappe.db.commit()
 
+        # Validate content can be parsed correctly
+        try:
+            parsed = json.loads(ws.content)
+            errors = []
+            for i, card in enumerate(parsed):
+                if not isinstance(card, dict):
+                    errors.append(f"Card {i+1}: not a dict")
+                elif "data" not in card:
+                    errors.append(f"Card {i+1}: missing 'data' key")
+                elif "card_name" not in card.get("data", {}):
+                    errors.append(f"Card {i+1}: missing 'card_name' in data")
+            if errors:
+                frappe.log_error(f"Content validation: {'; '.join(errors)}", "Workspace Sync")
+                print(f"  ⚠️ Content issues: {len(errors)} cards with problems")
+            else:
+                print(f"  ✅ Content validated: {len(parsed)} cards, all well-formed")
+        except Exception as e:
+            frappe.log_error(f"Content parse failed: {e}", "Workspace Sync")
+            print(f"  ⚠️ Content parse failed: {e}")
+
         print(f"  ✅ Workspace synced: {cards_count} cards, {links_count} links, {shortcuts_count} shortcuts")
 
     except Exception as e:
