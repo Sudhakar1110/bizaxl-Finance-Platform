@@ -197,27 +197,35 @@ def sync_workspace_from_fixture():
 
         print(f"  ✅ BIZAXL FINANCE WORKSPACE: {cards_count} cards, {links_count} links, {shortcuts_count} shortcuts")
 
-        # ── Step 5: Diagnostic — verify workspace loads via same API as frontend ──
+        # ── Step 5: Diagnostic — verify workspace loads via Frappe REST API ──
         try:
-            # Test 1: Can we load the workspace doc?
+            # Test 1: Load via get_doc (works server-side)
             ws_check = frappe.get_doc("Workspace", workspace_name)
             content_check = json.loads(ws_check.content)
-            print(f"  🔍 Diagnostic: frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
+            print(f"  🔍 [1/4] frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
 
-            # Test 2: Verify links load
+            # Test 2: Verify links count
             link_check = frappe.db.count("Workspace Link", {"parent": workspace_name})
-            print(f"  🔍 Diagnostic: {link_check} links in database")
+            print(f"  🔍 [2/4] {link_check} links in tabWorkspace Link")
 
-            # Test 3: Try the actual workspace API used by frontend
-            from frappe.desk.doctype.workspace.workspace import get_workspace_data
-            api_data = get_workspace_data(workspace_name)
-            api_content = json.loads(api_data.get("content", "[]"))
-            print(f"  🔍 Diagnostic: get_workspace_data API returned {len(api_content)} cards")
+            # Test 3: Try the actual API frontend uses — frappe.client.get
+            from frappe.desk.form.load import get_doc
+            api_doc = get_doc("Workspace", workspace_name)
+            api_content = json.loads(api_doc.get("content", "[]"))
+            print(f"  🔍 [3/4] frappe.client.get API OK — {len(api_content)} cards")
+
+            # Test 4: Check frappe.boot workspaces
+            from frappe.boot import get_bootinfo
+            boot = frappe._dict()
+            # Simulate what happens at login
+            workspaces = frappe.get_all("Workspace", fields=["*"])
+            ws_found = [w.name for w in workspaces if w.name == workspace_name]
+            print(f"  🔍 [4/4] Total workspaces in DB: {len(workspaces)}, Bizaxl Finance found: {bool(ws_found)}")
 
         except Exception as diag_e:
             print(f"  ❌ Diagnostic FAILED: {diag_e}")
             import traceback
-            print(f"     Traceback: {traceback.format_exc()}")
+            print(f"     {traceback.format_exc()}")
 
     except Exception as e:
         frappe.log_error(f"Workspace sync failed: {str(e)}", "Workspace Sync")
