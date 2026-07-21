@@ -436,6 +436,72 @@
    "dependencies": "",
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Sanction Letters",
+   "link_count": 0,
+   "link_to": "Sanction Letter",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "EMI Schedules",
+   "link_count": 0,
+   "link_to": "EMI Schedule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Rate Reset Logs",
+   "link_count": 0,
+   "link_to": "Rate Reset Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Prepayment Requests",
+   "link_count": 0,
+   "link_to": "Prepayment Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Loan Restructures",
+   "link_count": 0,
+   "link_to": "Loan Restructure",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Personal Loan Applications",
+   "link_count": 0,
+   "link_to": "Personal Loan Application",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Insurance",
    "link_count": 0,
    "link_to": "",
@@ -494,6 +560,17 @@
    "label": "Insurance Nominees",
    "link_count": 0,
    "link_to": "Insurance Nominee",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Insurance Bundle Trackers",
+   "link_count": 0,
+   "link_to": "Insurance Bundle Tracker",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -1095,10 +1172,20 @@
   {
    "dependencies": "",
    "hidden": 0,
-   "is_query_report": 0,
-   "label": "Chit Auctions",
+   "is_query_report": 0,    "label": "Chit Auctions",
    "link_count": 0,
    "link_to": "Chit Auction",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Chit ROC Returns",
+   "link_count": 0,
+   "link_to": "Chit ROC Return",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -1183,10 +1270,20 @@
   {
    "dependencies": "",
    "hidden": 0,
-   "is_query_report": 0,
-   "label": "SARFAESI Cases",
+   "is_query_report": 0,    "label": "SARFAESI Cases",
    "link_count": 0,
    "link_to": "SARFAESI Case",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Write-offs",
+   "link_count": 0,
+   "link_to": "Write-off",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"

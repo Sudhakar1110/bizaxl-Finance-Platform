@@ -1,0 +1,330 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "customer",
+  "customer_name",
+  "loan_amount",
+  "tenure_months",
+  "column_break_1",
+  "interest_rate",
+  "purpose",
+  "status",
+  "section_digital_onboarding",
+  "aadhaar_number",
+  "pan_number",
+  "income_type",
+  "monthly_income",
+  "column_break_2",
+  "employer_name",
+  "employment_category",
+  "years_in_job",
+  "existing_emi_obligations",
+  "section_scorecard",
+  "credit_score",
+  "scorecard_version",
+  "scorecard_result",
+  "offer_amount",
+  "column_break_3",
+  "offer_rate",
+  "offer_tenure",
+  "decision",
+  "decision_date",
+  "section_esign",
+  "esign_status",
+  "esign_date",
+  "esign_reference",
+  "column_break_4",
+  "disbursement_account",
+  "disbursement_date",
+  "disbursement_reference",
+  "section_additional",
+  "co_applicant_name",
+  "co_applicant_income",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "PL-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "loan_amount",
+   "fieldtype": "Currency",
+   "label": "Loan Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tenure_months",
+   "fieldtype": "Int",
+   "label": "Tenure (Months)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Percent",
+   "label": "Interest Rate (p.a.)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Select",
+   "label": "Purpose",
+   "options": "Wedding\nMedical Emergency\nTravel\nEducation\nHome Renovation\nDebt Consolidation\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nPre-approved\nUnder Review\nApproved\nRejected\ne-Sign Pending\ne-Signed\nDisbursed\nClosed",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_digital_onboarding",
+   "fieldtype": "Section Break",
+   "label": "Digital Onboarding"
+  },
+  {
+   "fieldname": "aadhaar_number",
+   "fieldtype": "Data",
+   "label": "Aadhaar Number",
+   "description": "Auto-fills address via eKYC"
+  },
+  {
+   "fieldname": "pan_number",
+   "fieldtype": "Data",
+   "label": "PAN Number"
+  },
+  {
+   "fieldname": "income_type",
+   "fieldtype": "Select",
+   "label": "Income Type",
+   "options": "Salaried\nSelf-Employed\nFreelancer\nOther"
+  },
+  {
+   "fieldname": "monthly_income",
+   "fieldtype": "Currency",
+   "label": "Monthly Income"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "employer_name",
+   "fieldtype": "Data",
+   "label": "Employer Name"
+  },
+  {
+   "fieldname": "employment_category",
+   "fieldtype": "Select",
+   "label": "Employment Category",
+   "options": "Government\nPublic Sector\nPrivate - MNC\nPrivate - Startup\nSelf-Employed Professional\nOther"
+  },
+  {
+   "fieldname": "years_in_job",
+   "fieldtype": "Float",
+   "label": "Years in Current Job"
+  },
+  {
+   "fieldname": "existing_emi_obligations",
+   "fieldtype": "Currency",
+   "label": "Existing EMI Obligations"
+  },
+  {
+   "fieldname": "section_scorecard",
+   "fieldtype": "Section Break",
+   "label": "Scorecard & Decision"
+  },
+  {
+   "fieldname": "credit_score",
+   "fieldtype": "Int",
+   "label": "Credit Score"
+  },
+  {
+   "fieldname": "scorecard_version",
+   "fieldtype": "Data",
+   "label": "Scorecard Version",
+   "read_only": 1
+  },
+  {
+   "fieldname": "scorecard_result",
+   "fieldtype": "Data",
+   "label": "Scorecard Result",
+   "read_only": 1
+  },
+  {
+   "fieldname": "offer_amount",
+   "fieldtype": "Currency",
+   "label": "Offer Amount",
+   "read_only": 1,
+   "description": "Pre-approved or scorecard-generated offer"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "offer_rate",
+   "fieldtype": "Percent",
+   "label": "Offer Rate",
+   "read_only": 1
+  },
+  {
+   "fieldname": "offer_tenure",
+   "fieldtype": "Int",
+   "label": "Offer Tenure",
+   "read_only": 1
+  },
+  {
+   "fieldname": "decision",
+   "fieldtype": "Select",
+   "label": "Decision",
+   "options": "Auto-Approved\nManual Review\nRejected\nRefer",
+   "read_only": 1
+  },
+  {
+   "fieldname": "decision_date",
+   "fieldtype": "Date",
+   "label": "Decision Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_esign",
+   "fieldtype": "Section Break",
+   "label": "e-Sign & Disbursement"
+  },
+  {
+   "fieldname": "esign_status",
+   "fieldtype": "Select",
+   "label": "e-Sign Status",
+   "options": "Pending\nSent\nSigned\nExpired\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "esign_date",
+   "fieldtype": "Date",
+   "label": "e-Sign Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "esign_reference",
+   "fieldtype": "Data",
+   "label": "e-Sign Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "disbursement_account",
+   "fieldtype": "Link",
+   "label": "Disbursement Account",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "disbursement_date",
+   "fieldtype": "Date",
+   "label": "Disbursement Date"
+  },
+  {
+   "fieldname": "disbursement_reference",
+   "fieldtype": "Data",
+   "label": "Disbursement Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_additional",
+   "fieldtype": "Section Break",
+   "label": "Additional Details"
+  },
+  {
+   "fieldname": "co_applicant_name",
+   "fieldtype": "Data",
+   "label": "Co-Applicant Name"
+  },
+  {
+   "fieldname": "co_applicant_income",
+   "fieldtype": "Currency",
+   "label": "Co-Applicant Income"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Loans",
+ "name": "Personal Loan Application",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "PL-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Credit Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "customer_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

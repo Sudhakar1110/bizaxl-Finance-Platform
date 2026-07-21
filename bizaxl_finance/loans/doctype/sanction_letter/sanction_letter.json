@@ -1,0 +1,345 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "loan_application",
+  "customer",
+  "customer_name",
+  "loan_product",
+  "column_break_1",
+  "sanctioned_amount",
+  "interest_rate",
+  "tenure_months",
+  "status",
+  "section_terms",
+  "interest_type",
+  "repayment_frequency",
+  "processing_fee_percent",
+  "processing_fee_amount",
+  "column_break_2",
+  "gst_on_processing_fee",
+  "prepayment_penalty",
+  "foreclosure_charges",
+  "moratorium_period_months",
+  "section_insurance_bundle",
+  "insurance_product",
+  "insurance_policy_number",
+  "insurance_sum_assured",
+  "insurance_premium",
+  "column_break_3",
+  "insurance_policy_start",
+  "insurance_policy_end",
+  "insurance_provider",
+  "section_approval",
+  "sanction_date",
+  "sanctioned_by",
+  "approval_committee",
+  "column_break_4",
+  "valid_until",
+  "rejection_reason",
+  "remarks",
+  "section_esign",
+  "esign_status",
+  "esign_date",
+  "esign_reference",
+  "column_break_5",
+  "agreement_signed",
+  "signed_copy_attached"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "SAN-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "loan_product",
+   "fieldtype": "Read Only",
+   "label": "Loan Product",
+   "fetch_from": "loan_application.loan_product"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sanctioned_amount",
+   "fieldtype": "Currency",
+   "label": "Sanctioned Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Percent",
+   "label": "Interest Rate (p.a.)",
+   "reqd": 1,
+   "fetch_from": "loan_application.interest_rate"
+  },
+  {
+   "fieldname": "tenure_months",
+   "fieldtype": "Int",
+   "label": "Tenure (Months)",
+   "reqd": 1,
+   "fetch_from": "loan_application.tenure_months"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nApproved\nRejected\nAccepted\nExpired\ne-Sign Pending",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_terms",
+   "fieldtype": "Section Break",
+   "label": "Terms & Charges"
+  },
+  {
+   "fieldname": "interest_type",
+   "fieldtype": "Select",
+   "label": "Interest Type",
+   "options": "Fixed\nFloating (MCLR)\nFloating (Repo)\nHybrid",
+   "default": "Fixed"
+  },
+  {
+   "fieldname": "repayment_frequency",
+   "fieldtype": "Select",
+   "label": "Repayment Frequency",
+   "options": "Monthly\nQuarterly\nBullet",
+   "default": "Monthly"
+  },
+  {
+   "fieldname": "processing_fee_percent",
+   "fieldtype": "Percent",
+   "label": "Processing Fee (%)"
+  },
+  {
+   "fieldname": "processing_fee_amount",
+   "fieldtype": "Currency",
+   "label": "Processing Fee Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gst_on_processing_fee",
+   "fieldtype": "Currency",
+   "label": "GST on Processing Fee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "prepayment_penalty",
+   "fieldtype": "Percent",
+   "label": "Prepayment Penalty (%)"
+  },
+  {
+   "fieldname": "foreclosure_charges",
+   "fieldtype": "Percent",
+   "label": "Foreclosure Charges (%)"
+  },
+  {
+   "fieldname": "moratorium_period_months",
+   "fieldtype": "Int",
+   "label": "Moratorium (Months)",
+   "default": 0
+  },
+  {
+   "fieldname": "section_insurance_bundle",
+   "fieldtype": "Section Break",
+   "label": "Insurance Bundle"
+  },
+  {
+   "fieldname": "insurance_product",
+   "fieldtype": "Link",
+   "label": "Insurance Product",
+   "options": "Insurance Product"
+  },
+  {
+   "fieldname": "insurance_policy_number",
+   "fieldtype": "Data",
+   "label": "Insurance Policy No."
+  },
+  {
+   "fieldname": "insurance_sum_assured",
+   "fieldtype": "Currency",
+   "label": "Insurance Sum Assured"
+  },
+  {
+   "fieldname": "insurance_premium",
+   "fieldtype": "Currency",
+   "label": "Insurance Premium"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insurance_policy_start",
+   "fieldtype": "Date",
+   "label": "Insurance Start"
+  },
+  {
+   "fieldname": "insurance_policy_end",
+   "fieldtype": "Date",
+   "label": "Insurance End"
+  },
+  {
+   "fieldname": "insurance_provider",
+   "fieldtype": "Data",
+   "label": "Insurance Provider"
+  },
+  {
+   "fieldname": "section_approval",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "fieldname": "sanction_date",
+   "fieldtype": "Date",
+   "label": "Sanction Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "sanctioned_by",
+   "fieldtype": "Link",
+   "label": "Sanctioned By",
+   "options": "User"
+  },
+  {
+   "fieldname": "approval_committee",
+   "fieldtype": "Data",
+   "label": "Approval Committee"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "valid_until",
+   "fieldtype": "Date",
+   "label": "Valid Until",
+   "description": "Sanction letter validity period"
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "section_esign",
+   "fieldtype": "Section Break",
+   "label": "e-Sign & Agreement"
+  },
+  {
+   "fieldname": "esign_status",
+   "fieldtype": "Select",
+   "label": "e-Sign Status",
+   "options": "Pending\nSent\nSigned\nExpired\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "esign_date",
+   "fieldtype": "Date",
+   "label": "e-Sign Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "esign_reference",
+   "fieldtype": "Data",
+   "label": "e-Sign Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "agreement_signed",
+   "fieldtype": "Check",
+   "label": "Agreement Signed"
+  },
+  {
+   "fieldname": "signed_copy_attached",
+   "fieldtype": "Attach",
+   "label": "Signed Copy"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Loans",
+ "name": "Sanction Letter",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "SAN-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Credit Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "loan_application",
+ "track_changes": 1
+}

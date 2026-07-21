@@ -1,0 +1,234 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "loan_application",
+  "customer",
+  "customer_name",
+  "npa_classification",
+  "column_break_1",
+  "write_off_date",
+  "write_off_type",
+  "status",
+  "section_amounts",
+  "outstanding_principal",
+  "accrued_interest",
+  "penalty_amount",
+  "total_outstanding",
+  "column_break_2",
+  "recovery_amount_realized",
+  "write_off_amount",
+  "provision_held_amount",
+  "net_impact",
+  "section_approval",
+  "approved_by",
+  "approval_date",
+  "approval_committee",
+  "column_break_3",
+  "recovery_attempts_summary",
+  "recovery_officer",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "WO-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "npa_classification",
+   "fieldtype": "Link",
+   "label": "NPA Classification",
+   "options": "NPA Classification"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "write_off_date",
+   "fieldtype": "Date",
+   "label": "Write-off Date",
+   "default": "Today",
+   "reqd": 1
+  },
+  {
+   "fieldname": "write_off_type",
+   "fieldtype": "Select",
+   "label": "Write-off Type",
+   "options": "Technical Write-off\nFull Write-off\nCompromise Settlement\nLok Adalat Settlement",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending Approval\nApproved\nExecuted",
+   "default": "Pending Approval",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_amounts",
+   "fieldtype": "Section Break",
+   "label": "Amounts"
+  },
+  {
+   "fieldname": "outstanding_principal",
+   "fieldtype": "Currency",
+   "label": "Outstanding Principal",
+   "read_only": 1
+  },
+  {
+   "fieldname": "accrued_interest",
+   "fieldtype": "Currency",
+   "label": "Accrued Interest",
+   "read_only": 1
+  },
+  {
+   "fieldname": "penalty_amount",
+   "fieldtype": "Currency",
+   "label": "Penalty / Charges"
+  },
+  {
+   "fieldname": "total_outstanding",
+   "fieldtype": "Currency",
+   "label": "Total Outstanding",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "recovery_amount_realized",
+   "fieldtype": "Currency",
+   "label": "Recovery Realized"
+  },
+  {
+   "fieldname": "write_off_amount",
+   "fieldtype": "Currency",
+   "label": "Write-off Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "provision_held_amount",
+   "fieldtype": "Currency",
+   "label": "Provision Held",
+   "description": "Existing provision amount against this loan"
+  },
+  {
+   "fieldname": "net_impact",
+   "fieldtype": "Currency",
+   "label": "Net P&L Impact",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_approval",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User"
+  },
+  {
+   "fieldname": "approval_date",
+   "fieldtype": "Date",
+   "label": "Approval Date"
+  },
+  {
+   "fieldname": "approval_committee",
+   "fieldtype": "Data",
+   "label": "Approval Committee"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "recovery_attempts_summary",
+   "fieldtype": "Small Text",
+   "label": "Recovery Attempts Summary"
+  },
+  {
+   "fieldname": "recovery_officer",
+   "fieldtype": "Link",
+   "label": "Recovery Officer",
+   "options": "User"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Collections",
+ "name": "Write-off",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "WO-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Collection Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "write_off_date",
+ "sort_order": "DESC",
+ "title_field": "loan_application",
+ "track_changes": 1,
+ "track_seen": 1
+}

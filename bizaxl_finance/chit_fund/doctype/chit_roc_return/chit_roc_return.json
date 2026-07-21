@@ -1,0 +1,277 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "chit_group",
+  "chit_name",
+  "chit_value",
+  "number_of_members",
+  "column_break_1",
+  "reporting_period",
+  "return_type",
+  "filing_date",
+  "status",
+  "section_subscriber_summary",
+  "total_subscribers",
+  "active_subscribers",
+  "prized_subscribers",
+  "defaulting_subscribers",
+  "column_break_2",
+  "total_subscriptions_collected",
+  "total_prizes_distributed",
+  "total_dividend_paid",
+  "foreman_commission_paid",
+  "section_financials",
+  "total_receipts",
+  "total_payments",
+  "net_balance",
+  "column_break_3",
+  "opening_balance",
+  "closing_balance",
+  "bank_balance",
+  "section_filing",
+  "filing_authority",
+  "acknowledgment_number",
+  "filing_reference",
+  "column_break_4",
+  "due_date",
+  "submitted_by",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "ROC-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "chit_group",
+   "fieldtype": "Link",
+   "label": "Chit Group",
+   "options": "Chit Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "chit_name",
+   "fieldtype": "Read Only",
+   "label": "Chit Name",
+   "fetch_from": "chit_group.chit_name"
+  },
+  {
+   "fieldname": "chit_value",
+   "fieldtype": "Currency",
+   "label": "Chit Value",
+   "fetch_from": "chit_group.chit_value",
+   "read_only": 1
+  },
+  {
+   "fieldname": "number_of_members",
+   "fieldtype": "Int",
+   "label": "Total Members",
+   "fetch_from": "chit_group.number_of_members",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reporting_period",
+   "fieldtype": "Select",
+   "label": "Reporting Period",
+   "options": "Monthly\nQuarterly\nAnnual\nFinal",
+   "reqd": 1
+  },
+  {
+   "fieldname": "return_type",
+   "fieldtype": "Select",
+   "label": "Return Type",
+   "options": "Monthly Return\nAnnual Return\nFinal Settlement\nBalance Sheet",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "filing_date",
+   "fieldtype": "Date",
+   "label": "Filing Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nFiled\nAcknowledged\nRejected",
+   "default": "Draft",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_subscriber_summary",
+   "fieldtype": "Section Break",
+   "label": "Subscriber Summary"
+  },
+  {
+   "fieldname": "total_subscribers",
+   "fieldtype": "Int",
+   "label": "Total Subscribers"
+  },
+  {
+   "fieldname": "active_subscribers",
+   "fieldtype": "Int",
+   "label": "Active"
+  },
+  {
+   "fieldname": "prized_subscribers",
+   "fieldtype": "Int",
+   "label": "Prized"
+  },
+  {
+   "fieldname": "defaulting_subscribers",
+   "fieldtype": "Int",
+   "label": "Defaulting"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_subscriptions_collected",
+   "fieldtype": "Currency",
+   "label": "Total Subscriptions"
+  },
+  {
+   "fieldname": "total_prizes_distributed",
+   "fieldtype": "Currency",
+   "label": "Prizes Distributed"
+  },
+  {
+   "fieldname": "total_dividend_paid",
+   "fieldtype": "Currency",
+   "label": "Dividend Paid"
+  },
+  {
+   "fieldname": "foreman_commission_paid",
+   "fieldtype": "Currency",
+   "label": "Foreman Commission"
+  },
+  {
+   "fieldname": "section_financials",
+   "fieldtype": "Section Break",
+   "label": "Financial Position"
+  },
+  {
+   "fieldname": "total_receipts",
+   "fieldtype": "Currency",
+   "label": "Total Receipts"
+  },
+  {
+   "fieldname": "total_payments",
+   "fieldtype": "Currency",
+   "label": "Total Payments"
+  },
+  {
+   "fieldname": "net_balance",
+   "fieldtype": "Currency",
+   "label": "Net Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opening_balance",
+   "fieldtype": "Currency",
+   "label": "Opening Balance"
+  },
+  {
+   "fieldname": "closing_balance",
+   "fieldtype": "Currency",
+   "label": "Closing Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "bank_balance",
+   "fieldtype": "Currency",
+   "label": "Bank Balance"
+  },
+  {
+   "fieldname": "section_filing",
+   "fieldtype": "Section Break",
+   "label": "Filing Details"
+  },
+  {
+   "fieldname": "filing_authority",
+   "fieldtype": "Data",
+   "label": "Filing Authority",
+   "description": "Registrar of Chits office"
+  },
+  {
+   "fieldname": "acknowledgment_number",
+   "fieldtype": "Data",
+   "label": "Acknowledgment No."
+  },
+  {
+   "fieldname": "filing_reference",
+   "fieldtype": "Attach",
+   "label": "Filed Document"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "Due Date"
+  },
+  {
+   "fieldname": "submitted_by",
+   "fieldtype": "Link",
+   "label": "Submitted By",
+   "options": "User"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Chit Fund",
+ "name": "Chit ROC Return",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "ROC-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Chit Foreman",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  }
+ ],
+ "sort_field": "filing_date",
+ "sort_order": "DESC",
+ "title_field": "chit_group",
+ "track_changes": 1
+}

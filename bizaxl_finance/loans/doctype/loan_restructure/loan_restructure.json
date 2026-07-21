@@ -1,0 +1,271 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "loan_application",
+  "customer",
+  "customer_name",
+  "restructure_type",
+  "column_break_1",
+  "restructure_date",
+  "status",
+  "approval_status",
+  "section_current_terms",
+  "current_outstanding",
+  "current_interest_rate",
+  "current_tenure_months",
+  "current_emi",
+  "column_break_2",
+  "current_dpd_days",
+  "current_npa_category",
+  "restructure_reason",
+  "section_proposed_terms",
+  "new_outstanding",
+  "new_interest_rate",
+  "new_tenure_months",
+  "new_emi",
+  "column_break_3",
+  "moratorium_months",
+  "concession_amount",
+  "concession_type",
+  "section_approval",
+  "approved_by",
+  "approval_date",
+  "approval_reference",
+  "column_break_4",
+  "rejection_reason",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "RST-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "restructure_type",
+   "fieldtype": "Select",
+   "label": "Restructure Type",
+   "options": "Rate Revision\nTenure Extension\nEMI Reduction\nMoratorium Grant\nCombination\nWrite-off Settlement",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "restructure_date",
+   "fieldtype": "Date",
+   "label": "Restructure Date",
+   "default": "Today",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nActive\nCompleted\nDefaulted After Restructure",
+   "default": "Draft"
+  },
+  {
+   "fieldname": "approval_status",
+   "fieldtype": "Select",
+   "label": "Approval Status",
+   "options": "Pending\nApproved\nRejected",
+   "default": "Pending",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_current_terms",
+   "fieldtype": "Section Break",
+   "label": "Current Terms (Before Restructure)"
+  },
+  {
+   "fieldname": "current_outstanding",
+   "fieldtype": "Currency",
+   "label": "Current Outstanding"
+  },
+  {
+   "fieldname": "current_interest_rate",
+   "fieldtype": "Percent",
+   "label": "Current Rate (%)"
+  },
+  {
+   "fieldname": "current_tenure_months",
+   "fieldtype": "Int",
+   "label": "Current Tenure (Months)"
+  },
+  {
+   "fieldname": "current_emi",
+   "fieldtype": "Currency",
+   "label": "Current EMI"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "current_dpd_days",
+   "fieldtype": "Int",
+   "label": "Current DPD (Days)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "current_npa_category",
+   "fieldtype": "Data",
+   "label": "Current NPA Category",
+   "read_only": 1
+  },
+  {
+   "fieldname": "restructure_reason",
+   "fieldtype": "Small Text",
+   "label": "Restructure Reason",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_proposed_terms",
+   "fieldtype": "Section Break",
+   "label": "Proposed Terms (After Restructure)"
+  },
+  {
+   "fieldname": "new_outstanding",
+   "fieldtype": "Currency",
+   "label": "New Outstanding"
+  },
+  {
+   "fieldname": "new_interest_rate",
+   "fieldtype": "Percent",
+   "label": "New Rate (%)"
+  },
+  {
+   "fieldname": "new_tenure_months",
+   "fieldtype": "Int",
+   "label": "New Tenure (Months)"
+  },
+  {
+   "fieldname": "new_emi",
+   "fieldtype": "Currency",
+   "label": "New EMI"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "moratorium_months",
+   "fieldtype": "Int",
+   "label": "Moratorium (Months)",
+   "description": "Additional moratorium period granted"
+  },
+  {
+   "fieldname": "concession_amount",
+   "fieldtype": "Currency",
+   "label": "Concession Amount"
+  },
+  {
+   "fieldname": "concession_type",
+   "fieldtype": "Select",
+   "label": "Concession Type",
+   "options": "Interest Waiver\nPrincipal Haircut\nPenalty Waiver\nNo Concession"
+  },
+  {
+   "fieldname": "section_approval",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User"
+  },
+  {
+   "fieldname": "approval_date",
+   "fieldtype": "Date",
+   "label": "Approval Date"
+  },
+  {
+   "fieldname": "approval_reference",
+   "fieldtype": "Data",
+   "label": "Approval Reference"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Loans",
+ "name": "Loan Restructure",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "RST-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Collection Officer",
+   "read": 1
+  }
+ ],
+ "sort_field": "restructure_date",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "track_seen": 1
+}

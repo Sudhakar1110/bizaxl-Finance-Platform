@@ -1,0 +1,182 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "loan_application",
+  "customer",
+  "reset_date",
+  "column_break_1",
+  "reset_reason",
+  "previous_rate",
+  "new_rate",
+  "section_details",
+  "rate_type",
+  "previous_emi",
+  "new_emi",
+  "column_break_2",
+  "outstanding_principal",
+  "remaining_tenure_months",
+  "notified_to_customer",
+  "section_reference",
+  "reference_rate",
+  "spread_over_reference",
+  "column_break_3",
+  "approved_by",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reset_date",
+   "fieldtype": "Date",
+   "label": "Reset Date",
+   "reqd": 1,
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reset_reason",
+   "fieldtype": "Select",
+   "label": "Reset Reason",
+   "options": "MCLR Change\nRepo Rate Change\nRate Revision\nScheduled Reset\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "previous_rate",
+   "fieldtype": "Percent",
+   "label": "Previous Rate (%)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "new_rate",
+   "fieldtype": "Percent",
+   "label": "New Rate (%)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break",
+   "label": "Impact Details"
+  },
+  {
+   "fieldname": "rate_type",
+   "fieldtype": "Select",
+   "label": "Rate Type",
+   "options": "Fixed\nFloating (MCLR)\nFloating (Repo)\nHybrid"
+  },
+  {
+   "fieldname": "previous_emi",
+   "fieldtype": "Currency",
+   "label": "Previous EMI"
+  },
+  {
+   "fieldname": "new_emi",
+   "fieldtype": "Currency",
+   "label": "New EMI"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "outstanding_principal",
+   "fieldtype": "Currency",
+   "label": "Outstanding Principal"
+  },
+  {
+   "fieldname": "remaining_tenure_months",
+   "fieldtype": "Int",
+   "label": "Remaining Tenure (Months)"
+  },
+  {
+   "fieldname": "notified_to_customer",
+   "fieldtype": "Check",
+   "label": "Notified to Customer",
+   "default": 0
+  },
+  {
+   "fieldname": "section_reference",
+   "fieldtype": "Section Break",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "reference_rate",
+   "fieldtype": "Percent",
+   "label": "Reference Rate (MCLR/Repo)"
+  },
+  {
+   "fieldname": "spread_over_reference",
+   "fieldtype": "Percent",
+   "label": "Spread over Reference"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Loans",
+ "name": "Rate Reset Log",
+ "naming_rule": "By Naming Series",
+ "autoname": "RR-.loan_application.-.YYYY.-.#####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Customer",
+   "read": 1
+  }
+ ],
+ "sort_field": "reset_date",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

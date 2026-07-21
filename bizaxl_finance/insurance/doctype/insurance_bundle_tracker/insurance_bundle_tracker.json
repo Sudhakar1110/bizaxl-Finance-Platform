@@ -1,0 +1,217 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "loan_application",
+  "customer",
+  "customer_name",
+  "insurance_policy",
+  "column_break_1",
+  "bundle_type",
+  "is_mandatory",
+  "status",
+  "section_insurance_details",
+  "insurance_product",
+  "insurance_provider",
+  "policy_number",
+  "sum_assured",
+  "column_break_2",
+  "premium_amount",
+  "premium_frequency",
+  "policy_start_date",
+  "policy_end_date",
+  "section_renewal",
+  "renewal_eligible",
+  "renewal_alert_days_before",
+  "last_renewal_alert_date",
+  "column_break_3",
+  "renewal_status",
+  "renewal_date",
+  "new_policy_number"
+ ],
+ "fields": [
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Bizaxl Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name",
+   "fetch_from": "customer.customer_name"
+  },
+  {
+   "fieldname": "insurance_policy",
+   "fieldtype": "Link",
+   "label": "Insurance Policy",
+   "options": "Insurance Policy"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bundle_type",
+   "fieldtype": "Select",
+   "label": "Bundle Type",
+   "options": "Loan Protection\nVehicle Insurance\nHome Insurance\nHealth Insurance\nLife Insurance\nProperty Insurance\nOther",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "is_mandatory",
+   "fieldtype": "Check",
+   "label": "Mandatory Bundle",
+   "default": 0
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nExpired\nRenewed\nCancelled",
+   "default": "Active",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_insurance_details",
+   "fieldtype": "Section Break",
+   "label": "Insurance Details"
+  },
+  {
+   "fieldname": "insurance_product",
+   "fieldtype": "Link",
+   "label": "Insurance Product",
+   "options": "Insurance Product"
+  },
+  {
+   "fieldname": "insurance_provider",
+   "fieldtype": "Data",
+   "label": "Provider"
+  },
+  {
+   "fieldname": "policy_number",
+   "fieldtype": "Data",
+   "label": "Policy Number"
+  },
+  {
+   "fieldname": "sum_assured",
+   "fieldtype": "Currency",
+   "label": "Sum Assured"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "premium_amount",
+   "fieldtype": "Currency",
+   "label": "Premium Amount"
+  },
+  {
+   "fieldname": "premium_frequency",
+   "fieldtype": "Select",
+   "label": "Premium Frequency",
+   "options": "Monthly\nQuarterly\nHalf Yearly\nYearly\nSingle"
+  },
+  {
+   "fieldname": "policy_start_date",
+   "fieldtype": "Date",
+   "label": "Policy Start"
+  },
+  {
+   "fieldname": "policy_end_date",
+   "fieldtype": "Date",
+   "label": "Policy End"
+  },
+  {
+   "fieldname": "section_renewal",
+   "fieldtype": "Section Break",
+   "label": "Renewal Tracking"
+  },
+  {
+   "fieldname": "renewal_eligible",
+   "fieldtype": "Check",
+   "label": "Renewal Eligible",
+   "default": 1
+  },
+  {
+   "fieldname": "renewal_alert_days_before",
+   "fieldtype": "Int",
+   "label": "Alert Days Before",
+   "default": 30
+  },
+  {
+   "fieldname": "last_renewal_alert_date",
+   "fieldtype": "Date",
+   "label": "Last Alert Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "renewal_status",
+   "fieldtype": "Select",
+   "label": "Renewal Status",
+   "options": "Not Due\nAlert Sent\nRenewed\nExpired",
+   "default": "Not Due"
+  },
+  {
+   "fieldname": "renewal_date",
+   "fieldtype": "Date",
+   "label": "Renewal Date"
+  },
+  {
+   "fieldname": "new_policy_number",
+   "fieldtype": "Data",
+   "label": "New Policy Number"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "modified": "2024-01-01 00:00:00",
+ "module": "Insurance",
+ "name": "Insurance Bundle Tracker",
+ "naming_rule": "By Naming Series",
+ "autoname": "IBT-.loan_application.-.#####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Insurance Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1
+  }
+ ],
+ "sort_field": "policy_start_date",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
