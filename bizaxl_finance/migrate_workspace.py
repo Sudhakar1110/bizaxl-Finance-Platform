@@ -122,16 +122,35 @@ def sync_workspace_from_fixture():
 
         frappe.db.commit()
 
-        # ── Step 4: Clear cache ──
+        # ── Step 4: Clear ALL caches that affect workspace loading ──
+        # The Workspace class uses frappe.get_cached_doc() which caches for 6 hours.
+        # Without clearing, stale data is returned by get_workspace_sidebar_items.
         frappe.cache().delete_value(f"workspace:data:{workspace_name}")
         frappe.cache().hdel("workspace_data_keys", workspace_name)
+        # Clear cached document (used by Workspace class constructor)
+        frappe.cache().hdel("document_cache", f"Workspace::{workspace_name}")
+        # Clear bootinfo (used for workspace list)
+        frappe.cache().delete_key("bootinfo")
 
-        # ── Step 5: Verify ──
+        # ── Step 5: Diagnostic - verify workspace appears in sidebar API ──
+        from frappe.desk.desktop import get_workspace_sidebar_items
+        sidebar = get_workspace_sidebar_items()
+        page_count = len(sidebar.get("pages", []))
+        bizaxl_found = any(
+            p.get("name") == workspace_name or "Bizaxl" in p.get("title", "")
+            for p in sidebar.get("pages", [])
+        )
+        if bizaxl_found:
+            print(f"  ✅ Sidebar API: {page_count} pages, 'Bizaxl Finance' FOUND")
+        else:
+            print(f"  ⚠️ Sidebar API: {page_count} pages, 'Bizaxl Finance' NOT FOUND")
+            print(f"     Pages in list: {[p.get('title') for p in sidebar.get('pages', [])[:5]]}")
+
+        # ── Step 6: Final verification ──
         ws_final = frappe.get_doc("Workspace", workspace_name)
         final_cards = len(json.loads(ws_final.content))
         final_links = len(ws_final.links)
-
-        print(f"  ✅ Workspace created via ORM: {final_cards} cards, {final_links} links")
+        print(f"  ✅ Final: {final_cards} cards, {final_links} links")
         print(f"  ✅ Module: '{ws_final.module}', Public: {ws_final.public}")
 
     except Exception as e:
