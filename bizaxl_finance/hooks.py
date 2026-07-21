@@ -127,6 +127,13 @@ after_migrate = [
     "bizaxl_finance.migrate_workspace.sync_workspace_from_fixture",
 ]
 
+# ── before_uninstall hook to fix module references ──────────────────────────
+# Frappe deletes modules before doctypes during uninstall, causing errors.
+# This hook reassigns doctypes to 'Setup' module before uninstall begins.
+before_uninstall = [
+    "bizaxl_finance.setup.before_uninstall",
+]
+
 # ── Dashboard Configuration ──────────────────────────────────────────────────
 override_doctype_dashboards = {}
 
