@@ -44,16 +44,25 @@ class ColendingPartnership(Document):
         }
 
     def update_portfolio_summary(self):
-        """Refresh portfolio summary from linked loans"""
-        loan_apps = frappe.get_all("Loan Application",
-            filters={"custom_colending_partnership": self.name},
-            fields=["loan_amount", "name"]
-        )
+        """Refresh portfolio summary from linked loans
+        
+        Note: Requires 'custom_colending_partnership' field on Loan Application
+        DocType. Add via Customize Form or create as a standard field.
+        """
+        try:
+            loan_apps = frappe.get_all("Loan Application",
+                filters={"custom_colending_partnership": self.name},
+                fields=["loan_amount", "name"]
+            )
 
-        self.total_loans_funded = len(loan_apps)
-        self.total_disbursed_amount = sum(
-            flt(frappe.db.get_value("Loan Disbursement",
-                {"loan_application": la.name}, "disbursed_amount") or 0)
-            for la in loan_apps
-        )
-        self.save(ignore_permissions=True)
+            self.total_loans_funded = len(loan_apps)
+            self.total_disbursed_amount = sum(
+                flt(frappe.db.get_value("Loan Disbursement",
+                    {"loan_application": la.name}, "disbursed_amount") or 0)
+                for la in loan_apps
+            )
+            self.save(ignore_permissions=True)
+        except Exception as e:
+            frappe.log_error(f"Co-lending summary update failed: {e}", "Co-lending")
+            frappe.msgprint(f"Portfolio summary auto-update failed: {e}. "
+                          "Add 'custom_colending_partnership' field to Loan Application.")
