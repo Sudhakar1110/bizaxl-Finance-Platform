@@ -21,10 +21,11 @@ import math
 
 
 def load_demo_data():
-    # ── All imports: module-level + inside function for exec() safety ──
-    # Frappe console's exec() must have imports at both levels:
-    # module-level for the outer function, and in the enclosing scope
-    # so inner functions can find them via closure or __globals__.
+    # ── Imports inside the function for closures ──
+    # exec() in Frappe console doesn't propagate module-level imports
+    # to inner function closures. These must be in the enclosing scope.
+    import random
+    import math
     from frappe.utils import today, add_months, add_days, add_years
 
     # ── Helpers ─────────────────────────────────────────────────────────────
