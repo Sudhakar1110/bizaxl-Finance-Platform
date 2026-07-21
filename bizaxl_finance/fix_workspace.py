@@ -81,10 +81,9 @@ def fix_workspace():
             "hidden": shortcut.get("hidden", 0),
         })
 
-    # Save with in_import flag to skip link validation
-    frappe.flags.in_import = True
+    # Bypass link validation for DocTypes that may not exist yet
+    ws.flags.ignore_links = True
     ws.save(ignore_permissions=True)
-    frappe.flags.in_import = False
     frappe.db.commit()
 
     # Verify
