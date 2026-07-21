@@ -1,0 +1,208 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "auctioneer_name",
+  "firm_name",
+  "registration_number",
+  "cb",
+  "contact_person",
+  "contact_number",
+  "email",
+  "address",
+  "empanelement_section",
+  "empanelement_date",
+  "valid_until",
+  "status",
+  "cb",
+  "commission_percentage",
+  "specialization",
+  "city",
+  "performance_section",
+  "total_auctions_conducted",
+  "total_value_auctioned",
+  "average_recovery_rate",
+  "cb",
+  "rating",
+  "last_auction_date",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "AUCTNR-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "auctioneer_name",
+   "fieldtype": "Data",
+   "label": "Auctioneer Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "firm_name",
+   "fieldtype": "Data",
+   "label": "Firm Name"
+  },
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "label": "Registration Number"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "label": "Contact Number"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "empanelement_section",
+   "fieldtype": "Section Break",
+   "label": "Empanelement"
+  },
+  {
+   "fieldname": "empanelement_date",
+   "fieldtype": "Date",
+   "label": "Empanelement Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "valid_until",
+   "fieldtype": "Date",
+   "label": "Valid Until"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\\nSuspended\\nDe-registered\\nExpired",
+   "default": "Active"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "commission_percentage",
+   "fieldtype": "Percent",
+   "label": "Commission %"
+  },
+  {
+   "fieldname": "specialization",
+   "fieldtype": "Select",
+   "label": "Specialization",
+   "options": "Gold\\nVehicles\\nProperty\\nAll\\nOther"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "performance_section",
+   "fieldtype": "Section Break",
+   "label": "Performance"
+  },
+  {
+   "fieldname": "total_auctions_conducted",
+   "fieldtype": "Int",
+   "label": "Total Auctions Conducted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_value_auctioned",
+   "fieldtype": "Currency",
+   "label": "Total Value Auctioned",
+   "read_only": 1
+  },
+  {
+   "fieldname": "average_recovery_rate",
+   "fieldtype": "Percent",
+   "label": "Average Recovery Rate",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Select",
+   "label": "Rating",
+   "options": "5 Star\\n4 Star\\n3 Star\\n2 Star\\n1 Star"
+  },
+  {
+   "fieldname": "last_auction_date",
+   "fieldtype": "Date",
+   "label": "Last Auction Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 0,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Gold Loan",
+ "name": "Auctioneer Register",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "AUCTNR-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Gold Appraiser",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "auctioneer_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

@@ -159,6 +159,85 @@ class GoldPledge(Document):
         )
         return top_up.name
 
+    def renew_pledge(self, new_tenure_months=None, new_interest_rate=None):
+        """
+        Renew a gold loan pledge at maturity.
+
+        Gold loan renewal allows the customer to continue the loan
+        without repaying the principal. A new pledge is created with:
+        - Renewed principal (existing loan amount)
+        - Optionally additional gold items added
+        - Fresh tenure and interest rate
+
+        Returns the new Gold Pledge document name.
+        """
+        if not self.maturity_date:
+            frappe.throw("Cannot renew: Maturity date not set")
+
+        from frappe.utils import getdate
+        if getdate(today()) < getdate(self.maturity_date):
+            frappe.throw(
+                f"Cannot renew before maturity date {self.maturity_date}. "
+                "Please wait until maturity."
+            )
+
+        # Calculate renewal details
+        outstanding_principal = flt(self.loan_amount or 0)
+        renewal_tenure = new_tenure_months or self.tenure_months or 12
+        renewal_rate = new_interest_rate or self.interest_rate
+
+        # Count existing renewals
+        renewal_count = frappe.db.count("Gold Pledge", {
+            "original_pledge": self.original_pledge or self.name
+        })
+
+        # Create renewed pledge
+        renewed = frappe.get_doc({
+            "doctype": "Gold Pledge",
+            "customer_name": self.customer_name,
+            "customer_pan": self.customer_pan,
+            "customer_aadhaar": self.customer_aadhaar,
+            "branch": self.branch,
+            "loan_amount": outstanding_principal,
+            "interest_rate": renewal_rate,
+            "tenure_months": renewal_tenure,
+            "interest_type": self.interest_type,
+            "market_rate_per_gram": self.market_rate_per_gram,
+            "is_renewed": 1,
+            "original_pledge": self.original_pledge or self.name,
+            "renewal_date": today(),
+            "renewal_number": renewal_count + 1,
+            "principal_renewed": outstanding_principal,
+            "renewal_interest_rate": renewal_rate,
+            "renewed_tenure_months": renewal_tenure,
+            "valuation_date": today(),
+            "appraiser": self.appraiser,
+            "status": "Active",
+        })
+
+        # Copy gold items from original pledge
+        if self.get("gold_items"):
+            for item in self.gold_items:
+                renewed.append("gold_items", {
+                    "item_description": item.item_description,
+                    "gross_weight": item.gross_weight,
+                    "net_weight": item.net_weight,
+                    "purity": item.purity,
+                    "item_value": item.item_value,
+                })
+
+        renewed.insert(ignore_permissions=True)
+        renewed.submit()
+
+        # Mark original pledge as Renewed
+        frappe.db.set_value("Gold Pledge", self.name, "status", "Renewed")
+
+        frappe.msgprint(
+            f"✅ Gold pledge renewed: {renewed.name}",
+            alert=True, indicator="green"
+        )
+        return renewed.name
+
     def on_submit(self):
         pass  # LTV monitoring handled via scheduler
 

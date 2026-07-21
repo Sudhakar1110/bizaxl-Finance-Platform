@@ -31,6 +31,10 @@ class VehicleDetail(Document):
         if self.agreed_price and self.valuation_price:
             effective_price = min(self.agreed_price, self.valuation_price or self.agreed_price)
             max_loan = effective_price * max_ltv / 100
+
+            # Calculate down payment percentage
+            self._calculate_down_payment()
+
             frappe.msgprint(
                 f"Max eligible loan: ₹{max_loan:,.2f} (LTV: {max_ltv}% of ₹{effective_price:,.2f})",
                 alert=True
@@ -155,6 +159,30 @@ class VehicleDetail(Document):
             f"Parivahan Status: {self.rc_hypothecation_status}",
             alert=True
         )
+
+    def _calculate_down_payment(self):
+        """Calculate down payment percentage based on agreed price"""
+        if self.down_payment and self.agreed_price and self.agreed_price > 0:
+            self.down_payment_percentage = round(
+                (self.down_payment / self.agreed_price) * 100, 2
+            )
+            # Validate RBI minimum down payment norms
+            min_down_payment = {
+                "2 Wheeler": 10,
+                "4 Wheeler - Hatchback": 15,
+                "4 Wheeler - Sedan": 15,
+                "4 Wheeler - SUV": 20,
+                "Commercial Vehicle": 20,
+                "Electric Vehicle": 15,
+                "Tractor": 20,
+            }
+            required_min = min_down_payment.get(self.vehicle_category, 10)
+            if self.down_payment_percentage < required_min:
+                frappe.msgprint(
+                    f"⚠️ Down payment of {self.down_payment_percentage}% is below "
+                    f"minimum {required_min}% for {self.vehicle_category}.",
+                    alert=True, indicator="orange"
+                )
 
     def set_valuation_defaults(self):
         """Set valuation defaults"""

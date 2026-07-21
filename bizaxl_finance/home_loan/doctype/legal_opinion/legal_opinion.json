@@ -1,0 +1,265 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "loan_application",
+  "property_detail",
+  "customer_name",
+  "cb",
+  "opinion_date",
+  "advocate_name",
+  "advocate_firm",
+  "title_verification_section",
+  "title_deed_number",
+  "title_holder_name",
+  "title_clear",
+  "cb",
+  "encumbrance_status",
+  "encumbrance_certificate",
+  "encumbrance_remarks",
+  "document_verification_section",
+  "govt_approvals_verified",
+  "property_tax_paid",
+  "litigation_pending",
+  "cb",
+  "litigation_details",
+  "approved_plan_verified",
+  "occupancy_certificate_available",
+  "legal_opinion_section",
+  "legal_opinion_status",
+  "legal_opinion_summary",
+  "cb",
+  "recommendation",
+  "sanctioned_amount",
+  "attachments_section",
+  "legal_report_attachment",
+  "supporting_documents",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "LEGAL-OP-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1
+  },
+  {
+   "fieldname": "property_detail",
+   "fieldtype": "Link",
+   "label": "Property",
+   "options": "Property Detail"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "fetch_from": "loan_application.customer_name"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opinion_date",
+   "fieldtype": "Date",
+   "label": "Opinion Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "advocate_name",
+   "fieldtype": "Data",
+   "label": "Advocate / Lawyer Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "advocate_firm",
+   "fieldtype": "Data",
+   "label": "Law Firm"
+  },
+  {
+   "fieldname": "title_verification_section",
+   "fieldtype": "Section Break",
+   "label": "Title Verification"
+  },
+  {
+   "fieldname": "title_deed_number",
+   "fieldtype": "Data",
+   "label": "Title Deed Number"
+  },
+  {
+   "fieldname": "title_holder_name",
+   "fieldtype": "Data",
+   "label": "Title Holder Name"
+  },
+  {
+   "fieldname": "title_clear",
+   "fieldtype": "Select",
+   "label": "Title Clear?",
+   "options": "Clear\\nDisputed\\nEncumbered\\nPending Verification"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "encumbrance_status",
+   "fieldtype": "Select",
+   "label": "Encumbrance Status",
+   "options": "Clear\\nEncumbered\\nPartially Encumbered\\nNot Verified"
+  },
+  {
+   "fieldname": "encumbrance_certificate",
+   "fieldtype": "Attach",
+   "label": "Encumbrance Certificate"
+  },
+  {
+   "fieldname": "encumbrance_remarks",
+   "fieldtype": "Small Text",
+   "label": "Encumbrance Remarks"
+  },
+  {
+   "fieldname": "document_verification_section",
+   "fieldtype": "Section Break",
+   "label": "Document Verification"
+  },
+  {
+   "fieldname": "govt_approvals_verified",
+   "fieldtype": "Check",
+   "label": "Govt Approvals Verified"
+  },
+  {
+   "fieldname": "property_tax_paid",
+   "fieldtype": "Check",
+   "label": "Property Tax Paid"
+  },
+  {
+   "fieldname": "litigation_pending",
+   "fieldtype": "Check",
+   "label": "Litigation Pending?"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "litigation_details",
+   "fieldtype": "Small Text",
+   "label": "Litigation Details"
+  },
+  {
+   "fieldname": "approved_plan_verified",
+   "fieldtype": "Check",
+   "label": "Approved Plan Verified"
+  },
+  {
+   "fieldname": "occupancy_certificate_available",
+   "fieldtype": "Check",
+   "label": "Occupancy Certificate Available"
+  },
+  {
+   "fieldname": "legal_opinion_section",
+   "fieldtype": "Section Break",
+   "label": "Legal Opinion"
+  },
+  {
+   "fieldname": "legal_opinion_status",
+   "fieldtype": "Select",
+   "label": "Legal Opinion Status",
+   "options": "Favorable\\nFavorable with Conditions\\nUnfavorable\\nPending Additional Info",
+   "default": "Pending Additional Info"
+  },
+  {
+   "fieldname": "legal_opinion_summary",
+   "fieldtype": "Small Text",
+   "label": "Legal Opinion Summary"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "recommendation",
+   "fieldtype": "Select",
+   "label": "Recommendation",
+   "options": "Approve\\nApprove with Conditions\\nReject\\nDefer"
+  },
+  {
+   "fieldname": "sanctioned_amount",
+   "fieldtype": "Currency",
+   "label": "Recommended Sanction Amount"
+  },
+  {
+   "fieldname": "attachments_section",
+   "fieldtype": "Section Break",
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "legal_report_attachment",
+   "fieldtype": "Attach",
+   "label": "Legal Report"
+  },
+  {
+   "fieldname": "supporting_documents",
+   "fieldtype": "Attach",
+   "label": "Supporting Documents"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Home Loan",
+ "name": "Legal Opinion",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "LEGAL-OP-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Credit Officer",
+   "read": 1,
+   "write": 0,
+   "create": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "loan_application",
+ "track_changes": 1,
+ "track_seen": 1
+}

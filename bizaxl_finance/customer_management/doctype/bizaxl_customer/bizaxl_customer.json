@@ -16,6 +16,7 @@
   "date_of_birth",
   "pan_number",
   "aadhaar_number",
+  "ckyc_number",
   "gst_number",
   "section_kyc",
   "kyc_status",
@@ -132,6 +133,12 @@
    "fieldname": "aadhaar_number",
    "fieldtype": "Data",
    "label": "Aadhaar Number"
+  },
+  {
+   "fieldname": "ckyc_number",
+   "fieldtype": "Data",
+   "label": "CKYC Number",
+   "description": "Central KYC registry identifier"
   },
   {
    "fieldname": "gst_number",

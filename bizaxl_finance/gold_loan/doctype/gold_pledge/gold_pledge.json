@@ -43,6 +43,16 @@
   "cb",
   "maturity_date",
   "status",
+  "section_renewal",
+  "is_renewed",
+  "original_pledge",
+  "renewal_date",
+  "renewal_number",
+  "column_break_renewal",
+  "principal_renewed",
+  "additional_pledge_weight",
+  "renewal_interest_rate",
+  "renewed_tenure_months",
   "remarks"
  ],
  "fields": [
@@ -259,10 +269,68 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Active\nTop-Up Available\nOverdue\nNPA\nAuction Initiated\nAuctioned\nClosed\nReleased",
+   "options": "Active\nTop-Up Available\nRenewed\nOverdue\nNPA\nAuction Initiated\nAuctioned\nClosed\nReleased",
    "default": "Active",
    "in_list_view": 1,
    "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_renewal",
+   "fieldtype": "Section Break",
+   "label": "Renewal",
+   "description": "Gold loan renewal details"
+  },
+  {
+   "fieldname": "is_renewed",
+   "fieldtype": "Check",
+   "label": "Is Renewed"
+  },
+  {
+   "fieldname": "original_pledge",
+   "fieldtype": "Link",
+   "label": "Original Pledge",
+   "options": "Gold Pledge",
+   "depends_on": "eval:doc.is_renewed"
+  },
+  {
+   "fieldname": "renewal_date",
+   "fieldtype": "Date",
+   "label": "Renewal Date",
+   "depends_on": "eval:doc.is_renewed"
+  },
+  {
+   "fieldname": "renewal_number",
+   "fieldtype": "Int",
+   "label": "Renewal Number",
+   "depends_on": "eval:doc.is_renewed"
+  },
+  {
+   "fieldname": "column_break_renewal",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "principal_renewed",
+   "fieldtype": "Currency",
+   "label": "Principal Renewed",
+   "depends_on": "eval:doc.is_renewed"
+  },
+  {
+   "fieldname": "additional_pledge_weight",
+   "fieldtype": "Float",
+   "label": "Additional Pledge Weight (gms)",
+   "depends_on": "eval:doc.is_renewed"
+  },
+  {
+   "fieldname": "renewal_interest_rate",
+   "fieldtype": "Percent",
+   "label": "Renewal Interest Rate",
+   "depends_on": "eval:doc.is_renewed"
+  },
+  {
+   "fieldname": "renewed_tenure_months",
+   "fieldtype": "Int",
+   "label": "Renewed Tenure (Months)",
+   "depends_on": "eval:doc.is_renewed"
   },
   {
    "fieldname": "remarks",

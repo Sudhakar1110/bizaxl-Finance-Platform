@@ -15,6 +15,8 @@
   "otr_price",
   "valuation_price",
   "agreed_price",
+  "down_payment",
+  "down_payment_percentage",
   "registration_section",
   "registration_number",
   "engine_number",
@@ -93,6 +95,19 @@
    "fieldname": "agreed_price",
    "fieldtype": "Currency",
    "label": "Agreed Price"
+  },
+  {
+   "fieldname": "down_payment",
+   "fieldtype": "Currency",
+   "label": "Down Payment",
+   "description": "Actual down payment made by customer"
+  },
+  {
+   "fieldname": "down_payment_percentage",
+   "fieldtype": "Percent",
+   "label": "Down Payment (%)",
+   "read_only": 1,
+   "description": "Down payment as % of agreed price"
   },
   {
    "fieldname": "registration_section",

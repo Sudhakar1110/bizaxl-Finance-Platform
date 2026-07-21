@@ -1,0 +1,218 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2024-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "loan_application",
+  "property_detail",
+  "customer_name",
+  "cb",
+  "inspection_date",
+  "engineer_name",
+  "engineer_firm",
+  "construction_section",
+  "current_stage",
+  "percentage_complete",
+  "quality_check",
+  "cb",
+  "certified_stage",
+  "next_stage_expected_date",
+  "deviation_from_plan",
+  "deviation_details",
+  "certification_section",
+  "stage_certified",
+  "recommended_tranche_amount",
+  "certification_status",
+  "cb",
+  "valid_until",
+  "attachments",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "ENG-CERT-.YYYY.-.####",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "reqd": 1
+  },
+  {
+   "fieldname": "property_detail",
+   "fieldtype": "Link",
+   "label": "Property",
+   "options": "Property Detail"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "fetch_from": "loan_application.customer_name"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "inspection_date",
+   "fieldtype": "Date",
+   "label": "Inspection Date",
+   "default": "Today",
+   "reqd": 1
+  },
+  {
+   "fieldname": "engineer_name",
+   "fieldtype": "Data",
+   "label": "Engineer Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "engineer_firm",
+   "fieldtype": "Data",
+   "label": "Engineering Firm"
+  },
+  {
+   "fieldname": "construction_section",
+   "fieldtype": "Section Break",
+   "label": "Construction Assessment"
+  },
+  {
+   "fieldname": "current_stage",
+   "fieldtype": "Select",
+   "label": "Current Construction Stage",
+   "options": "Not Started\\nSite Preparation\\nFoundation\\nGround Floor\\nFirst Floor\\nSecond Floor\\nRoof\\nExternal Finishing\\nInternal Finishing\\nCompleted",
+   "reqd": 1
+  },
+  {
+   "fieldname": "percentage_complete",
+   "fieldtype": "Percent",
+   "label": "Percentage Complete",
+   "reqd": 1
+  },
+  {
+   "fieldname": "quality_check",
+   "fieldtype": "Select",
+   "label": "Quality Check",
+   "options": "Excellent\\nGood\\nSatisfactory\\nNeeds Improvement\\nUnsatisfactory",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "certified_stage",
+   "fieldtype": "Select",
+   "label": "Stage Certified",
+   "options": "Not Started\\nSite Preparation\\nFoundation\\nGround Floor\\nFirst Floor\\nSecond Floor\\nRoof\\nExternal Finishing\\nInternal Finishing\\nCompleted",
+   "reqd": 1
+  },
+  {
+   "fieldname": "next_stage_expected_date",
+   "fieldtype": "Date",
+   "label": "Next Stage Expected By"
+  },
+  {
+   "fieldname": "deviation_from_plan",
+   "fieldtype": "Check",
+   "label": "Deviation from Approved Plan?"
+  },
+  {
+   "fieldname": "deviation_details",
+   "fieldtype": "Small Text",
+   "label": "Deviation Details"
+  },
+  {
+   "fieldname": "certification_section",
+   "fieldtype": "Section Break",
+   "label": "Certification"
+  },
+  {
+   "fieldname": "stage_certified",
+   "fieldtype": "Check",
+   "label": "Stage Certified for Disbursement",
+   "default": 1
+  },
+  {
+   "fieldname": "recommended_tranche_amount",
+   "fieldtype": "Currency",
+   "label": "Recommended Tranche Amount"
+  },
+  {
+   "fieldname": "certification_status",
+   "fieldtype": "Select",
+   "label": "Certification Status",
+   "options": "Certified\\nCertified with Observations\\nNot Certified\\nRe-inspection Required",
+   "default": "Certified"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "valid_until",
+   "fieldtype": "Date",
+   "label": "Certificate Valid Until"
+  },
+  {
+   "fieldname": "attachments",
+   "fieldtype": "Attach",
+   "label": "Site Photos / Report"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "is_child_table": 0,
+ "editable_grid": 0,
+ "modified": "2024-06-01 00:00:00",
+ "module": "Home Loan",
+ "name": "Engineer Certificate",
+ "naming_rule": "By Naming Series",
+ "autoname": "naming_series:",
+ "naming_series_options": "ENG-CERT-.YYYY.-.####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Loan Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "Credit Officer",
+   "read": 1,
+   "write": 0,
+   "create": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "loan_application",
+ "track_changes": 1,
+ "track_seen": 1
+}
