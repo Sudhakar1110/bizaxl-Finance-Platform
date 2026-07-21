@@ -15,6 +15,14 @@
   "interest_rate",
   "tenure_months",
   "interest_type",
+  "section_top_up",
+  "is_top_up",
+  "parent_pledge",
+  "top_up_amount",
+  "top_up_date",
+  "column_break_topup",
+  "top_up_approved_by",
+  "top_up_status",
   "gold_details_section",
   "gold_items",
   "cb",
@@ -97,6 +105,54 @@
    "fieldtype": "Select",
    "label": "Interest Type",
    "options": "Flat\nReducing\nDaily Reducing"
+  },
+  {
+   "fieldname": "section_top_up",
+   "fieldtype": "Section Break",
+   "label": "Top-up Loan",
+   "description": "Additional loan against LTV headroom"
+  },
+  {
+   "fieldname": "is_top_up",
+   "fieldtype": "Check",
+   "label": "Is Top-up Loan"
+  },
+  {
+   "fieldname": "parent_pledge",
+   "fieldtype": "Link",
+   "label": "Parent Pledge",
+   "options": "Gold Pledge",
+   "depends_on": "eval:doc.is_top_up"
+  },
+  {
+   "fieldname": "top_up_amount",
+   "fieldtype": "Currency",
+   "label": "Top-up Amount",
+   "depends_on": "eval:doc.is_top_up"
+  },
+  {
+   "fieldname": "top_up_date",
+   "fieldtype": "Date",
+   "label": "Top-up Date",
+   "depends_on": "eval:doc.is_top_up"
+  },
+  {
+   "fieldname": "column_break_topup",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "top_up_approved_by",
+   "fieldtype": "Link",
+   "label": "Top-up Approved By",
+   "options": "User",
+   "depends_on": "eval:doc.is_top_up"
+  },
+  {
+   "fieldname": "top_up_status",
+   "fieldtype": "Select",
+   "label": "Top-up Status",
+   "options": "Not Applicable\nEligible\nApplied\nApproved\nDisbursed\nRejected",
+   "default": "Not Applicable"
   },
   {
    "fieldname": "gold_details_section",

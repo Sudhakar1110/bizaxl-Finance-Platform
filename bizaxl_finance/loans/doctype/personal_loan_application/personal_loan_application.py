@@ -1,6 +1,8 @@
+import math
 import frappe
 from frappe.model.document import Document
 from frappe.utils import flt, today
+
 
 class PersonalLoanApplication(Document):
     def validate(self):
@@ -16,13 +18,46 @@ class PersonalLoanApplication(Document):
         self.create_disbursement()
 
     def calculate_foir(self):
-        """Calculate FOIR (Fixed Obligation to Income Ratio)"""
-        if self.monthly_income and self.monthly_income > 0:
-            total_obligations = flt(self.existing_emi_obligations or 0)
-            proposed_emi = self._estimate_emi()
-            total_obligations += proposed_emi
-            foir = (total_obligations / self.monthly_income) * 100
-            self.scorecard_result = f"FOIR: {foir:.1f}%"
+        """
+        Calculate FOIR (Fixed Obligation to Income Ratio)
+        FOIR = (Existing EMI Obligations + Proposed EMI) / Monthly Income * 100
+
+        Thresholds:
+        - Salaried: Max 50%
+        - Self-Employed: Max 55%
+        - If FOIR > threshold: Manual review required
+        """
+        if not self.monthly_income or self.monthly_income <= 0:
+            return
+
+        total_obligations = flt(self.existing_emi_obligations or 0)
+        proposed_emi = self._estimate_emi()
+        total_obligations += proposed_emi
+
+        foir = (total_obligations / self.monthly_income) * 100
+
+        # Store computed values
+        self.foir_percentage = round(foir, 2)
+        self.proposed_emi = round(proposed_emi, 2)
+        self.total_obligations = round(total_obligations, 2)
+
+        # Determine FOIR thresholds based on income type
+        foir_limit = 50 if self.income_type == "Salaried" else 55
+
+        # Update scorecard result
+        result_parts = [f"FOIR: {foir:.1f}%"]
+        if foir > foir_limit:
+            result_parts.append(f"EXCEEDS {foir_limit}% limit")
+            self.decision = "Manual Review"
+            frappe.msgprint(
+                f"⚠️ FOIR {foir:.1f}% exceeds {foir_limit}% limit for {self.income_type}. "
+                "Application flagged for manual review.",
+                alert=True, indicator="orange"
+            )
+        else:
+            result_parts.append(f"Within {foir_limit}% limit")
+
+        self.scorecard_result = " | ".join(result_parts)
 
     def validate_limits(self):
         """Validate against product/policy limits"""
@@ -61,7 +96,6 @@ class PersonalLoanApplication(Document):
             monthly_rate = flt(self.interest_rate) / 12 / 100
             tenure = flt(self.tenure_months)
             if monthly_rate > 0:
-                import math
                 emi = self.loan_amount * monthly_rate * math.pow(1 + monthly_rate, tenure) / \
                       (math.pow(1 + monthly_rate, tenure) - 1)
                 return flt(emi)

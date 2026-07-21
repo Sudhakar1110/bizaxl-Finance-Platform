@@ -15,6 +15,14 @@
   "tenor_months",
   "emi_amount",
   "transaction_date",
+  "section_subvention",
+  "subvention_rate",
+  "subvention_amount",
+  "merchant_settlement_amount",
+  "column_break_sub",
+  "subvention_status",
+  "settlement_date",
+  "settlement_reference",
   "status",
   "remarks"
  ],
@@ -76,6 +84,57 @@
   },
   {
    "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "section_subvention",
+   "fieldtype": "Section Break",
+   "label": "Merchant Subvention"
+  },
+  {
+   "fieldname": "subvention_rate",
+   "fieldtype": "Percent",
+   "label": "Subvention Rate (%)",
+   "description": "Rate at which merchant subsidizes interest"
+  },
+  {
+   "fieldname": "subvention_amount",
+   "fieldtype": "Currency",
+   "label": "Subvention Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "merchant_settlement_amount",
+   "fieldtype": "Currency",
+   "label": "Merchant Settlement Amount",
+   "read_only": 1,
+   "description": "Amount settled to merchant (Transaction Amount - Subvention)"
+  },
+  {
+   "fieldname": "column_break_sub",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "subvention_status",
+   "fieldtype": "Select",
+   "label": "Subvention Status",
+   "options": "Pending\nCalculated\nSettled\nFailed",
+   "default": "Pending"
+  },
+  {
+   "fieldname": "settlement_date",
+   "fieldtype": "Date",
+   "label": "Settlement Date"
+  },
+  {
+   "fieldname": "settlement_reference",
+   "fieldtype": "Data",
+   "label": "Settlement Reference"
+  },
+  {
+   "fieldname": "status",
    "fieldtype": "Date",
    "label": "Transaction Date",
    "default": "Today"

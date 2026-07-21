@@ -32,6 +32,14 @@
   "co_applicant_credit_score",
   "section_documents",
   "document_list_json",
+  "section_risk_grading",
+  "credit_score",
+  "risk_score",
+  "risk_grade",
+  "column_break_rg",
+  "risk_assessment_date",
+  "risk_assessed_by",
+  "risk_grading_remarks",
   "section_approval",
   "application_date",
   "approval_date",
@@ -203,6 +211,50 @@
    "fieldtype": "Code",
    "label": "Document List (JSON)",
    "options": "JSON"
+  },
+  {
+   "fieldname": "section_risk_grading",
+   "fieldtype": "Section Break",
+   "label": "Risk Grading (A1-D)"
+  },
+  {
+   "fieldname": "credit_score",
+   "fieldtype": "Int",
+   "label": "Credit Score"
+  },
+  {
+   "fieldname": "risk_score",
+   "fieldtype": "Float",
+   "label": "Risk Score",
+   "read_only": 1,
+   "description": "Computed risk score (0-100)"
+  },
+  {
+   "fieldname": "risk_grade",
+   "fieldtype": "Select",
+   "label": "Risk Grade",
+   "options": "A1\nA2\nB1\nB2\nC1\nC2\nD",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_rg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "risk_assessment_date",
+   "fieldtype": "Date",
+   "label": "Risk Assessment Date"
+  },
+  {
+   "fieldname": "risk_assessed_by",
+   "fieldtype": "Link",
+   "label": "Risk Assessed By",
+   "options": "User"
+  },
+  {
+   "fieldname": "risk_grading_remarks",
+   "fieldtype": "Small Text",
+   "label": "Risk Grading Remarks"
   },
   {
    "fieldname": "section_approval",

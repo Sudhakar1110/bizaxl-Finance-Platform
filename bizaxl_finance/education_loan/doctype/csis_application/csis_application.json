@@ -16,6 +16,20 @@
   "subsidy_status",
   "cb",
   "submission_date",
+  "section_step_up_emi",
+  "step_up_percentage",
+  "moratorium_months",
+  "initial_emi",
+  "column_break_stepup",
+  "year_2_emi",
+  "year_3_emi",
+  "year_4_emi",
+  "year_5_emi",
+  "section_additional",
+  "link_loan_application",
+  "loan_amount",
+  "interest_rate",
+  "tenanture_months",
   "remarks"
  ],
  "fields": [
@@ -79,6 +93,85 @@
    "fieldname": "submission_date",
    "fieldtype": "Date",
    "label": "Submission Date"
+  },
+  {
+   "fieldname": "section_step_up_emi",
+   "fieldtype": "Section Break",
+   "label": "Step-up EMI Schedule"
+  },
+  {
+   "fieldname": "step_up_percentage",
+   "fieldtype": "Percent",
+   "label": "Step-up % per Year",
+   "default": "10",
+   "description": "Percentage increase in EMI each year"
+  },
+  {
+   "fieldname": "moratorium_months",
+   "fieldtype": "Int",
+   "label": "Moratorium (Months)",
+   "default": "6",
+   "description": "Grace period after course completion"
+  },
+  {
+   "fieldname": "initial_emi",
+   "fieldtype": "Currency",
+   "label": "Year 1 EMI (Initial)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_stepup",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "year_2_emi",
+   "fieldtype": "Currency",
+   "label": "Year 2 EMI",
+   "read_only": 1
+  },
+  {
+   "fieldname": "year_3_emi",
+   "fieldtype": "Currency",
+   "label": "Year 3 EMI",
+   "read_only": 1
+  },
+  {
+   "fieldname": "year_4_emi",
+   "fieldtype": "Currency",
+   "label": "Year 4 EMI",
+   "read_only": 1
+  },
+  {
+   "fieldname": "year_5_emi",
+   "fieldtype": "Currency",
+   "label": "Year 5 EMI",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_additional",
+   "fieldtype": "Section Break",
+   "label": "Loan Details"
+  },
+  {
+   "fieldname": "link_loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application"
+  },
+  {
+   "fieldname": "loan_amount",
+   "fieldtype": "Currency",
+   "label": "Loan Amount"
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Percent",
+   "label": "Interest Rate (p.a.)"
+  },
+  {
+   "fieldname": "tenanture_months",
+   "fieldtype": "Int",
+   "label": "Tenure (Months)"
   },
   {
    "fieldname": "remarks",

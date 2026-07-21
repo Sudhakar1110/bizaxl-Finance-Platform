@@ -16,6 +16,15 @@
   "recovery_cost",
   "cb",
   "storage_location",
+  "yard_in_date",
+  "yard_release_date",
+  "yard_charges",
+  "inventory_condition",
+  "cb2",
+  "auction_date",
+  "auction_amount",
+  "auctioneer_name",
+  "npa_reference",
   "status",
   "remarks"
  ],
@@ -82,6 +91,53 @@
    "fieldtype": "Select",
    "label": "Storage",
    "options": "Branch Yard\nThird Party Yard\nDealer Yard"
+  },
+  {
+   "fieldname": "yard_in_date",
+   "fieldtype": "Date",
+   "label": "Yard In Date"
+  },
+  {
+   "fieldname": "yard_release_date",
+   "fieldtype": "Date",
+   "label": "Yard Release Date"
+  },
+  {
+   "fieldname": "yard_charges",
+   "fieldtype": "Currency",
+   "label": "Yard Charges"
+  },
+  {
+   "fieldname": "inventory_condition",
+   "fieldtype": "Select",
+   "label": "Inventory Condition",
+   "options": "Good\nFair\nPoor\nDamaged\nNot Inspected",
+   "default": "Not Inspected"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "auction_date",
+   "fieldtype": "Date",
+   "label": "Auction Date"
+  },
+  {
+   "fieldname": "auction_amount",
+   "fieldtype": "Currency",
+   "label": "Auction Amount"
+  },
+  {
+   "fieldname": "auctioneer_name",
+   "fieldtype": "Data",
+   "label": "Auctioneer Name"
+  },
+  {
+   "fieldname": "npa_reference",
+   "fieldtype": "Link",
+   "label": "NPA Reference",
+   "options": "NPA Classification"
   },
   {
    "fieldname": "status",

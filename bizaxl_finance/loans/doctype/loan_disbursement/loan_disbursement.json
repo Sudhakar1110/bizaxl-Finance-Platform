@@ -20,6 +20,7 @@
   "transaction_reference",
   "mode_of_payment",
   "column_break_2",
+  "processing_fee_percentage",
   "processing_fee_amount",
   "gst_amount",
   "net_disbursement",
@@ -121,9 +122,16 @@
    "fieldtype": "Column Break"
   },
   {
+   "fieldname": "processing_fee_percentage",
+   "fieldtype": "Percent",
+   "label": "Processing Fee (%)",
+   "description": "Auto-fetched from Loan Product"
+  },
+  {
    "fieldname": "processing_fee_amount",
    "fieldtype": "Currency",
-   "label": "Processing Fee Amount"
+   "label": "Processing Fee Amount",
+   "read_only": 1
   },
   {
    "fieldname": "gst_amount",

@@ -24,6 +24,14 @@
   "employment_category",
   "years_in_job",
   "existing_emi_obligations",
+  "section_foir",
+  "foir_percentage",
+  "proposed_emi",
+  "total_obligations",
+  "column_break_foir",
+  "income_verification_status",
+  "income_verification_date",
+  "income_verification_done_by",
   "section_scorecard",
   "credit_score",
   "scorecard_version",
@@ -160,6 +168,51 @@
    "fieldname": "existing_emi_obligations",
    "fieldtype": "Currency",
    "label": "Existing EMI Obligations"
+  },
+  {
+   "fieldname": "section_foir",
+   "fieldtype": "Section Break",
+   "label": "FOIR Analysis"
+  },
+  {
+   "fieldname": "foir_percentage",
+   "fieldtype": "Percent",
+   "label": "FOIR (%)",
+   "read_only": 1,
+   "description": "Fixed Obligation to Income Ratio"
+  },
+  {
+   "fieldname": "proposed_emi",
+   "fieldtype": "Currency",
+   "label": "Proposed EMI",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_obligations",
+   "fieldtype": "Currency",
+   "label": "Total Monthly Obligations",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_foir",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "income_verification_status",
+   "fieldtype": "Select",
+   "label": "Income Verification Status",
+   "options": "Pending\nVerified via AA\nVerified via Documents\nVerified via Employer\nFailed\nNot Required"
+  },
+  {
+   "fieldname": "income_verification_date",
+   "fieldtype": "Date",
+   "label": "Income Verification Date"
+  },
+  {
+   "fieldname": "income_verification_done_by",
+   "fieldtype": "Link",
+   "label": "Verified By",
+   "options": "User"
   },
   {
    "fieldname": "section_scorecard",

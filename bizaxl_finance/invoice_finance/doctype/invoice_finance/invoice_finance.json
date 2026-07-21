@@ -28,7 +28,11 @@
   "repayment_date",
   "repayment_amount",
   "treds_invoice_id",
-  "treds_status"
+  "treds_status",
+  "treds_submitted_date",
+  "treds_approved_date",
+  "treds_settlement_date",
+  "treds_response_json"
  ],
  "fields": [
   {
@@ -161,7 +165,30 @@
    "fieldname": "treds_status",
    "fieldtype": "Select",
    "label": "TReDS Status",
-   "options": "Not Submitted\nSubmitted\nBid Received\nAccepted\nSettled"
+   "options": "Not Submitted\nSubmitted\nBid Received\nAccepted\nSettled",
+   "default": "Not Submitted"
+  },
+  {
+   "fieldname": "treds_submitted_date",
+   "fieldtype": "Date",
+   "label": "TReDS Submitted Date"
+  },
+  {
+   "fieldname": "treds_approved_date",
+   "fieldtype": "Date",
+   "label": "TReDS Approved Date"
+  },
+  {
+   "fieldname": "treds_settlement_date",
+   "fieldtype": "Date",
+   "label": "TReDS Settlement Date"
+  },
+  {
+   "fieldname": "treds_response_json",
+   "fieldtype": "Code",
+   "label": "TReDS API Response",
+   "options": "JSON",
+   "read_only": 1
   }
  ],
  "is_submittable": 1,

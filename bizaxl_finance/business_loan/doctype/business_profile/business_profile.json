@@ -19,7 +19,16 @@
   "total_assets",
   "total_liabilities",
   "existing_bank_borrowings",
-  "business_address"
+  "business_address",
+  "section_dscr",
+  "dscr_value",
+  "dscr_calculation_date",
+  "column_break_dscr",
+  "net_profit",
+  "interest_expense",
+  "depreciation",
+  "loan_principal_repayment",
+  "total_debt_service"
  ],
  "fields": [
   {
@@ -101,6 +110,54 @@
    "fieldname": "business_address",
    "fieldtype": "Small Text",
    "label": "Address"
+  },
+  {
+   "fieldname": "section_dscr",
+   "fieldtype": "Section Break",
+   "label": "DSCR Calculation"
+  },
+  {
+   "fieldname": "dscr_value",
+   "fieldtype": "Float",
+   "label": "DSCR",
+   "read_only": 1,
+   "description": "Debt Service Coverage Ratio"
+  },
+  {
+   "fieldname": "dscr_calculation_date",
+   "fieldtype": "Date",
+   "label": "DSCR Calculation Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_dscr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "net_profit",
+   "fieldtype": "Currency",
+   "label": "Net Profit (PAT)"
+  },
+  {
+   "fieldname": "interest_expense",
+   "fieldtype": "Currency",
+   "label": "Interest Expense"
+  },
+  {
+   "fieldname": "depreciation",
+   "fieldtype": "Currency",
+   "label": "Depreciation"
+  },
+  {
+   "fieldname": "loan_principal_repayment",
+   "fieldtype": "Currency",
+   "label": "Loan Principal Repayment"
+  },
+  {
+   "fieldname": "total_debt_service",
+   "fieldtype": "Currency",
+   "label": "Total Debt Service",
+   "read_only": 1
   }
  ],
  "is_submittable": 0,

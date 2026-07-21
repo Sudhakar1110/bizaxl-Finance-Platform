@@ -28,6 +28,12 @@
   "cb",
   "rc_hypothecation_date",
   "rc_hypothecation_status",
+  "rc_submitted_date",
+  "rc_endorsed_date",
+  "rc_received_date",
+  "rc_release_date",
+  "parivahan_reference",
+  "parivahan_api_response",
   "status"
  ],
  "fields": [
@@ -153,7 +159,40 @@
    "fieldname": "rc_hypothecation_status",
    "fieldtype": "Select",
    "label": "Hypothecation Status",
-   "options": "Pending\nSubmitted to RTO\nEndorsed\nCopy Received\nReleased"
+   "options": "Pending\nSubmitted to RTO\nEndorsed\nCopy Received\nReleased",
+   "default": "Pending"
+  },
+  {
+   "fieldname": "rc_submitted_date",
+   "fieldtype": "Date",
+   "label": "RC Submitted Date"
+  },
+  {
+   "fieldname": "rc_endorsed_date",
+   "fieldtype": "Date",
+   "label": "RC Endorsed Date"
+  },
+  {
+   "fieldname": "rc_received_date",
+   "fieldtype": "Date",
+   "label": "RC Copy Received Date"
+  },
+  {
+   "fieldname": "rc_release_date",
+   "fieldtype": "Date",
+   "label": "RC Release Date"
+  },
+  {
+   "fieldname": "parivahan_reference",
+   "fieldtype": "Data",
+   "label": "Parivahan Reference"
+  },
+  {
+   "fieldname": "parivahan_api_response",
+   "fieldtype": "Code",
+   "label": "Parivahan API Response",
+   "options": "JSON",
+   "read_only": 1
   },
   {
    "fieldname": "status",

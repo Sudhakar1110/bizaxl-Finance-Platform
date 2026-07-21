@@ -16,8 +16,13 @@
   "foreman_commission",
   "dividend_per_member",
   "cb",
+  "total_dividend_amount",
+  "non_prized_count",
+  "dividend_distribution_date",
+  "dividend_paid",
   "status",
   "participants_json",
+  "dividend_summary_json",
   "remarks"
  ],
  "fields": [
@@ -86,6 +91,28 @@
    "fieldtype": "Column Break"
   },
   {
+   "fieldname": "total_dividend_amount",
+   "fieldtype": "Currency",
+   "label": "Total Dividend Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "non_prized_count",
+   "fieldtype": "Int",
+   "label": "Non-Prized Members",
+   "read_only": 1
+  },
+  {
+   "fieldname": "dividend_distribution_date",
+   "fieldtype": "Date",
+   "label": "Dividend Distribution Date"
+  },
+  {
+   "fieldname": "dividend_paid",
+   "fieldtype": "Check",
+   "label": "Dividend Paid"
+  },
+  {
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -97,6 +124,13 @@
    "fieldtype": "Code",
    "label": "Participants & Bids (JSON)",
    "options": "JSON"
+  },
+  {
+   "fieldname": "dividend_summary_json",
+   "fieldtype": "Code",
+   "label": "Dividend Summary (JSON)",
+   "options": "JSON",
+   "read_only": 1
   },
   {
    "fieldname": "remarks",
