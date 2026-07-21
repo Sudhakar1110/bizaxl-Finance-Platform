@@ -123,9 +123,10 @@ scheduler_events = {
 }
 
 # ── after_migrate hook to restore workspace layout ────────────────────────
-after_migrate = [
-    "bizaxl_finance.migrate_workspace.sync_workspace_from_fixture",
-]
+# DISABLED - causes workspace issues
+# after_migrate = [
+#     "bizaxl_finance.migrate_workspace.sync_workspace_from_fixture",
+# ]
 
 # ── before_uninstall hook ─────────────────────────────────────────────────
 # Pre-deletes bizaxl_finance doctypes before Frappe deletes modules.
@@ -151,6 +152,7 @@ website_route_rules = [
 web_pages = {
     "demo-data": "bizaxl_finance.www.demo_data",
     "fix-workspace": "bizaxl_finance.www.fix_workspace",
+    "create-workspace": "bizaxl_finance.www.create_workspace",
 }
 
 # ── Jinja ─────────────────────────────────────────────────────────────────────
