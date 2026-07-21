@@ -69,15 +69,18 @@ def sync_workspace_from_fixture():
             print(f"  ✅ Workspace row created via SQL")
         else:
             # Update content directly via SQL
+            # NOTE: Setting module='' to bypass module lookup issues with custom modules
+            # Frappe v15 workspace API might fail when module is a custom module without package
             frappe.db.sql("""
                 UPDATE `tabWorkspace`
                 SET `content` = %s,
+                    `module` = '',
                     `label` = 'Bizaxl Finance',
                     `title` = 'Bizaxl Finance',
                     `modified` = NOW()
                 WHERE `name` = %s
             """, (content, workspace_name))
-            print(f"  ✅ Workspace content updated via SQL")
+            print(f"  ✅ Workspace content updated via SQL (module='')")
 
         # ── Step 2: Replace all links ──
         frappe.db.sql("DELETE FROM `tabWorkspace Link` WHERE `parent` = %s", workspace_name)
