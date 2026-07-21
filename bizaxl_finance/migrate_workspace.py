@@ -198,9 +198,10 @@ def sync_workspace_from_fixture():
 
         print(f"  ✅ BIZAXL FINANCE WORKSPACE: {cards_count} cards, {links_count} links, {shortcuts_count} shortcuts")
 
-        # ── Step 5: Diagnostic — call EXACT API the browser frontend uses ──
-        # The browser ONLY calls get_workspace_sidebar_items (from network tab evidence)
-        # This single API returns BOTH sidebar items AND workspace content
+        # ── Step 5: Diagnostic — test EXACT API the browser frontend uses ──
+        # The browser calls get_workspace_sidebar_items which returns workspace
+        # content for the 'active' workspace (determined by HTTP request context).
+        # During migration there's no HTTP request, so we simulate it.
         try:
             # Test 1: Basic doc load
             ws_check = frappe.get_doc("Workspace", workspace_name)
@@ -211,28 +212,45 @@ def sync_workspace_from_fixture():
             link_check = frappe.db.count("Workspace Link", {"parent": workspace_name})
             print(f"  🔍 [2/4] {link_check} links in database")
 
-            # Test 3: Call get_workspace_sidebar_items (the EXACT API the frontend uses)
+            # Test 3: Call get_workspace_sidebar_items WITHOUT request context
             from frappe.desk.desktop import get_workspace_sidebar_items
             sidebar_data = get_workspace_sidebar_items()
-            # This returns dict with keys like 'sidebar_items', 'workspace', etc.
-            ws_content_from_api = sidebar_data.get("workspace", {}).get("content", "[]")
-            if isinstance(ws_content_from_api, str):
-                ws_cards = len(json.loads(ws_content_from_api))
-            elif isinstance(ws_content_from_api, list):
-                ws_cards = len(ws_content_from_api)
+            ws_no_ctx = sidebar_data.get("workspace", {}).get("content", "[]")
+            if isinstance(ws_no_ctx, str):
+                ws_no_cards = len(json.loads(ws_no_ctx))
+            elif isinstance(ws_no_ctx, list):
+                ws_no_cards = len(ws_no_ctx)
+            else:
+                ws_no_cards = 0
+            print(f"  🔍 [3/4] Without request context: {ws_no_cards} cards (expected 0 - no request)")
+            
+            # Test 4: Set request context and call again
+            from frappe import form_dict
+            original_workspace = form_dict.get("workspace")
+            form_dict["workspace"] = workspace_name
+            sidebar_data2 = get_workspace_sidebar_items()
+            ws_with_ctx = sidebar_data2.get("workspace", {}).get("content", "[]")
+            if isinstance(ws_with_ctx, str):
+                ws_cards = len(json.loads(ws_with_ctx))
+            elif isinstance(ws_with_ctx, list):
+                ws_cards = len(ws_with_ctx)
             else:
                 ws_cards = 0
-            print(f"  🔍 [3/4] get_workspace_sidebar_items returned workspace with {ws_cards} cards")
-            
-            # Test 4: Check key fields the API returns
-            ws_name_from_api = sidebar_data.get("workspace", {}).get("name", "")
-            ws_label = sidebar_data.get("workspace", {}).get("label", "")
-            print(f"  🔍 [4/4] Sidebar workspace: name='{ws_name_from_api}', label='{ws_label}'")
-            
-            if ws_cards >= 24 and ws_name_from_api == workspace_name:
-                print(f"  ✅ ALL DIAGNOSTICS PASSED — Workspace API returns 24 cards correctly")
+            ws_name = sidebar_data2.get("workspace", {}).get("name", "")
+            # Restore original
+            if original_workspace:
+                form_dict["workspace"] = original_workspace
             else:
-                print(f"  ⚠️ MISMATCH — API returned {ws_cards} cards for '{ws_name_from_api}'")
+                form_dict.pop("workspace", None)
+            
+            print(f"  🔍 [4/4] WITH workspace='{workspace_name}': {ws_cards} cards, name='{ws_name}'")
+            
+            if ws_cards >= 24:
+                print(f"  ✅ API WORKS WITH REQUEST CONTEXT — {ws_cards} cards for '{ws_name}'")
+                print(f"     Browser issue = URL/request may pass wrong workspace name")
+            else:
+                print(f"  ❌ API RETURNS {ws_cards} cards EVEN WITH correct workspace param")
+                print(f"     This means get_workspace_sidebar_items can't find our workspace")
 
         except Exception as diag_e:
             print(f"  ❌ Diagnostic FAILED: {diag_e}")
