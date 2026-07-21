@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Load Demo Data - Bizaxl Finance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2e7d32;
+            text-align: center;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        .btn:hover {
+            background: #1b5e20;
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .result {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        .result.success {
+            background: #e8f5e9;
+            border: 1px solid #2e7d32;
+            color: #2e7d32;
+        }
+        .result.error {
+            background: #ffebee;
+            border: 1px solid #c62828;
+            color: #c62828;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+            display: none;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏦 Bizaxl Finance</h1>
+        <h2 style="text-align:center; color:#666;">Load Demo Data</h2>
+        
+        <div class="info">
+            <strong>This will create sample data for:</strong>
+            <ul>
+                <li>5 Customers</li>
+                <li>5 Loan Products</li>
+                <li>5 Loan Applications</li>
+                <li>20 Transactions</li>
+                <li>3 Bank Accounts</li>
+                <li>5 Leads</li>
+                <li>4 Investment Accounts</li>
+                <li>5 Insurance Policies</li>
+                <li>7 Credit Reports</li>
+                <li>9 Bill Payments</li>
+                <li>5 Collection Records</li>
+                <li>4 AML Screenings</li>
+                <li>3 DSA Masters</li>
+            </ul>
+            <p><em>Records that already exist will be skipped.</em></p>
+        </div>
+        
+        <button class="btn" onclick="loadDemoData()">🚀 Load Demo Data</button>
+        
+        <div class="loading" id="loading">
+            Loading demo data... Please wait...
+        </div>
+        
+        <div class="result" id="result"></div>
+    </div>
+    
+    <script>
+        async function loadDemoData() {
+            const btn = document.querySelector('.btn');
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+            
+            btn.disabled = true;
+            btn.textContent = 'Loading...';
+            loading.style.display = 'block';
+            result.style.display = 'none';
+            
+            try {
+                const response = await fetch('/api/method/bizaxl_finance.www.demo_data.load_demo_data');
+                const data = await response.json();
+                
+                loading.style.display = 'none';
+                result.style.display = 'block';
+                
+                if (data.message && data.message.success) {
+                    result.className = 'result success';
+                    result.innerHTML = `<strong>✅ Success!</strong><br>${data.message.message}<br><br>Total records: ${data.message.count}`;
+                    btn.textContent = '✅ Demo Data Loaded!';
+                } else {
+                    result.className = 'result error';
+                    result.innerHTML = `<strong>❌ Error:</strong><br>${data.exception || data._server_messages || 'Unknown error'}`;
+                    btn.disabled = false;
+                    btn.textContent = '🚀 Load Demo Data';
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                result.style.display = 'block';
+                result.className = 'result error';
+                result.innerHTML = `<strong>❌ Error:</strong><br>${error.message}`;
+                btn.disabled = false;
+                btn.textContent = '🚀 Load Demo Data';
+            }
+        }
+    </script>
+</body>
+</html>

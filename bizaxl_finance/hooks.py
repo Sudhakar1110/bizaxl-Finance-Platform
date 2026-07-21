@@ -147,6 +147,11 @@ website_route_rules = [
     {"from_route": "/bizaxl-portal", "to_route": "bizaxl_portal"},
 ]
 
+# ── Web Pages ─────────────────────────────────────────────────────────────────
+web_pages = {
+    "demo-data": "bizaxl_finance.www.demo_data",
+}
+
 # ── Jinja ─────────────────────────────────────────────────────────────────────
 jinja = {
     "methods": [],
