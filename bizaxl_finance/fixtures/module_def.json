@@ -8,6 +8,13 @@
   },
   {
     "doctype": "Module Def",
+    "name": "Customer Management",
+    "module_name": "Customer Management",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
     "name": "Banking",
     "module_name": "Banking",
     "app_name": "bizaxl_finance",
@@ -57,8 +64,113 @@
   },
   {
     "doctype": "Module Def",
-    "name": "Customer Management",
-    "module_name": "Customer Management",
+    "name": "Foundation",
+    "module_name": "Foundation",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "NBFC Lending",
+    "module_name": "NBFC Lending",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Gold Loan",
+    "module_name": "Gold Loan",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Microfinance",
+    "module_name": "Microfinance",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Vehicle Loan",
+    "module_name": "Vehicle Loan",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Home Loan",
+    "module_name": "Home Loan",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Business Loan",
+    "module_name": "Business Loan",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Education Loan",
+    "module_name": "Education Loan",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "BNPL",
+    "module_name": "BNPL",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Invoice Finance",
+    "module_name": "Invoice Finance",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Chit Fund",
+    "module_name": "Chit Fund",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Consumer Finance",
+    "module_name": "Consumer Finance",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Collections",
+    "module_name": "Collections",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Risk Compliance",
+    "module_name": "Risk Compliance",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Risk & Compliance",
+    "module_name": "Risk & Compliance",
+    "app_name": "bizaxl_finance",
+    "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Accounting",
+    "module_name": "Accounting",
     "app_name": "bizaxl_finance",
     "custom": 1
   }
