@@ -197,6 +197,28 @@ def sync_workspace_from_fixture():
 
         print(f"  ✅ BIZAXL FINANCE WORKSPACE: {cards_count} cards, {links_count} links, {shortcuts_count} shortcuts")
 
+        # ── Step 5: Diagnostic — verify workspace loads via same API as frontend ──
+        try:
+            # Test 1: Can we load the workspace doc?
+            ws_check = frappe.get_doc("Workspace", workspace_name)
+            content_check = json.loads(ws_check.content)
+            print(f"  🔍 Diagnostic: frappe.get_doc OK — {len(content_check)} cards, module='{ws_check.module}'")
+
+            # Test 2: Verify links load
+            link_check = frappe.db.count("Workspace Link", {"parent": workspace_name})
+            print(f"  🔍 Diagnostic: {link_check} links in database")
+
+            # Test 3: Try the actual workspace API used by frontend
+            from frappe.desk.doctype.workspace.workspace import get_workspace_data
+            api_data = get_workspace_data(workspace_name)
+            api_content = json.loads(api_data.get("content", "[]"))
+            print(f"  🔍 Diagnostic: get_workspace_data API returned {len(api_content)} cards")
+
+        except Exception as diag_e:
+            print(f"  ❌ Diagnostic FAILED: {diag_e}")
+            import traceback
+            print(f"     Traceback: {traceback.format_exc()}")
+
     except Exception as e:
         frappe.log_error(f"Workspace sync failed: {str(e)}", "Workspace Sync")
         # Print full traceback for debugging
