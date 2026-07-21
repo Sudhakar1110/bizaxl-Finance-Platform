@@ -149,6 +149,14 @@ def sync_workspace_from_fixture():
         frappe.db.commit()
         print(f"  ✅ {shortcuts_count} shortcuts synced")
 
+        # ── Step 4: Clear workspace cache ──
+        # Direct SQL bypasses Frappe's ORM cache, so we must invalidate it manually
+        frappe.cache().delete_value(f"workspace:data:{workspace_name}")
+        frappe.cache().hdel("workspace_data_keys", workspace_name)
+        # Also clear the doc cache for this specific workspace
+        frappe.cache().hdel("doctype_meta", "Workspace")
+        frappe.cache().hdel("doctype_meta", workspace_name)
+
         print(f"  ✅ BIZAXL FINANCE WORKSPACE: {cards_count} cards, {links_count} links, {shortcuts_count} shortcuts")
 
     except Exception as e:
