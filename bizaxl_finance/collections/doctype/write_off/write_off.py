@@ -5,10 +5,11 @@ from frappe.utils import flt, today
 class WriteOff(Document):
     def validate(self):
         self.calculate_amounts()
-        self.validate_approval()
 
     def before_submit(self):
         self.status = "Approved"
+        if not self.approved_by:
+            frappe.throw("Write-off must be approved by an authorized user")
 
     def on_submit(self):
         self.execute_write_off()

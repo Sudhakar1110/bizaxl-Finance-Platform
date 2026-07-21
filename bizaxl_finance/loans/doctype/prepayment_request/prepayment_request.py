@@ -44,6 +44,23 @@ class PrepaymentRequest(Document):
         )
         self.approved_amount = self.requested_amount
 
+    def create_repayment(self):
+        """Create a Loan Repayment record for this prepayment"""
+        if self.approved_amount and self.approved_amount > 0:
+            repayment_type = "Foreclosure" if self.prepayment_type == "Full Prepayment (Foreclosure)" else "Partial Prepayment"
+            repayment = frappe.get_doc({
+                "doctype": "Loan Repayment",
+                "loan_application": self.loan_application,
+                "customer": self.customer,
+                "repayment_type": repayment_type,
+                "amount": self.approved_amount,
+                "payment_date": self.effective_date or today(),
+                "penalty_amount": self.prepayment_penalty_amount or 0,
+                "status": "Completed",
+            })
+            repayment.insert()
+            repayment.submit()
+
     def update_loan_application(self):
         if self.new_outstanding_balance <= 0:
             frappe.db.set_value("Loan Application", self.loan_application, "status", "Closed")

@@ -1577,6 +1577,45 @@
    "format": "",
    "restrict_to_domain": "",
    "url": ""
+  },
+  {
+   "type": "DocType",
+   "label": "New Sanction Letter",
+   "link_to": "Sanction Letter",
+   "doc_view": "New",
+   "hidden": 0,
+   "stats_filter": "",
+   "icon": "",
+   "color": "",
+   "format": "",
+   "restrict_to_domain": "",
+   "url": ""
+  },
+  {
+   "type": "DocType",
+   "label": "New Personal Loan",
+   "link_to": "Personal Loan Application",
+   "doc_view": "New",
+   "hidden": 0,
+   "stats_filter": "",
+   "icon": "",
+   "color": "",
+   "format": "",
+   "restrict_to_domain": "",
+   "url": ""
+  },
+  {
+   "type": "DocType",
+   "label": "New Write-off",
+   "link_to": "Write-off",
+   "doc_view": "New",
+   "hidden": 0,
+   "stats_filter": "",
+   "icon": "",
+   "color": "",
+   "format": "",
+   "restrict_to_domain": "",
+   "url": ""
   }
  ]
 }
