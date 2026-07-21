@@ -92,25 +92,29 @@ def sync_workspace_from_fixture():
         
         frappe.db.sql(insert_sql, vals)
 
-        # Add valid links via SQL
+        # Add valid links via SQL - get actual columns
+        link_cols = [r[0] for r in frappe.db.sql("SHOW COLUMNS FROM `tabWorkspace Link`")]
+        link_insert_cols = ["name", "parent", "parentfield", "parenttype", "type", "label", "link_to", "link_type", "hidden", "is_query_report", "onboard"]
+        link_insert_cols = [c for c in link_insert_cols if c in link_cols]
+        
         for idx, link in enumerate(valid_links):
-            frappe.db.sql("""
-                INSERT INTO `tabWorkspace Link` (
-                    name, doctype, parent, parentfield, parenttype,
-                    type, label, link_to, link_type, hidden, is_query_report, onboard
-                ) VALUES (
-                    %s, 'Workspace Link', 'Bizaxl Finance', 'links', 'Workspace',
-                    %s, %s, %s, %s, 0, %s, %s
-                )
-            """, (
-                f"ws_link_{idx}",
-                link.get('type', ''),
-                link.get('label', ''),
-                link.get('link_to', ''),
-                link.get('link_type', ''),
-                link.get('is_query_report', 0),
-                link.get('onboard', 0)
-            ))
+            vals = []
+            for c in link_insert_cols:
+                if c == "name": vals.append(f"ws_link_{idx}")
+                elif c == "parent": vals.append("Bizaxl Finance")
+                elif c == "parentfield": vals.append("links")
+                elif c == "parenttype": vals.append("Workspace")
+                elif c == "type": vals.append(link.get('type', ''))
+                elif c == "label": vals.append(link.get('label', ''))
+                elif c == "link_to": vals.append(link.get('link_to', ''))
+                elif c == "link_type": vals.append(link.get('link_type', ''))
+                elif c == "hidden": vals.append(0)
+                elif c == "is_query_report": vals.append(link.get('is_query_report', 0))
+                elif c == "onboard": vals.append(link.get('onboard', 0))
+            
+            cols_str = ", ".join([f"`{c}`" for c in link_insert_cols])
+            vals_str = ", ".join(["%s"] * len(link_insert_cols))
+            frappe.db.sql(f"INSERT INTO `tabWorkspace Link` ({cols_str}) VALUES ({vals_str})", vals)
 
         frappe.db.commit()
         frappe.cache().delete_key("bootinfo")
