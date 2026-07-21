@@ -73,22 +73,40 @@ def create_workspace():
         # Get columns
         cols = [r[0] for r in frappe.db.sql("SHOW COLUMNS FROM `tabWorkspace`")]
         
+        # Build insert with all possible fields
         insert_cols = []
         vals = []
         
-        if "name" in cols: insert_cols.append("name"); vals.append("Bizaxl Finance")
-        if "title" in cols: insert_cols.append("title"); vals.append("Bizaxl Finance")
-        if "label" in cols: insert_cols.append("label"); vals.append("Bizaxl Finance")
-        if "module" in cols: insert_cols.append("module"); vals.append("Bizaxl Finance")
-        if "icon" in cols: insert_cols.append("icon"); vals.append("credit-card")
-        if "public" in cols: insert_cols.append("public"); vals.append(1)
-        if "sequence_id" in cols: insert_cols.append("sequence_id"); vals.append(1.0)
-        if "owner" in cols: insert_cols.append("owner"); vals.append("Administrator")
-        if "creation" in cols: insert_cols.append("creation"); vals.append(frappe.utils.now())
-        if "modified" in cols: insert_cols.append("modified"); vals.append(frappe.utils.now())
-        if "content" in cols: insert_cols.append("content"); vals.append(content)
-        if "is_standard" in cols: insert_cols.append("is_standard"); vals.append(0)
-        if "is_hidden" in cols: insert_cols.append("is_hidden"); vals.append(0)
+        field_map = {
+            "name": "Bizaxl Finance",
+            "title": "Bizaxl Finance",
+            "label": "Bizaxl Finance",
+            "module": "Bizaxl Finance",
+            "icon": "credit-card",
+            "public": 1,
+            "sequence_id": 1.0,
+            "owner": "Administrator",
+            "creation": frappe.utils.now(),
+            "modified": frappe.utils.now(),
+            "content": content,
+            "is_standard": 0,
+            "is_hidden": 0,
+            "is_default": 1,
+            "category": "Modules",
+            "restrict_to_domain": "",
+            "developer_mode_only": 0,
+            "disable_user_customization": 0,
+            "extends": "",
+            "extends_another_page": 0,
+            "hide_custom": 0,
+            "idx": 0,
+            "parent_page": "",
+        }
+        
+        for col in cols:
+            if col in field_map:
+                insert_cols.append(col)
+                vals.append(field_map[col])
         
         cols_str = ", ".join([f"`{c}`" for c in insert_cols])
         vals_str = ", ".join(["%s"] * len(insert_cols))
@@ -96,7 +114,7 @@ def create_workspace():
         
         # Add links
         link_cols = [r[0] for r in frappe.db.sql("SHOW COLUMNS FROM `tabWorkspace Link`")]
-        link_insert_cols = ["name", "parent", "parentfield", "parenttype", "type", "label", "link_to", "link_type", "hidden"]
+        link_insert_cols = ["name", "parent", "parentfield", "parenttype", "type", "label", "link_to", "link_type", "hidden", "is_query_report", "onboard", "dependencies", "link_count"]
         link_insert_cols = [c for c in link_insert_cols if c in link_cols]
         
         link_count = 0
@@ -115,6 +133,10 @@ def create_workspace():
                 elif c == "link_to": link_vals.append(link_to)
                 elif c == "link_type": link_vals.append(link_type)
                 elif c == "hidden": link_vals.append(0)
+                elif c == "is_query_report": link_vals.append(0)
+                elif c == "onboard": link_vals.append(0)
+                elif c == "dependencies": link_vals.append("")
+                elif c == "link_count": link_vals.append(0)
             
             cols_str = ", ".join([f"`{c}`" for c in link_insert_cols])
             vals_str = ", ".join(["%s"] * len(link_insert_cols))
