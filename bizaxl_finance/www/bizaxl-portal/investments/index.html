@@ -1,0 +1,60 @@
+{% extends "templates/web.html" %}
+{% block title %}My Investments{% endblock %}
+{% block header %}<h1>My Investments</h1>{% endblock %}
+{% block page_content %}
+<div class="container my-4">
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title">Mutual Funds</h6>
+                    <h4>{{ mutual_funds|length }} Funds</h4>
+                    {% set mf_value = mutual_funds|sum(attribute='current_value') %}
+                    <p class="text-muted mb-0">Value: ₹{{ "%.2f"|format(mf_value or 0) }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title">Fixed Deposits</h6>
+                    <h4>{{ fixed_deposits|length }} Deposits</h4>
+                    {% set fd_value = fixed_deposits|sum(attribute='deposit_amount') %}
+                    <p class="text-muted mb-0">Invested: ₹{{ "%.2f"|format(fd_value or 0) }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Holdings -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">Portfolio Holdings</h5>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr><th>Asset Type</th><th class="text-end">Invested</th><th class="text-end">Current Value</th><th class="text-end">Return</th></tr>
+                </thead>
+                <tbody>
+                    {% for h in holdings %}
+                    <tr>
+                        <td>{{ h.asset_type }}</td>
+                        <td class="text-end">₹{{ "%.2f"|format(h.invested_amount or 0) }}</td>
+                        <td class="text-end">₹{{ "%.2f"|format(h.current_value or 0) }}</td>
+                        <td class="text-end">
+                            <span class="text-{{ 'success' if (h.return_pct or 0) >= 0 else 'danger' }}">
+                                {{ h.return_pct or 0 }}%
+                            </span>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="4" class="text-center text-muted py-4">No holdings</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "templates/web.html" %}
+{% block title %}Pay Bills{% endblock %}
+{% block header %}<h1>Pay Bills</h1>{% endblock %}
+{% block page_content %}
+<div class="container my-4">
+    <!-- Pay via UPI -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">Quick Transfer via UPI</h5>
+        </div>
+        <div class="card-body">
+            <form action="/api/method/bizaxl_finance.api.initiate_upi_transfer" method="POST">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">From UPI</label>
+                        <select class="form-select" name="from_upi">
+                            {% for upi in upi_ids %}
+                            <option value="{{ upi.upi_id }}">{{ upi.upi_id }}</option>
+                            {% else %}
+                            <option>— No UPI IDs —</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">To UPI</label>
+                        <input type="text" class="form-control" name="to_upi" placeholder="name@bank" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Amount</label>
+                        <input type="number" class="form-control" name="amount" placeholder="₹" required>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bills List -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">Bills & Recharges</h5>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr><th>Type</th><th>Provider</th><th class="text-end">Amount</th><th>Due Date</th><th>Status</th><th></th></tr>
+                </thead>
+                <tbody>
+                    {% for bill in bills %}
+                    <tr>
+                        <td>{{ bill.bill_type }}</td>
+                        <td>{{ bill.provider }}</td>
+                        <td class="text-end">₹{{ "%.2f"|format(bill.amount or 0) }}</td>
+                        <td>{{ bill.due_date }}</td>
+                        <td><span class="badge bg-{{ 'danger' if bill.status == 'Overdue' else 'warning' if bill.status == 'Pending' else 'success' }}">{{ bill.status }}</span></td>
+                        <td>
+                            {% if bill.status == 'Pending' %}
+                            <a href="/api/method/bizaxl_finance.api.initiate_bill_payment?bill_payment_id={{ bill.name }}" class="btn btn-sm btn-success">Pay Now</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="6" class="text-center text-muted py-4">No bills found</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

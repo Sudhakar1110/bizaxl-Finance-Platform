@@ -1,0 +1,72 @@
+<!-- Sanction Letter Print Format — ERPNext v15 Jinja Template -->
+<style>
+    body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; color: #333; }
+    .header { text-align: center; margin-bottom: 30px; }
+    .header h1 { font-size: 16pt; margin-bottom: 5px; }
+    .header h2 { font-size: 12pt; color: #555; font-weight: normal; }
+    .letter-ref { text-align: right; font-size: 9pt; color: #666; }
+    .content { margin: 30px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    th { background: #f5f5f5; width: 40%; }
+    .disclaimer { margin-top: 30px; font-size: 9pt; color: #666; border-top: 1px solid #ccc; padding-top: 15px; }
+    .stamp { text-align: right; margin-top: 40px; }
+    @media print { @page { margin: 0.75in; } }
+</style>
+
+<div class="letter-ref">
+    <p>Ref: SAN/{{ doc.name or "" }}</p>
+    <p>Date: {{ doc.approval_date or doc.creation or "" }}</p>
+</div>
+
+<div class="header">
+    <h1>LOAN SANCTION LETTER</h1>
+    <h2>Bizaxl Finance — Complete Financial Services Platform</h2>
+</div>
+
+<div class="content">
+    <p>Dear <strong>{{ doc.customer_name or "Applicant" }}</strong>,</p>
+    <p>Congratulations! We are pleased to inform you that your loan application has been <strong>sanctioned</strong> as per the following terms and conditions:</p>
+
+    <table>
+        <tr><th>Loan Application No.</th><td>{{ doc.name }}</td></tr>
+        <tr><th>Loan Product</th><td>{{ doc.loan_product }}</td></tr>
+        <tr><th>Loan Type</th><td>{{ doc.loan_type or "—" }}</td></tr>
+        <tr><th>Sanctioned Amount</th><td><strong>₹ {{ "%.2f"|format(doc.loan_amount or 0) }}</strong></td></tr>
+        <tr><th>Interest Rate</th><td><strong>{{ doc.interest_rate or 0 }}% p.a.</strong> (Reducing Balance)</td></tr>
+        <tr><th>Tenure</th><td>{{ doc.tenure_months or 0 }} months</td></tr>
+        <tr><th>EMI Amount</th><td>₹ {{ "%.2f"|format(doc.emi_amount or 0) }}</td></tr>
+        <tr><th>Processing Fee</th><td>₹ {{ "%.2f"|format(doc.loan_amount * 0.02 | round(2)) if doc.loan_amount else 0 }}</td></tr>
+        <tr><th>Mode of Disbursement</th><td>Bank Transfer / NEFT</td></tr>
+    </table>
+
+    <h3 style="margin-top:20px;">Conditions of Sanction</h3>
+    <ol>
+        <li>This sanction is valid for <strong>30 days</strong> from the date of this letter.</li>
+        <li>Disbursement is subject to submission of all required documents.</li>
+        <li>EMI shall commence from the next month after full disbursement.</li>
+        <li>Credit life insurance is mandatory for the loan tenure.</li>
+        <li>Any change in terms requires written approval.</li>
+    </ol>
+
+    <h3>Documents Required for Disbursement</h3>
+    <ul>
+        <li>Signed Loan Agreement (2 copies)</li>
+        <li>Post-dated cheques / NACH mandate</li>
+        <li>Insurance policy document (if applicable)</li>
+        <li>Security/ collateral documentation</li>
+    </ul>
+</div>
+
+<p>Please visit our nearest branch or contact your Relationship Manager to complete the disbursement formalities.</p>
+
+<div class="stamp">
+    <p>_________________________</p>
+    <p><strong>Authorised Signatory</strong></p>
+    <p>Bizaxl Finance</p>
+</div>
+
+<div class="disclaimer">
+    <p><strong>Disclaimer:</strong> This sanction letter is a computer-generated document and does not require a physical signature. The loan is subject to the terms and conditions of the final Loan Agreement.</p>
+    <p>This is not a commitment letter and does not constitute a binding agreement until the Loan Agreement is executed.</p>
+</div>

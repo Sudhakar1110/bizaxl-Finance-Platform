@@ -1,0 +1,66 @@
+<!-- Repayment Schedule Print Format — ERPNext v15 Jinja Template -->
+<style>
+    body { font-family: 'Courier New', monospace; font-size: 10pt; }
+    h1 { text-align: center; font-size: 14pt; }
+    table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+    th { background: #333; color: #fff; padding: 8px; text-align: center; }
+    td { border: 1px solid #ccc; padding: 6px; text-align: center; }
+    tr:nth-child(even) { background: #f9f9f9; }
+    tr.total-row { background: #ffd700; font-weight: bold; }
+    .header-info { margin: 20px 0; }
+    .header-info p { margin: 2px 0; }
+    @media print { @page { margin: 0.5in; } }
+</style>
+
+<h1>LOAN REPAYMENT SCHEDULE</h1>
+
+<div class="header-info">
+    <p><strong>Borrower:</strong> {{ doc.customer_name }}</p>
+    <p><strong>Loan Amount:</strong> ₹ {{ "%.2f"|format(doc.loan_amount or 0) }}</p>
+    <p><strong>Interest Rate:</strong> {{ doc.interest_rate or 0 }}% p.a.</p>
+    <p><strong>Tenure:</strong> {{ doc.tenure_months or 0 }} months</p>
+    <p><strong>EMI:</strong> ₹ {{ "%.2f"|format(doc.emi_amount or 0) }}</p>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Due Date</th>
+            <th>Opening Balance</th>
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>EMI</th>
+            <th>Closing Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set ns = namespace(balance=doc.loan_amount or 0) %}
+        {% for i in range(doc.tenure_months or 0) %}
+        {% set interest_amount = (ns.balance * (doc.interest_rate or 0) / 100 / 12) | round(2) %}
+        {% set principal_amount = (doc.emi_amount or 0) - interest_amount %}
+        {% set closing = ns.balance - principal_amount %}
+        <tr>
+            <td>{{ i + 1 }}</td>
+            <td>{{ frappe.utils.add_months(doc.first_emi_date or doc.creation, i) or "" }}</td>
+            <td>₹ {{ "%.2f"|format(ns.balance) }}</td>
+            <td>₹ {{ "%.2f"|format(principal_amount) }}</td>
+            <td>₹ {{ "%.2f"|format(interest_amount) }}</td>
+            <td>₹ {{ "%.2f"|format(doc.emi_amount or 0) }}</td>
+            <td>₹ {{ "%.2f"|format(closing if closing > 0 else 0) }}</td>
+        </tr>
+        {% set ns.balance = closing if closing > 0 else 0 %}
+        {% endfor %}
+        <tr class="total-row">
+            <td colspan="3"><strong>Total</strong></td>
+            <td><strong>₹ {{ "%.2f"|format(doc.total_interest or 0) }}</strong></td>
+            <td></td>
+            <td><strong>₹ {{ "%.2f"|format(doc.total_payable or 0) }}</strong></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<p style="text-align:center;margin-top:20px;font-size:8pt;color:#666;">
+    This is a computer-generated repayment schedule. Subject to the terms of the Loan Agreement.
+</p>

@@ -1,0 +1,60 @@
+{% extends "templates/web.html" %}
+{% block title %}Apply for Loan{% endblock %}
+{% block header %}<h1>Apply for Loan</h1>{% endblock %}
+{% block page_content %}
+<div class="container my-4">
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+            <form action="/api/method/bizaxl_finance.www.bizaxl_portal.loans.apply.submit_loan_application" method="POST">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Loan Product *</label>
+                        <select class="form-select" name="loan_product" required>
+                            <option value="">— Select Product —</option>
+                            {% for p in loan_products %}
+                            <option value="{{ p.name }}" 
+                                data-min="{{ p.minimum_amount }}" 
+                                data-max="{{ p.maximum_amount }}"
+                                data-rate="{{ p.interest_rate }}">
+                                {{ p.loan_type }} ({{ p.interest_rate }}%)
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Loan Amount *</label>
+                        <input type="number" class="form-control" name="loan_amount" min="1000" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Tenure (Months) *</label>
+                        <input type="number" class="form-control" name="tenure_months" min="1" max="360" value="12" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Interest Rate (% p.a.)</label>
+                        <input type="text" class="form-control" name="interest_rate" readonly>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Purpose of Loan</label>
+                        <textarea class="form-control" name="purpose" rows="3" placeholder="Describe the purpose of this loan..."></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Submit Application</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+document.querySelector('[name="loan_product"]').addEventListener('change', function() {
+    const opt = this.options[this.selectedIndex];
+    const rate = opt.dataset.rate;
+    const min = opt.dataset.min;
+    const max = opt.dataset.max;
+    if(rate) document.querySelector('[name="interest_rate"]').value = rate;
+    const amountInput = document.querySelector('[name="loan_amount"]');
+    if(min) amountInput.min = min;
+    if(max) amountInput.max = max;
+});
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "templates/web.html" %}
+{% block title %}My Insurance{% endblock %}
+{% block header %}<h1>My Insurance Policies</h1>{% endblock %}
+{% block page_content %}
+<div class="container my-4">
+    {% for p in policies %}
+    <div class="card border-0 shadow-sm mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>{{ p.insurance_plan }}</h5>
+                    <small class="text-muted">{{ p.policy_number }}</small>
+                </div>
+                <div class="col-md-2">
+                    <small class="text-muted">Coverage</small>
+                    <div>₹{{ "%.2f"|format(p.sum_assured or 0) }}</div>
+                </div>
+                <div class="col-md-2">
+                    <small class="text-muted">Premium</small>
+                    <div>₹{{ "%.2f"|format(p.premium_amount or 0) }}/{{ p.premium_frequency or "yr" }}</div>
+                </div>
+                <div class="col-md-2">
+                    <small class="text-muted">Expires</small>
+                    <div>{{ p.policy_end_date or "—" }}</div>
+                </div>
+                <div class="col-md-2 text-end">
+                    <span class="badge bg-{{ 'success' if p.status == 'Active' else 'secondary' }}">{{ p.status }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info">No insurance policies found.</div>
+    {% endfor %}
+</div>
+{% endblock %}

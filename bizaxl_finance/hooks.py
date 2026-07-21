@@ -73,6 +73,8 @@ fixtures = [
     {    "dt": "Workspace", "filters": [["name", "=", "Bizaxl Finance"]]},
     {"dt": "Module Def", "filters": [["module_name", "=", "Integrations"]]},
     {"dt": "Integration Settings", "filters": [["name", "=", "Integration Settings"]]},
+    {"dt": "Module Def", "filters": [["module_name", "=", "Accounting"]]},
+    {"dt": "GL Settings", "filters": [["name", "=", "GL Settings"]]},
 ]
 
 # ── Custom Roles ──────────────────────────────────────────────────────────────
@@ -117,6 +119,7 @@ scheduler_events = {
         "bizaxl_finance.tasks.generate_maturity_alerts",
         "bizaxl_finance.tasks.calculate_commission_payouts",
         "bizaxl_finance.tasks.generate_scheduled_reports",
+        "bizaxl_finance.accounting.gl_integration.accrue_interest",
     ],
 }
 

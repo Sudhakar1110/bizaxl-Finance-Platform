@@ -1,0 +1,88 @@
+<!-- Loan Agreement Print Format — ERPNext v15 Jinja Template -->
+<style>
+    body { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.6; color: #333; }
+    h1 { text-align: center; font-size: 18pt; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+    h2 { font-size: 14pt; margin-top: 25px; border-bottom: 1px solid #999; padding-bottom: 5px; }
+    table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+    table, th, td { border: 1px solid #666; padding: 8px; }
+    th { background: #eee; text-align: left; }
+    .signature { margin-top: 50px; }
+    .signature div { display: inline-block; width: 45%; margin-right: 5%; vertical-align: top; }
+    .signature-line { border-top: 1px solid #333; margin-top: 40px; padding-top: 5px; }
+    .witness { margin-top: 30px; font-size: 10pt; }
+    @media print { @page { margin: 1in; } }
+</style>
+
+<h1>LOAN AGREEMENT</h1>
+<p style="text-align:center;font-size:10pt">Date: {{ doc.creation or "" }}</p>
+<p style="text-align:center;font-size:10pt">Loan Agreement No: {{ doc.name }}</p>
+
+<h2>1. PARTIES TO THE AGREEMENT</h2>
+<table>
+    <tr><th style="width:30%">Lender</th><td><strong>{{ doc.company or "Bizaxl Finance" }}</strong></td></tr>
+    <tr><th>Borrower</th><td><strong>{{ doc.customer_name or doc.customer }}</strong></td></tr>
+    <tr><th>Loan Product</th><td>{{ doc.loan_product }}</td></tr>
+    <tr><th>Loan Type</th><td>{{ doc.loan_type or "Personal Loan" }}</td></tr>
+</table>
+
+<h2>2. LOAN DETAILS</h2>
+<table>
+    <tr><th style="width:30%">Principal Amount</th><td><strong>₹ {{ "%.2f"|format(doc.loan_amount or 0) }}</strong></td></tr>
+    <tr><th>Interest Rate</th><td>{{ doc.interest_rate or 0 }}% per annum (Reducing Balance)</td></tr>
+    <tr><th>Tenure</th><td>{{ doc.tenure_months or 0 }} months</td></tr>
+    <tr><th>EMI Amount</th><td>₹ {{ "%.2f"|format(doc.emi_amount or 0) }}</td></tr>
+    <tr><th>Total Interest Payable</th><td>₹ {{ "%.2f"|format(doc.total_interest or 0) }}</td></tr>
+    <tr><th>Total Amount Payable</th><td>₹ {{ "%.2f"|format(doc.total_payable or 0) }}</td></tr>
+    <tr><th>First EMI Date</th><td>{{ doc.first_emi_date or "" }}</td></tr>
+    <tr><th>Last EMI Date</th><td>{{ doc.last_emi_date or "" }}</td></tr>
+</table>
+
+<h2>3. REPAYMENT SCHEDULE</h2>
+<p>Total of {{ doc.tenure_months or 0 }} monthly installments of ₹ {{ "%.2f"|format(doc.emi_amount or 0) }} each.</p>
+
+<h2>4. TERMS AND CONDITIONS</h2>
+<ol style="margin-left: 20px;">
+    <li>The Borrower agrees to repay the loan in equated monthly installments (EMI) as per the schedule.</li>
+    <li>Late payment will attract a penalty at the rate prescribed by the Lender.</li>
+    <li>The Borrower may prepay the loan in part or full as per the Lender's prepayment policy.</li>
+    <li>The Lender reserves the right to recall the loan in case of default.</li>
+    <li>All disputes shall be subject to the jurisdiction of courts at the Lender's location.</li>
+    <li>The Borrower confirms that all information provided is true and correct.</li>
+</ol>
+
+<h2>5. EVENTS OF DEFAULT</h2>
+<p>The Lender may declare the Borrower in default upon:</p>
+<ul style="margin-left: 20px;">
+    <li>Failure to pay 3 consecutive EMIs</li>
+    <li>Misrepresentation of facts</li>
+    <li>Bankruptcy or insolvency proceedings</li>
+    <li>Material adverse change in financial condition</li>
+</ul>
+
+<div class="signature">
+    <div>
+        <p class="signature-line">________________________</p>
+        <p><strong>FOR THE LENDER</strong></p>
+        <p>Authorised Signatory</p>
+        <p>Date: _______________</p>
+    </div>
+    <div>
+        <p class="signature-line">________________________</p>
+        <p><strong>THE BORROWER</strong></p>
+        <p>{{ doc.customer_name or doc.customer }}</p>
+        <p>Date: _______________</p>
+    </div>
+</div>
+
+<div class="witness">
+    <h2>WITNESSES</h2>
+    <table>
+        <tr><th>Name</th><th>Signature</th><th>Address</th></tr>
+        <tr><td>1. ___________________</td><td>______________</td><td>___________________</td></tr>
+        <tr><td>2. ___________________</td><td>______________</td><td>___________________</td></tr>
+    </table>
+</div>
+
+<p style="text-align:center;margin-top:40px;font-size:9pt;color:#666;">
+    This is a computer-generated document. No signature is required for electronic version.
+</p>

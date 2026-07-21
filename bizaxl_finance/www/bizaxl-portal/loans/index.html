@@ -1,0 +1,44 @@
+{% extends "templates/web.html" %}
+{% block title %}My Loans{% endblock %}
+{% block header %}
+<div class="d-flex justify-content-between align-items-center">
+    <h1>My Loans</h1>
+    <a href="/bizaxl-portal/loans/apply" class="btn btn-primary">Apply for Loan</a>
+</div>
+{% endblock %}
+{% block page_content %}
+<div class="container my-4">
+    {% for loan in loans %}
+    <div class="card border-0 shadow-sm mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <h6 class="text-muted">{{ loan.loan_product or "Loan" }}</h6>
+                    <h4>₹{{ "%.2f"|format(loan.loan_amount or 0) }}</h4>
+                    <span class="badge bg-{{ loan.status_color }}">{{ loan.status }}</span>
+                </div>
+                <div class="col-md-3">
+                    <small class="text-muted d-block">Disbursed</small>
+                    <strong>{{ loan.disbursement_date or "—" }}</strong>
+                    <small class="text-muted d-block mt-2">Tenure</small>
+                    <strong>{{ loan.tenure_months or "—" }} months</strong>
+                </div>
+                <div class="col-md-3">
+                    <small class="text-muted d-block">Interest Rate</small>
+                    <strong>{{ loan.interest_rate or 0 }}% p.a.</strong>
+                    <small class="text-muted d-block mt-2">EMI Amount</small>
+                    <strong>₹{{ "%.2f"|format(loan.emi_amount or 0) }}</strong>
+                </div>
+                <div class="col-md-3 text-end">
+                    <small class="text-muted d-block">Outstanding</small>
+                    <h5 class="text-warning">₹{{ "%.2f"|format(loan.outstanding or 0) }}</h5>
+                    <a href="/bizaxl-portal/loans/{{ loan.name }}" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info">No loans found. <a href="/bizaxl-portal/loans/apply">Apply now</a></div>
+    {% endfor %}
+</div>
+{% endblock %}

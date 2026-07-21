@@ -1,0 +1,181 @@
+<!--
+Bizaxl Finance — Customer Self-Service Portal Dashboard
+ERPNext v15 Portal Pattern: www/ directory with Jinja templating
+-->
+
+{% extends "templates/web.html" %}
+
+{% block title %}Bizaxl Finance Portal{% endblock %}
+
+{% block header %}
+<div class="portal-header">
+    <h1>Welcome, {{ full_name or "Customer" }}</h1>
+    <p class="text-muted">Your complete financial dashboard</p>
+</div>
+{% endblock %}
+
+{% block page_content %}
+<div class="container my-4">
+    <!-- KPI Cards Row -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="kb-icon bg-primary-light rounded-circle p-3 mb-2">
+                        <i class="fas fa-wallet fa-2x text-primary"></i>
+                    </div>
+                    <h5 class="card-title">Total Balance</h5>
+                    <h3 class="text-primary">₹{{ "%.2f"|format(total_balance or 0) }}</h3>
+                    <a href="/bizaxl-portal/accounts" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="kb-icon bg-success-light rounded-circle p-3 mb-2">
+                        <i class="fas fa-chart-line fa-2x text-success"></i>
+                    </div>
+                    <h5 class="card-title">My Investments</h5>
+                    <h3 class="text-success">₹{{ "%.2f"|format(investment_value or 0) }}</h3>
+                    <a href="/bizaxl-portal/investments" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="kb-icon bg-warning-light rounded-circle p-3 mb-2">
+                        <i class="fas fa-hand-holding-usd fa-2x text-warning"></i>
+                    </div>
+                    <h5 class="card-title">Active Loans</h5>
+                    <h3 class="text-warning">{{ active_loans or 0 }}</h3>
+                    <a href="/bizaxl-portal/loans" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="kb-icon bg-info-light rounded-circle p-3 mb-2">
+                        <i class="fas fa-shield-alt fa-2x text-info"></i>
+                    </div>
+                    <h5 class="card-title">Insurance Policies</h5>
+                    <h3 class="text-info">{{ active_policies or 0 }}</h3>
+                    <a href="/bizaxl-portal/insurance" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Quick Actions</h5>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="/bizaxl-portal/payments" class="btn btn-primary">
+                            <i class="fas fa-credit-card me-2"></i>Pay Bills
+                        </a>
+                        <a href="/api/method/bizaxl_finance.api.initiate_upi_transfer" class="btn btn-outline-primary">
+                            <i class="fas fa-exchange-alt me-2"></i>Transfer
+                        </a>
+                        <a href="/bizaxl-portal/loans" class="btn btn-outline-success">
+                            <i class="fas fa-plus-circle me-2"></i>Apply for Loan
+                        </a>
+                        <a href="/bizaxl-portal/insurance" class="btn btn-outline-info">
+                            <i class="fas fa-file-invoice me-2"></i>Claim Insurance
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0">
+                    <h5 class="card-title mb-0">Recent Transactions</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th class="text-end">Amount</th>
+                                    <th class="text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for txn in recent_transactions %}
+                                <tr>
+                                    <td>{{ txn.transaction_date }}</td>
+                                    <td>
+                                        <span class="badge {% if txn.transaction_type == 'Credit' %}bg-success{% else %}bg-danger{% endif %}">
+                                            {{ txn.transaction_type }}
+                                        </span>
+                                    </td>
+                                    <td>{{ txn.description or "—" }}</td>
+                                    <td class="text-end">₹{{ "%.2f"|format(txn.amount or 0) }}</td>
+                                    <td class="text-center">
+                                        <span class="badge bg-{{ 'success' if txn.status == 'Completed' else 'warning' }}">
+                                            {{ txn.status }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">No recent transactions</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0">
+                    <h5 class="card-title mb-0">Upcoming Bills</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        {% for bill in upcoming_bills %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <small class="text-muted">{{ bill.bill_type }}</small>
+                                <div>{{ bill.provider }}</div>
+                            </div>
+                            <div class="text-end">
+                                <div>₹{{ "%.2f"|format(bill.amount or 0) }}</div>
+                                <small class="text-danger">Due: {{ bill.due_date }}</small>
+                            </div>
+                        </li>
+                        {% else %}
+                        <li class="list-group-item text-center text-muted py-4">No upcoming bills</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.portal-header { padding: 20px 0; }
+.kb-icon { width: 60px; height: 60px; display: inline-flex; align-items: center; justify-content: center; }
+.bg-primary-light { background-color: rgba(13,110,253,0.1); }
+.bg-success-light { background-color: rgba(25,135,84,0.1); }
+.bg-warning-light { background-color: rgba(255,193,7,0.1); }
+.bg-info-light { background-color: rgba(13,202,240,0.1); }
+.card { border-radius: 12px; transition: transform 0.2s; }
+.card:hover { transform: translateY(-2px); }
+</style>
+{% endblock %}
