@@ -1,358 +1,566 @@
 {
- "category": "Modules",
- "charts": [],
- "creation": "2024-01-01 00:00:00",
- "developer_mode_only": 0,
- "disable_user_customization": 0,
- "docstatus": 0,
  "doctype": "Workspace",
- "extends": "",
- "extends_another_page": 0,
- "hide_custom": 0,
- "icon": "credit-card",
- "idx": 0,
- "is_default": 1,
- "is_standard": 1,
+ "is_hidden": 0,
  "label": "Bizaxl Finance",
- "links": [
-  {
-   "type": "Card Break",
-   "label": "Customer Management",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Bizaxl Customers",
-   "link_type": "DocType",
-   "link_to": "Bizaxl Customer",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "KYC Documents",
-   "link_type": "DocType",
-   "link_to": "KYC Document",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Customer Communications",
-   "link_type": "DocType",
-   "link_to": "Customer Communication",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Customer Nominations",
-   "link_type": "DocType",
-   "link_to": "Customer Nomination",
-   "hidden": 0
-  },
-  {
-   "type": "Card Break",
-   "label": "Banking & Accounts",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Bank Accounts",
-   "link_type": "DocType",
-   "link_to": "Bank Account",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Transactions",
-   "link_type": "DocType",
-   "link_to": "Transaction",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "UPI IDs",
-   "link_type": "DocType",
-   "link_to": "UPI ID",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Payment Methods",
-   "link_type": "DocType",
-   "link_to": "Payment Method",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Banking Settings",
-   "link_type": "DocType",
-   "link_to": "Banking Settings",
-   "hidden": 0
-  },
-  {
-   "type": "Card Break",
-   "label": "Payments & Bills",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Bill Payments",
-   "link_type": "DocType",
-   "link_to": "Bill Payment",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Mobile Recharges",
-   "link_type": "DocType",
-   "link_to": "Mobile Recharge",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "FASTag Recharges",
-   "link_type": "DocType",
-   "link_to": "FASTag Recharge",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Bill Payment Categories",
-   "link_type": "DocType",
-   "link_to": "Bill Payment Category",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Recharge Providers",
-   "link_type": "DocType",
-   "link_to": "Recharge Provider",
-   "hidden": 0
-  },
-  {
-   "type": "Card Break",
-   "label": "Investments",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Investment Accounts",
-   "link_type": "DocType",
-   "link_to": "Investment Account",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Mutual Funds",
-   "link_type": "DocType",
-   "link_to": "Mutual Fund",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Mutual Fund Transactions",
-   "link_type": "DocType",
-   "link_to": "Mutual Fund Transaction",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Fixed Deposits",
-   "link_type": "DocType",
-   "link_to": "Fixed Deposit",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Digital Gold",
-   "link_type": "DocType",
-   "link_to": "Digital Gold",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Investment Goals",
-   "link_type": "DocType",
-   "link_to": "Investment Goal",
-   "hidden": 0
-  },
-  {
-   "type": "Card Break",
-   "label": "Loan Management",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Loan Products",
-   "link_type": "DocType",
-   "link_to": "Loan Product",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Loan Applications",
-   "link_type": "DocType",
-   "link_to": "Loan Application",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Loan Disbursements",
-   "link_type": "DocType",
-   "link_to": "Loan Disbursement",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Loan Repayments",
-   "link_type": "DocType",
-   "link_to": "Loan Repayment",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Loan Collaterals",
-   "link_type": "DocType",
-   "link_to": "Loan Collateral",
-   "hidden": 0
-  },
-  {
-   "type": "Card Break",
-   "label": "Insurance",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Insurance Products",
-   "link_type": "DocType",
-   "link_to": "Insurance Product",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Insurance Policies",
-   "link_type": "DocType",
-   "link_to": "Insurance Policy",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Insurance Claims",
-   "link_type": "DocType",
-   "link_to": "Insurance Claim",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Premium Payments",
-   "link_type": "DocType",
-   "link_to": "Premium Payment",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Insurance Nominees",
-   "link_type": "DocType",
-   "link_to": "Insurance Nominee",
-   "hidden": 0
-  },
-  {
-   "type": "Card Break",
-   "label": "Credit Management",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Credit Reports",
-   "link_type": "DocType",
-   "link_to": "Credit Report",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Credit Score History",
-   "link_type": "DocType",
-   "link_to": "Credit Score History",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Credit Goals",
-   "link_type": "DocType",
-   "link_to": "Credit Goal",
-   "hidden": 0
-  },
-  {
-   "type": "Card Break",
-   "label": "Portfolio & Goals",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Portfolio Holdings",
-   "link_type": "DocType",
-   "link_to": "Portfolio Holding",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Portfolio Summaries",
-   "link_type": "DocType",
-   "link_to": "Portfolio Summary",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Financial Goals",
-   "link_type": "DocType",
-   "link_to": "Financial Goal",
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "Asset Classes",
-   "link_type": "DocType",
-   "link_to": "Asset Class",
-   "hidden": 0
-  }
- ],
- "modified": "2024-01-01 00:00:00",
  "module": "Bizaxl Finance",
  "name": "Bizaxl Finance",
- "number_cards": [],
- "parent_page": "",
+ "owner": "Administrator",
  "public": 1,
- "restrict_to_domain": "",
- "roles": [],
  "sequence_id": 1.0,
- "shortcuts": [
+ "title": "Bizaxl Finance",
+ "icon": "credit-card",
+ "is_default": 1,
+ "is_standard": 1,
+ "content": "[{\"id\": \"hdr_1.0\", \"type\": \"header\", \"data\": {\"text\": \"Bizaxl Finance\", \"col\": 12}}, {\"id\": \"b9625bf3\", \"type\": \"card\", \"data\": {\"card_name\": \"Customer Management\", \"links\": [{\"type\": \"link\", \"label\": \"Bizaxl Customers\", \"link_to\": \"Bizaxl Customer\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"KYC Documents\", \"link_to\": \"KYC Document\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Customer Communications\", \"link_to\": \"Customer Communication\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Customer Nominations\", \"link_to\": \"Customer Nomination\", \"link_type\": \"DocType\"}]}}, {\"id\": \"229bcde3\", \"type\": \"card\", \"data\": {\"card_name\": \"Banking & Accounts\", \"links\": [{\"type\": \"link\", \"label\": \"Bank Accounts\", \"link_to\": \"Bank Account\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Transactions\", \"link_to\": \"Transaction\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"UPI IDs\", \"link_to\": \"UPI ID\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Payment Methods\", \"link_to\": \"Payment Method\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Banking Settings\", \"link_to\": \"Banking Settings\", \"link_type\": \"DocType\"}]}}, {\"id\": \"477ebc6a\", \"type\": \"card\", \"data\": {\"card_name\": \"Payments & Bills\", \"links\": [{\"type\": \"link\", \"label\": \"Bill Payments\", \"link_to\": \"Bill Payment\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Mobile Recharges\", \"link_to\": \"Mobile Recharge\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"FASTag Recharges\", \"link_to\": \"FASTag Recharge\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Bill Payment Categories\", \"link_to\": \"Bill Payment Category\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Recharge Providers\", \"link_to\": \"Recharge Provider\", \"link_type\": \"DocType\"}]}}, {\"id\": \"58b5a31d\", \"type\": \"card\", \"data\": {\"card_name\": \"Investments\", \"links\": [{\"type\": \"link\", \"label\": \"Investment Accounts\", \"link_to\": \"Investment Account\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Mutual Funds\", \"link_to\": \"Mutual Fund\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Mutual Fund Transactions\", \"link_to\": \"Mutual Fund Transaction\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Fixed Deposits\", \"link_to\": \"Fixed Deposit\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Digital Gold\", \"link_to\": \"Digital Gold\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Investment Goals\", \"link_to\": \"Investment Goal\", \"link_type\": \"DocType\"}]}}, {\"id\": \"5fc98516\", \"type\": \"card\", \"data\": {\"card_name\": \"Loan Management\", \"links\": [{\"type\": \"link\", \"label\": \"Loan Products\", \"link_to\": \"Loan Product\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Loan Applications\", \"link_to\": \"Loan Application\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Loan Disbursements\", \"link_to\": \"Loan Disbursement\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Loan Repayments\", \"link_to\": \"Loan Repayment\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Loan Collaterals\", \"link_to\": \"Loan Collateral\", \"link_type\": \"DocType\"}]}}, {\"id\": \"eaff1bdf\", \"type\": \"card\", \"data\": {\"card_name\": \"Insurance\", \"links\": [{\"type\": \"link\", \"label\": \"Insurance Products\", \"link_to\": \"Insurance Product\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Insurance Policies\", \"link_to\": \"Insurance Policy\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Insurance Claims\", \"link_to\": \"Insurance Claim\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Premium Payments\", \"link_to\": \"Premium Payment\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Insurance Nominees\", \"link_to\": \"Insurance Nominee\", \"link_type\": \"DocType\"}]}}, {\"id\": \"68c50709\", \"type\": \"card\", \"data\": {\"card_name\": \"Credit Management\", \"links\": [{\"type\": \"link\", \"label\": \"Credit Reports\", \"link_to\": \"Credit Report\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Credit Score History\", \"link_to\": \"Credit Score History\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Credit Goals\", \"link_to\": \"Credit Goal\", \"link_type\": \"DocType\"}]}}, {\"id\": \"a7d87fdc\", \"type\": \"card\", \"data\": {\"card_name\": \"Portfolio & Goals\", \"links\": [{\"type\": \"link\", \"label\": \"Portfolio Holdings\", \"link_to\": \"Portfolio Holding\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Portfolio Summaries\", \"link_to\": \"Portfolio Summary\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Financial Goals\", \"link_to\": \"Financial Goal\", \"link_type\": \"DocType\"}, {\"type\": \"link\", \"label\": \"Asset Classes\", \"link_to\": \"Asset Class\", \"link_type\": \"DocType\"}]}}]",
+ "links": [
   {
-   "label": "New Customer",
-   "type": "DocType",
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Management",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bizaxl Customers",
+   "link_count": 0,
    "link_to": "Bizaxl Customer",
-   "doc_view": "New",
-   "hidden": 0
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   },
   {
-   "label": "New Transaction",
-   "type": "DocType",
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "KYC Documents",
+   "link_count": 0,
+   "link_to": "KYC Document",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Communications",
+   "link_count": 0,
+   "link_to": "Customer Communication",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Nominations",
+   "link_count": 0,
+   "link_to": "Customer Nomination",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Banking & Accounts",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank Accounts",
+   "link_count": 0,
+   "link_to": "Bank Account",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transactions",
+   "link_count": 0,
    "link_to": "Transaction",
-   "doc_view": "New",
-   "hidden": 0
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   },
   {
-   "label": "Pay Bill",
-   "type": "DocType",
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "UPI IDs",
+   "link_count": 0,
+   "link_to": "UPI ID",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Methods",
+   "link_count": 0,
+   "link_to": "Payment Method",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Banking Settings",
+   "link_count": 0,
+   "link_to": "Banking Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payments & Bills",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bill Payments",
+   "link_count": 0,
    "link_to": "Bill Payment",
-   "doc_view": "New",
-   "hidden": 0
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   },
   {
-   "label": "New Loan Application",
-   "type": "DocType",
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Mobile Recharges",
+   "link_count": 0,
+   "link_to": "Mobile Recharge",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "FASTag Recharges",
+   "link_count": 0,
+   "link_to": "FASTag Recharge",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bill Payment Categories",
+   "link_count": 0,
+   "link_to": "Bill Payment Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Recharge Providers",
+   "link_count": 0,
+   "link_to": "Recharge Provider",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Investments",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Investment Accounts",
+   "link_count": 0,
+   "link_to": "Investment Account",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Mutual Funds",
+   "link_count": 0,
+   "link_to": "Mutual Fund",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Mutual Fund Transactions",
+   "link_count": 0,
+   "link_to": "Mutual Fund Transaction",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fixed Deposits",
+   "link_count": 0,
+   "link_to": "Fixed Deposit",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Digital Gold",
+   "link_count": 0,
+   "link_to": "Digital Gold",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Investment Goals",
+   "link_count": 0,
+   "link_to": "Investment Goal",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Loan Management",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Loan Products",
+   "link_count": 0,
+   "link_to": "Loan Product",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Loan Applications",
+   "link_count": 0,
    "link_to": "Loan Application",
-   "doc_view": "New",
-   "hidden": 0
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Loan Disbursements",
+   "link_count": 0,
+   "link_to": "Loan Disbursement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Loan Repayments",
+   "link_count": 0,
+   "link_to": "Loan Repayment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Loan Collaterals",
+   "link_count": 0,
+   "link_to": "Loan Collateral",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Insurance",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Insurance Products",
+   "link_count": 0,
+   "link_to": "Insurance Product",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Insurance Policies",
+   "link_count": 0,
+   "link_to": "Insurance Policy",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Insurance Claims",
+   "link_count": 0,
+   "link_to": "Insurance Claim",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Premium Payments",
+   "link_count": 0,
+   "link_to": "Premium Payment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Insurance Nominees",
+   "link_count": 0,
+   "link_to": "Insurance Nominee",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Credit Management",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Credit Reports",
+   "link_count": 0,
+   "link_to": "Credit Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Credit Score History",
+   "link_count": 0,
+   "link_to": "Credit Score History",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Credit Goals",
+   "link_count": 0,
+   "link_to": "Credit Goal",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Portfolio & Goals",
+   "link_count": 0,
+   "link_to": "",
+   "link_type": "",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Portfolio Holdings",
+   "link_count": 0,
+   "link_to": "Portfolio Holding",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Portfolio Summaries",
+   "link_count": 0,
+   "link_to": "Portfolio Summary",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Financial Goals",
+   "link_count": 0,
+   "link_to": "Financial Goal",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Classes",
+   "link_count": 0,
+   "link_to": "Asset Class",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "title": "Bizaxl Finance"
+ "shortcuts": [
+  {
+   "type": "DocType",
+   "label": "New Customer",
+   "link_to": "Bizaxl Customer",
+   "doc_view": "New",
+   "hidden": 0,
+   "stats_filter": "",
+   "icon": "",
+   "color": "",
+   "format": "",
+   "restrict_to_domain": "",
+   "url": ""
+  },
+  {
+   "type": "DocType",
+   "label": "New Transaction",
+   "link_to": "Transaction",
+   "doc_view": "New",
+   "hidden": 0,
+   "stats_filter": "",
+   "icon": "",
+   "color": "",
+   "format": "",
+   "restrict_to_domain": "",
+   "url": ""
+  },
+  {
+   "type": "DocType",
+   "label": "Pay Bill",
+   "link_to": "Bill Payment",
+   "doc_view": "New",
+   "hidden": 0,
+   "stats_filter": "",
+   "icon": "",
+   "color": "",
+   "format": "",
+   "restrict_to_domain": "",
+   "url": ""
+  },
+  {
+   "type": "DocType",
+   "label": "New Loan Application",
+   "link_to": "Loan Application",
+   "doc_view": "New",
+   "hidden": 0,
+   "stats_filter": "",
+   "icon": "",
+   "color": "",
+   "format": "",
+   "restrict_to_domain": "",
+   "url": ""
+  }
+ ]
 }
