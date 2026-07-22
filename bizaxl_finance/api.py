@@ -131,12 +131,12 @@ def fix_modules_and_workspace():
     frappe.db.commit()
 
     # ── 3. Recreate Workspace (using existing migrate_workspace logic) ──────
+    results["workspace"] = False
     try:
         sync_workspace_from_fixture()
-        results["workspace"] = True
-        # Quick count after creation
         if frappe.db.exists("Workspace", "Bizaxl Finance"):
             ws = frappe.get_doc("Workspace", "Bizaxl Finance")
+            results["workspace"] = True
             results["workspace_cards"] = len(json.loads(ws.content))
             results["workspace_links"] = len(ws.links)
     except Exception as e:
