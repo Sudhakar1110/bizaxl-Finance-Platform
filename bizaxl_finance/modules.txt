@@ -19,5 +19,7 @@ Invoice Finance
 Chit Fund
 Consumer Finance
 Collections
+Bizaxl Finance
 Risk Compliance
+Integrations
 Accounting

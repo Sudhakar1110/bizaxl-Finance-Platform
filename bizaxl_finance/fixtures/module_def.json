@@ -173,5 +173,12 @@
     "module_name": "Accounting",
     "app_name": "bizaxl_finance",
     "custom": 1
+  },
+  {
+    "doctype": "Module Def",
+    "name": "Integrations",
+    "module_name": "Integrations",
+    "app_name": "bizaxl_finance",
+    "custom": 1
   }
 ]
