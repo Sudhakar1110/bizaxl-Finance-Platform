@@ -228,8 +228,9 @@ def _fix_integrations_module():
         else:
             print("✅ Integrations Module Def already has app_name='frappe'")
 
-        # Clean up partially-created core DocTypes from previous crashed migrations
-        # These DocTypes were orphaned+deleted, then partially recreated with wrong module
+        # Clean up any partially-created core DocTypes that might block migration.
+        # Use direct SQL only — frappe.delete_doc triggers webhooks and can crash
+        # when deleting DocTypes like "Webhook" itself (circular dependency).
         BROKEN_DOCTYPES = [
             "Google Contacts", "Google Calendar", "Webhook", "Webhook Header",
             "Social Login Key", "OAuth Client Role", "OAuth Provider Settings",
@@ -239,19 +240,18 @@ def _fix_integrations_module():
             "Query Parameters", "S3 Backup Settings",
         ]
         deleted = 0
+        frappe.db.commit()  # Ensure clean transaction state
         for dt in BROKEN_DOCTYPES:
-            if frappe.db.exists("DocType", dt):
-                try:
-                    frappe.delete_doc("DocType", dt, ignore_on_trash=True, force=True)
+            table_name = f"tab{dt.replace(' ', '_')}"
+            try:
+                if frappe.db.exists("DocType", dt):
+                    frappe.db.sql(f"DELETE FROM `tabDocType` WHERE `name` = %s", dt)
+                    frappe.db.sql(f"DROP TABLE IF EXISTS `{table_name}`")
+                    frappe.db.commit()
                     print(f"  🗑️ Deleted broken DocType: {dt}")
                     deleted += 1
-                except Exception:
-                    frappe.db.sql(f"DELETE FROM `tabDocType` WHERE `name` = %s", dt)
-                    frappe.db.sql(f"DROP TABLE IF EXISTS `tab{dt.replace(' ', '_')}`")
-                    print(f"  🗑️ Force-deleted broken DocType: {dt}")
-                    deleted += 1
-
-        frappe.db.commit()
+            except Exception as e:
+                print(f"  ⚠️ Could not delete {dt}: {e}")
 
         # Clear ALL caches so nothing stale remains
         frappe.clear_cache()
