@@ -129,10 +129,9 @@ after_install = [
 ]
 
 # ── after_migrate hook to restore workspace layout ────────────────────────
-# DISABLED - causes workspace issues
-# after_migrate = [
-#     "bizaxl_finance.migrate_workspace.sync_workspace_from_fixture",
-# ]
+after_migrate = [
+    "bizaxl_finance.migrate_workspace.sync_workspace_from_fixture",
+]
 
 # ── before_uninstall hook ─────────────────────────────────────────────────
 # Pre-deletes bizaxl_finance doctypes before Frappe deletes modules.

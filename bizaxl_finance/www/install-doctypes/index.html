@@ -25,12 +25,16 @@ Visit: https://finance.bizaxl.org/install-doctypes
                 <div class="card-body p-4 text-center">
                     <div id="statusArea">
                         <p class="mb-3 text-muted">Click below to check which DocTypes are installed and which are missing.</p>
-                        <button class="btn btn-outline-primary btn-lg me-2" onclick="checkStatus()" id="checkBtn">
+                        <button class="btn btn-outline-primary btn-lg me-2 mb-2" onclick="checkStatus()" id="checkBtn">
                             <i class="fas fa-search me-2"></i>Check Status
                         </button>
-                        <button class="btn btn-success btn-lg" onclick="installAll()" id="installBtn">
-                            <i class="fas fa-play me-2"></i>Install All DocTypes
+                        <button class="btn btn-success btn-lg me-2 mb-2" onclick="installAll()" id="installBtn">
+                            <i class="fas fa-play me-2"></i>Install Missing DocTypes
                         </button>
+                        <button class="btn btn-warning btn-lg mb-2" onclick="fixWorkspace()" id="fixBtn">
+                            <i class="fas fa-tools me-2"></i>Fix Workspace &amp; Modules
+                        </button>
+                        <p class="mt-2 text-muted small"><strong>Fix Workspace &amp; Modules</strong> recreates the Bizaxl Finance workspace with all module cards, fixes module definitions, and clears cache — use this if DocTypes exist but aren't showing up in the UI.</p>
                     </div>
                     <div id="loadingArea" class="d-none">
                         <div class="spinner-border text-primary mb-3" role="status">
@@ -121,6 +125,74 @@ Visit: https://finance.bizaxl.org/install-doctypes
                     </div>
                     <div class="card-body p-0">
                         <div id="failedList" class="list-group list-group-flush">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mb-4">
+            <button class="btn btn-outline-secondary" onclick="location.reload()">
+                <i class="fas fa-sync me-2"></i>Refresh Page
+            </button>
+        </div>
+    </div>
+
+    <!-- Fix Workspace Results Area -->
+    <div id="fixResultsArea" class="d-none">
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h2 class="text-info mb-0" id="fixModFixed">0</h2>
+                        <small class="text-muted">Modules Fixed</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h2 class="text-success mb-0" id="fixModCreated">0</h2>
+                        <small class="text-muted">Modules Created</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h2 class="text-primary mb-0" id="fixDtFixed">0</h2>
+                        <small class="text-muted">DocType Module Fixes</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white border-0">
+                        <h5 class="mb-0 text-info">
+                            <i class="fas fa-th-large me-2"></i>Workspace Status
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p id="fixWorkStatus" class="mb-0">—</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="fixErrorsSection" class="d-none">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0">
+                            <h5 class="mb-0 text-danger">
+                                <i class="fas fa-times-circle me-2"></i>Errors
+                            </h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div id="fixErrors" class="list-group list-group-flush"></div>
                         </div>
                     </div>
                 </div>
@@ -236,6 +308,61 @@ function checkStatus() {
             hideLoading();
             document.getElementById('checkBtn').disabled = false;
             document.getElementById('installBtn').disabled = false;
+            frappe.msgprint('Error: ' + JSON.stringify(err));
+        }
+    });
+}
+
+function fixWorkspace() {
+    showLoading('Fixing modules, recreating workspace, clearing cache...');
+    document.getElementById('checkBtn').disabled = true;
+    document.getElementById('installBtn').disabled = true;
+    document.getElementById('fixBtn').disabled = true;
+
+    frappe.call({
+        method: 'bizaxl_finance.api.fix_modules_and_workspace',
+        callback: function(r) {
+            hideLoading();
+            document.getElementById('checkBtn').disabled = false;
+            document.getElementById('installBtn').disabled = false;
+            document.getElementById('fixBtn').disabled = false;
+
+            const d = r.message || {};
+            let msg = '✅ Fix complete!';
+            if (d.modules_fixed > 0) msg += ' Fixed ' + d.modules_fixed + ' module defs.';
+            if (d.modules_created > 0) msg += ' Created ' + d.modules_created + ' module defs.';
+            if (d.doctype_module_fixes > 0) msg += ' Fixed ' + d.doctype_module_fixes + ' doctype module refs.';
+            if (d.workspace) msg += ' Workspace recreated with ' + d.workspace_cards + ' cards, ' + d.workspace_links + ' links.';
+            if (d.errors && d.errors.length > 0) msg += ' Errors: ' + d.errors.join(', ');
+
+            frappe.show_alert({ message: msg, indicator: d.success ? 'green' : 'red' });
+
+            // Show dedicated fix results section
+            document.getElementById('fixResultsArea').classList.remove('d-none');
+            document.getElementById('resultsArea').classList.add('d-none');
+            document.getElementById('fixModFixed').textContent = d.modules_fixed || 0;
+            document.getElementById('fixModCreated').textContent = d.modules_created || 0;
+            document.getElementById('fixDtFixed').textContent = d.doctype_module_fixes || 0;
+            document.getElementById('fixWorkStatus').innerHTML = d.workspace
+                ? '<span class="text-success">✅ Created (' + (d.workspace_cards || 0) + ' cards, ' + (d.workspace_links || 0) + ' links)</span>'
+                : '<span class="text-danger">❌ Failed</span>';
+
+            if (d.errors && d.errors.length > 0) {
+                document.getElementById('fixErrors').innerHTML = d.errors.map(function(e) {
+                    return '<div class="list-group-item list-group-item-danger py-2"><small>' + e + '</small></div>';
+                }).join('');
+                document.getElementById('fixErrorsSection').classList.remove('d-none');
+            } else {
+                document.getElementById('fixErrorsSection').classList.add('d-none');
+            }
+
+            frappe.msgprint(msg + '<br><br><strong>Refresh your browser and check the Workspace now!</strong>', 'Fix Complete', d.success ? 'green' : 'red');
+        },
+        error: function(err) {
+            hideLoading();
+            document.getElementById('checkBtn').disabled = false;
+            document.getElementById('installBtn').disabled = false;
+            document.getElementById('fixBtn').disabled = false;
             frappe.msgprint('Error: ' + JSON.stringify(err));
         }
     });

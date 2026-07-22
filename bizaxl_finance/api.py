@@ -55,6 +55,102 @@ def check_doctype_status():
     }
 
 
+# ── Comprehensive Fix: Modules + Workspace + Cache ─────────────────────────
+
+@frappe.whitelist()
+def fix_modules_and_workspace():
+    """Fix Module Defs, DocType modules, recreate Workspace, and clear cache.
+
+    Call from browser:
+        https://finance.bizaxl.org/api/method/bizaxl_finance.api.fix_modules_and_workspace
+    """
+    if "System Manager" not in frappe.get_roles():
+        frappe.throw("Only System Manager can run this fix", frappe.PermissionError)
+
+    import os
+    from bizaxl_finance.migrate_workspace import sync_workspace_from_fixture
+
+    results = {"modules_fixed": 0, "modules_created": 0, "doctype_module_fixes": 0, "workspace": False, "workspace_cards": 0, "workspace_links": 0, "errors": []}
+
+    # ── 1. Fix Module Defs ──────────────────────────────────────────────────
+    ALL_MODULE_NAMES = [
+        "Bizaxl Finance", "Customer Management", "Banking", "Payments",
+        "Investments", "Loans", "Insurance", "Credit Management",
+        "Portfolio Management", "Foundation", "NBFC Lending", "Gold Loan",
+        "Microfinance", "Vehicle Loan", "Home Loan", "Business Loan",
+        "Education Loan", "BNPL", "Invoice Finance", "Chit Fund",
+        "Consumer Finance", "Collections", "Risk Compliance",
+        "Risk & Compliance", "Accounting",
+    ]
+    APP_NAME = "bizaxl_finance"
+
+    for mod_name in ALL_MODULE_NAMES:
+        if frappe.db.exists("Module Def", mod_name):
+            current_app = frappe.db.get_value("Module Def", mod_name, "app_name")
+            if current_app != APP_NAME:
+                frappe.db.set_value("Module Def", mod_name, "app_name", APP_NAME)
+                results["modules_fixed"] += 1
+        else:
+            try:
+                doc = frappe.get_doc({
+                    "doctype": "Module Def",
+                    "module_name": mod_name,
+                    "app_name": APP_NAME,
+                    "custom": 1,
+                })
+                doc.insert(ignore_permissions=True)
+                results["modules_created"] += 1
+            except Exception as e:
+                results["errors"].append(f"Module {mod_name}: {str(e)}")
+
+    frappe.db.commit()
+
+    # ── 2. Fix DocType module references ───────────────────────────────────
+    base = frappe.get_app_path(APP_NAME)
+    for root, dirs, files in os.walk(base):
+        if "doctype" not in root.split(os.sep):
+            continue
+        for f in files:
+            if not f.endswith(".json") or f == "__init__.py":
+                continue
+            try:
+                with open(os.path.join(root, f)) as fh:
+                    data = json.load(fh)
+                if data.get("doctype") != "DocType":
+                    continue
+                dt_name = data.get("name")
+                expected_module = data.get("module")
+                if dt_name and expected_module and frappe.db.exists("DocType", dt_name):
+                    current = frappe.db.get_value("DocType", dt_name, "module")
+                    if current != expected_module:
+                        frappe.db.set_value("DocType", dt_name, "module", expected_module)
+                        results["doctype_module_fixes"] += 1
+            except Exception:
+                pass
+
+    frappe.db.commit()
+
+    # ── 3. Recreate Workspace (using existing migrate_workspace logic) ──────
+    try:
+        sync_workspace_from_fixture()
+        results["workspace"] = True
+        # Quick count after creation
+        if frappe.db.exists("Workspace", "Bizaxl Finance"):
+            ws = frappe.get_doc("Workspace", "Bizaxl Finance")
+            results["workspace_cards"] = len(json.loads(ws.content))
+            results["workspace_links"] = len(ws.links)
+    except Exception as e:
+        results["errors"].append(f"Workspace: {str(e)}")
+
+    # ── 4. Clear Cache ─────────────────────────────────────────────────────
+    frappe.cache().delete_key("bootinfo")
+    frappe.cache().delete_value("workspace:data:Bizaxl Finance")
+    frappe.clear_cache()
+
+    results["success"] = len(results["errors"]) == 0
+    return results
+
+
 # ── Customer Portal APIs ──────────────────────────────────────────────────
 
 @frappe.whitelist()
