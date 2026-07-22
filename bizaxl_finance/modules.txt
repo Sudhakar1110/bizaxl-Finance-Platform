@@ -20,5 +20,5 @@ Chit Fund
 Consumer Finance
 Collections
 Risk Compliance
-Integrations
+Integration Hub
 Accounting
