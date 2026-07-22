@@ -102,6 +102,13 @@ def fix_modules_and_workspace():
             except Exception as e:
                 results["errors"].append(f"Module {mod_name}: {str(e)}")
 
+    # ── Special case: Integrations must always belong to Frappe core ──────
+    if frappe.db.exists("Module Def", "Integrations"):
+        current_app = frappe.db.get_value("Module Def", "Integrations", "app_name")
+        if current_app != "frappe":
+            frappe.db.set_value("Module Def", "Integrations", "app_name", "frappe")
+            results["modules_fixed"] += 1
+
     frappe.db.commit()
 
     # ── 2. Fix DocType module references ───────────────────────────────────
