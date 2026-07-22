@@ -2,6 +2,59 @@ import frappe
 from frappe import _
 import json
 
+# ── DocType Installer (browser-accessible) ─────────────────────────────────
+
+@frappe.whitelist()
+def install_all_doctypes():
+    """Install all missing bizaxl_finance DocTypes.
+
+    Call this from your browser via:
+        https://finance.bizaxl.org/api/method/bizaxl_finance.api.install_all_doctypes
+
+    Or visit the web UI at:
+        https://finance.bizaxl.org/install-doctypes
+    """
+    # Only administrators can run this
+    if "System Manager" not in frappe.get_roles():
+        frappe.throw("Only System Manager can install DocTypes", frappe.PermissionError)
+
+    from bizaxl_finance.install_all_doctypes import run_and_return_results
+    return run_and_return_results()
+
+
+@frappe.whitelist()
+def check_doctype_status():
+    """Check which bizaxl_finance DocTypes are already installed vs missing.
+
+    Returns counts and lists of installed/missing doctypes.
+    Use this to preview before installing.
+    """
+    if "System Manager" not in frappe.get_roles():
+        frappe.throw("Only System Manager can check DocType status", frappe.PermissionError)
+
+    base_dir = frappe.get_app_path("bizaxl_finance")
+    from bizaxl_finance.install_all_doctypes import discover_doctype_paths
+
+    doctype_list = discover_doctype_paths(base_dir)
+    total = len(doctype_list)
+    installed = []
+    missing = []
+
+    for doctype_name, rel_path in doctype_list:
+        if frappe.db.exists("DocType", doctype_name):
+            installed.append(doctype_name)
+        else:
+            missing.append(doctype_name)
+
+    return {
+        "total": total,
+        "installed_count": len(installed),
+        "installed": installed,
+        "missing_count": len(missing),
+        "missing": missing,
+    }
+
+
 # ── Customer Portal APIs ──────────────────────────────────────────────────
 
 @frappe.whitelist()

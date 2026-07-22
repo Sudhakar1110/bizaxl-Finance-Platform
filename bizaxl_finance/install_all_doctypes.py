@@ -101,9 +101,50 @@ def install_on_app_install():
         results.append(result)
     ok = [r for r in results if r.startswith("✅")]
     fail = [r for r in results if r.startswith("❌")]
+    frappe.clear_cache()
     print(f"[bizaxl_finance] after_install: created {len(ok)} doctypes, {len(fail)} failed")
     if fail:
         raise Exception(f"Failed to create {len(fail)} doctypes: {fail}")
+
+
+def run_and_return_results():
+    """Run the installer and return structured results as a dict.
+    Used by the API endpoint so the web page can display results."""
+    base_dir = frappe.get_app_path("bizaxl_finance")
+    doctype_list = discover_doctype_paths(base_dir)
+
+    created = []
+    skipped = []
+    failed = []
+    not_found = []
+
+    total = len(doctype_list)
+    for doctype_name, rel_path in doctype_list:
+        result = create_single_doctype(base_dir, doctype_name, rel_path)
+        if result.startswith("✅"):
+            created.append(doctype_name)
+        elif result.startswith("⏭️"):
+            skipped.append(doctype_name)
+        elif result.startswith("❌"):
+            failed.append(result)
+        elif result.startswith("⚠️"):
+            not_found.append(result)
+
+    # Clear cache so new DocTypes show up immediately
+    frappe.clear_cache()
+
+    return {
+        "total": total,
+        "created": created,
+        "created_count": len(created),
+        "skipped": skipped,
+        "skipped_count": len(skipped),
+        "failed": failed,
+        "failed_count": len(failed),
+        "not_found": not_found,
+        "not_found_count": len(not_found),
+        "success": len(failed) == 0,
+    }
 
 
 def run():
