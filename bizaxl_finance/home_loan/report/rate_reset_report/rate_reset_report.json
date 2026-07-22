@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "Rate Reset Report",
+ "report_name": "Rate Reset Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Rate Reset Log",
+ "is_standard": "Yes",
+ "module": "Home Loan",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Loan Manager"}
+ ]
+}

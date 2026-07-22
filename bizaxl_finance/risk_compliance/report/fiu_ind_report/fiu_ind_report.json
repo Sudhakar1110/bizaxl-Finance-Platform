@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "FIU-IND Report",
+ "report_name": "FIU-IND Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Regulatory Report",
+ "is_standard": "Yes",
+ "module": "Risk Compliance",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Compliance Officer"}
+ ]
+}

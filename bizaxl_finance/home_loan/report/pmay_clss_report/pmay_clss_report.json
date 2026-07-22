@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "PMAY CLSS Report",
+ "report_name": "PMAY CLSS Report",
+ "report_type": "Script Report",
+ "ref_doctype": "PMAY Subsidy",
+ "is_standard": "Yes",
+ "module": "Home Loan",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Loan Manager"}
+ ]
+}

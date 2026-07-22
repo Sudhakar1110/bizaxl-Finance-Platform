@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "ALM Report",
+ "report_name": "ALM Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Fund Account",
+ "is_standard": "Yes",
+ "module": "Accounting",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Branch Manager"}
+ ]
+}

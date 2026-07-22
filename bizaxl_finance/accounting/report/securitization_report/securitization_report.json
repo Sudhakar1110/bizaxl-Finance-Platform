@@ -1,0 +1,12 @@
+{
+ "doctype": "Report",
+ "name": "Securitization Report",
+ "report_name": "Securitization Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Loan Accounting",
+ "is_standard": "Yes",
+ "module": "Accounting",
+ "roles": [
+  {"role": "System Manager"}
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "Scorecard Performance Report",
+ "report_name": "Scorecard Performance Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Scorecard Config",
+ "is_standard": "Yes",
+ "module": "Loans",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Credit Officer"}
+ ]
+}

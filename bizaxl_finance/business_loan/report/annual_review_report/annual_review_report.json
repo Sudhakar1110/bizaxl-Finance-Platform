@@ -1,0 +1,14 @@
+{
+ "doctype": "Report",
+ "name": "Annual Review Report",
+ "report_name": "Annual Review Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Business Profile",
+ "is_standard": "Yes",
+ "module": "Business Loan",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Credit Officer"},
+  {"role": "Loan Manager"}
+ ]
+}

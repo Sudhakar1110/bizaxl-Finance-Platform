@@ -1,0 +1,14 @@
+{
+ "doctype": "Report",
+ "name": "Audit Trail Report",
+ "report_name": "Audit Trail Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Version",
+ "is_standard": "Yes",
+ "module": "Risk Compliance",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Auditor"},
+  {"role": "Compliance Officer"}
+ ]
+}

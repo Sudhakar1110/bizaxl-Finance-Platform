@@ -1,0 +1,14 @@
+{
+ "doctype": "Report",
+ "name": "MFI Board Pack",
+ "report_name": "MFI Board Pack",
+ "report_type": "Script Report",
+ "ref_doctype": "MFI Member",
+ "is_standard": "Yes",
+ "module": "Microfinance",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Branch Manager"},
+  {"role": "Credit Officer"}
+ ]
+}

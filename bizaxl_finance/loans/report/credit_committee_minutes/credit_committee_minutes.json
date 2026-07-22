@@ -1,0 +1,14 @@
+{
+ "doctype": "Report",
+ "name": "Credit Committee Minutes",
+ "report_name": "Credit Committee Minutes",
+ "report_type": "Script Report",
+ "ref_doctype": "Credit Committee Decision",
+ "is_standard": "Yes",
+ "module": "Loans",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Credit Officer"},
+  {"role": "Loan Manager"}
+ ]
+}

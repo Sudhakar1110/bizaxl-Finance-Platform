@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "Gold Auction Report",
+ "report_name": "Gold Auction Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Gold Auction",
+ "is_standard": "Yes",
+ "module": "Gold Loan",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Gold Appraiser"}
+ ]
+}

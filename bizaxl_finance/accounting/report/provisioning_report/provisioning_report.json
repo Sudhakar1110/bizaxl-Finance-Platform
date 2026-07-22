@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "Provisioning Report",
+ "report_name": "Provisioning Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Provisioning Rule",
+ "is_standard": "Yes",
+ "module": "Accounting",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Compliance Officer"}
+ ]
+}

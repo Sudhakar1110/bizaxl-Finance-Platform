@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "Chit Balance Sheet",
+ "report_name": "Chit Balance Sheet",
+ "report_type": "Script Report",
+ "ref_doctype": "Chit Group",
+ "is_standard": "Yes",
+ "module": "Chit Fund",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Chit Foreman"}
+ ]
+}

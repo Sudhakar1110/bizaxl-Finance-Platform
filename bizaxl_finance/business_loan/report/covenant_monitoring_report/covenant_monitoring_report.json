@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "Covenant Monitoring Report",
+ "report_name": "Covenant Monitoring Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Loan Covenant",
+ "is_standard": "Yes",
+ "module": "Business Loan",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Credit Officer"}
+ ]
+}

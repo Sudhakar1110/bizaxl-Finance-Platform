@@ -1,0 +1,13 @@
+{
+ "doctype": "Report",
+ "name": "PAR Geography Report",
+ "report_name": "PAR Geography Report",
+ "report_type": "Script Report",
+ "ref_doctype": "MFI Center",
+ "is_standard": "Yes",
+ "module": "Microfinance",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Credit Officer"}
+ ]
+}
