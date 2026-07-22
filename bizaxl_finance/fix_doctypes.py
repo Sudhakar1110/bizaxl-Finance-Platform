@@ -14,8 +14,6 @@ Usage:
 import frappe
 import json
 import os
-import sys
-
 # Reuse the discovery logic from install_all_doctypes
 from bizaxl_finance.install_all_doctypes import discover_doctype_paths
 
