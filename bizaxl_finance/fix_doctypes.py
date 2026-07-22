@@ -5,6 +5,7 @@ Run this on your server to:
   1. Compare all doctypes in GitHub code vs your database
   2. Show which are missing
   3. Create the missing ones
+  4. Recreate the workspace (so it's no longer empty)
 
 Usage:
     bench --site finance.bizaxl.local execute bizaxl_finance.fix_doctypes.compare_and_install
@@ -15,32 +16,8 @@ import json
 import os
 import sys
 
-
-def discover_doctype_paths(base_dir):
-    """Walk the app directory and discover all doctype JSON files."""
-    doctypes = []
-    for root, dirs, files in os.walk(base_dir):
-        if "doctype" not in root.split(os.sep):
-            continue
-        for f in files:
-            if f.endswith(".json") and f != "property_setters.json":
-                full_path = os.path.join(root, f)
-                rel_path = os.path.relpath(full_path, base_dir)
-                try:
-                    with open(full_path) as fp:
-                        data = json.load(fp)
-                    if data.get("doctype") == "DocType" and data.get("name"):
-                        doctypes.append((data["name"], rel_path, data.get("module", "")))
-                except (json.JSONDecodeError, IOError):
-                    pass
-
-    # Sort by module then name
-    def sort_key(item):
-        name, rel_path, module = item
-        return (module or "", name.lower())
-
-    doctypes.sort(key=sort_key)
-    return doctypes
+# Reuse the discovery logic from install_all_doctypes
+from bizaxl_finance.install_all_doctypes import discover_doctype_paths
 
 
 def compare_and_install():
@@ -58,10 +35,19 @@ def compare_and_install():
     # Compare with database
     existing = []
     missing = []
-    for doctype_name, rel_path, module in doctype_list:
+    for doctype_name, rel_path in doctype_list:
         if frappe.db.exists("DocType", doctype_name):
-            existing.append((doctype_name, module))
+            existing.append(doctype_name)
         else:
+            # Read module from the JSON file
+            full_path = os.path.join(base_dir, rel_path)
+            module = ""
+            try:
+                with open(full_path) as fp:
+                    data = json.load(fp)
+                    module = data.get("module", "")
+            except Exception:
+                pass
             missing.append((doctype_name, module, rel_path))
 
     # Print comparison
@@ -89,69 +75,65 @@ def compare_and_install():
 
     # Install missing ones
     if not missing:
-        print("  ✅ Nothing to install. All done!")
-        return {"status": "ok", "message": "All doctypes already installed"}
+        print("  ✅ Nothing to install.")
+        print("  🔧 Still recreating workspace to fix empty workspace issue...")
+    else:
+        print("=" * 72)
+        print("  INSTALLING MISSING DOCTYPES...")
+        print("=" * 72)
 
-    print("=" * 72)
-    print("  INSTALLING MISSING DOCTYPES...")
-    print("=" * 72)
+        created = []
+        failed = []
 
-    created = []
-    skipped = []
-    failed = []
+        for doctype_name, module, rel_path in missing:
+            full_path = os.path.join(base_dir, rel_path)
 
-    for doctype_name, module, rel_path in missing:
-        full_path = os.path.join(base_dir, rel_path)
+            if not os.path.exists(full_path):
+                print(f"  ⚠️  FILE NOT FOUND: {doctype_name}")
+                continue
 
-        if not os.path.exists(full_path):
-            print(f"  ⚠️  FILE NOT FOUND: {doctype_name}")
-            continue
+            with open(full_path) as f:
+                data = json.load(f)
 
-        with open(full_path) as f:
-            data = json.load(f)
+            try:
+                doc = frappe.get_doc(data)
+                doc.insert(ignore_permissions=True)
+                frappe.db.commit()
+                print(f"  ✅ CREATED: {doctype_name} [{module}]")
+                created.append(doctype_name)
+            except Exception as e:
+                frappe.db.rollback()
+                print(f"  ❌ FAILED: {doctype_name} — {str(e)}")
+                failed.append(doctype_name)
 
-        try:
-            # For singletons, don't use naming series
-            if data.get("issingle"):
-                data.pop("autoname", None)
-                data.pop("naming_rule", None)
-            
-            doc = frappe.get_doc(data)
-            doc.insert(ignore_permissions=True)
-            frappe.db.commit()
-            print(f"  ✅ CREATED: {doctype_name} [{module}]")
-            created.append(doctype_name)
-        except Exception as e:
-            frappe.db.rollback()
-            print(f"  ❌ FAILED: {doctype_name} — {str(e)}")
-            failed.append(doctype_name)
+        # Summary
+        print()
+        print("=" * 72)
+        print("  INSTALL SUMMARY")
+        print("=" * 72)
+        print(f"  ✅ Created:  {len(created)}")
+        print(f"  ❌ Failed:   {len(failed)}")
+        print("=" * 72)
 
-    # Summary
+        if created:
+            print(f"\n  ✅ Newly installed: {', '.join(created)}")
+        if failed:
+            print(f"\n  ❌ Failed: {', '.join(failed)}")
+
+    # ── Recreate workspace ─────────────────────────────────────────────
     print()
     print("=" * 72)
-    print("  SUMMARY")
+    print("  RECREATING WORKSPACE...")
     print("=" * 72)
-    print(f"  ✅ Created:  {len(created)}")
-    print(f"  ❌ Failed:   {len(failed)}")
-    print(f"  ─────────────────────")
-    print(f"  Total installed: {len(created)}")
-    print("=" * 72)
+    
+    from bizaxl_finance.migrate_workspace import sync_workspace_from_fixture
+    sync_workspace_from_fixture()
 
-    if created:
-        print(f"\n  ✅ Created: {', '.join(created)}")
-    if failed:
-        print(f"\n  ❌ Failed: {', '.join(failed)}")
-
-    # Clear cache
+    # Clear cache so everything appears immediately
     frappe.clear_cache()
     frappe.cache().delete_key("bootinfo")
 
-    print("\n  ✅ All done! Refresh your workspace at /app/bizaxl-finance\n")
-
-    return {
-        "status": "ok" if not failed else "partial",
-        "created": created,
-        "created_count": len(created),
-        "failed": failed,
-        "failed_count": len(failed),
-    }
+    print()
+    print("  ✅ Done! Everything should now appear at:")
+    print("     http://finance.bizaxl.local/app/bizaxl-finance")
+    print()
