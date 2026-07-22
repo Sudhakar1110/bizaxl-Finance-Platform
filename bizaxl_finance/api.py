@@ -203,6 +203,43 @@ def fix_modules_and_workspace():
     return results
 
 
+# ── Fix Integrations Module ────────────────────────────────────────────────
+
+@frappe.whitelist()
+def reset_integrations_module():
+    """Reset the Integrations Module Def back to Frappe core.
+
+    Call this once from your browser:
+        https://finance.bizaxl.org/api/method/bizaxl_finance.api.reset_integrations_module
+
+    If the Integrations module has app_name=bizaxl_finance (from a previous
+    fixture load), this resets it to app_name=frappe so Frappe core DocTypes
+    (Webhook, Google Calendar, etc.) are not deleted as orphaned during migrate.
+    """
+    if "System Manager" not in frappe.get_roles():
+        frappe.throw("Only System Manager can run this", frappe.PermissionError)
+
+    result = {"fixed": False, "message": "", "current_app": ""}
+
+    if frappe.db.exists("Module Def", "Integrations"):
+        current_app = frappe.db.get_value("Module Def", "Integrations", "app_name")
+        result["current_app"] = current_app
+
+        if current_app != "frappe":
+            frappe.db.set_value("Module Def", "Integrations", "app_name", "frappe")
+            frappe.db.commit()
+            frappe.clear_cache()
+            result["fixed"] = True
+            result["message"] = f"✅ Integrations Module Def reset from '{current_app}' → 'frappe'"
+        else:
+            result["fixed"] = True
+            result["message"] = "✅ Integrations Module Def already has app_name='frappe'. No change needed."
+    else:
+        result["message"] = "⚠️ Integrations Module Def does not exist in database!"
+
+    return result
+
+
 # ── Customer Portal APIs ──────────────────────────────────────────────────
 
 @frappe.whitelist()
