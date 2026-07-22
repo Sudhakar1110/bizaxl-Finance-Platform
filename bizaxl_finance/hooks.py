@@ -70,9 +70,7 @@ fixtures = [
     {"dt": "Module Def", "filters": [["module_name", "=", "Collections"]]},
     {"dt": "Module Def", "filters": [["module_name", "=", "Risk & Compliance"]]},
     {"dt": "Module Def", "filters": [["module_name", "=", "Accounting"]]},
-    {"dt": "Module Def", "filters": [["module_name", "=", "Integrations"]]},
     {"dt": "Integration Settings", "filters": [["name", "=", "Integration Settings"]]},
-    {"dt": "Module Def", "filters": [["module_name", "=", "Accounting"]]},
     {"dt": "GL Settings", "filters": [["name", "=", "GL Settings"]]},
 ]
 
