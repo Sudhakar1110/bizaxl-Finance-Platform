@@ -19,7 +19,7 @@ Built on **Frappe Framework v15+** and **ERPNext v15+**, Bizaxl Finance is a sin
 | **Lending Verticals** | **12** |
 | **API Integrations** | **18** |
 | **User Roles** | **18** |
-| **Script Reports** | **11** |
+| **Script Reports** | **35** |
 | **Workspace Cards** | **24** |
 | **Scheduler Events** | **12** |
 
@@ -219,20 +219,76 @@ All integrations follow a **stub-to-live pattern** — they work without API key
 
 ---
 
-## 📊 Script Reports (11)
+## 📊 Script Reports (35)
 
+### Risk & Compliance (7)
+| Report | Description |
+|--------|-------------|
+| CRILC Report | Rs.5Cr+ large exposure reporting for RBI |
+| FPC Report | Fair Practices Code compliance report |
+| PSL Report | Priority Sector Lending computation |
+| FIU-IND Report | CTR/STR filings tracking |
+| AML Screening Report | AML/KYC screening overview |
+| Fraud Alert Report | Fraud investigation tracking |
+| Audit Trail Report | Document version change log |
+
+### Microfinance (4)
+| Report | Description |
+|--------|-------------|
+| PAR Portfolio | Portfolio at risk analysis |
+| PAR Geography Report | PAR by center/village/district/officer |
+| Client Protection Report | Member portfolio and overdue tracking |
+| MFI Board Pack | Board-level KPIs and portfolio summary |
+
+### Gold Loan (3)
+| Report | Description |
+|--------|-------------|
+| Gold Loan Portfolio | Gold loan LTV and aging analysis |
+| LTV Monitoring Report | Daily LTV tracking with breach alerts |
+| Gold Auction Report | Auction proceeds and surplus tracking |
+
+### Chit Fund (3)
+| Report | Description |
+|--------|-------------|
+| Chit Fund Portfolio | Chit group performance |
+| Subscriber Ledger Report | Per-subscriber payment and dividend view |
+| Chit Balance Sheet | Full chit reconciliation |
+
+### Business Loan (2)
+| Report | Description |
+|--------|-------------|
+| Covenant Monitoring Report | DSCR/ratio breach tracking |
+| Annual Review Report | Business financial health review |
+
+### Home Loan (3)
+| Report | Description |
+|--------|-------------|
+| Home Loan Portfolio | Home loan portfolio analysis |
+| PMAY CLSS Report | PMAY subsidy status tracking |
+| Rate Reset Report | MCLR/repo-linked rate change log |
+
+### Accounting (3)
+| Report | Description |
+|--------|-------------|
+| ALM Report | Asset-liability fund position |
+| Securitization Report | Securitization pool transactions |
+| Provisioning Report | NPA provision calculations |
+
+### Loans (4)
+| Report | Description |
+|--------|-------------|
+| Loan Repayment Schedule | EMI schedule view |
+| Scorecard Performance Report | Scorecard config and thresholds |
+| Credit Committee Minutes | Committee decision register |
+
+### Other Modules (6)
 | Report | Module | Description |
 |--------|--------|-------------|
 | Transaction Register | Banking | All transactions with filters |
-| Chit Fund Portfolio | Chit Fund | Chit group performance |
 | Collection Efficiency | Collections | Collection recovery rates |
 | NPA Portfolio | Collections | NPA breakdown by category |
 | Lead Pipeline | Customer Management | Lead funnel analysis |
 | Disbursement Report | Foundation | Loan disbursement tracking |
-| Gold Loan Portfolio | Gold Loan | Gold loan LTV and aging |
-| Home Loan Portfolio | Home Loan | Home loan portfolio analysis |
-| Loan Repayment Schedule | Loans | EMI schedule view |
-| PAR Portfolio | Microfinance | Portfolio at risk analysis |
 | Vehicle Loan Portfolio | Vehicle Loan | Vehicle loan portfolio |
 
 ---
