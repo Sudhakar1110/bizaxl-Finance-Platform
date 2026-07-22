@@ -224,12 +224,44 @@ def _fix_integrations_module():
         if current != "frappe":
             frappe.db.set_value("Module Def", "Integrations", "app_name", "frappe")
             frappe.db.commit()
-            frappe.clear_cache()
             print(f"✅ Integrations Module Def: '{current}' → 'frappe'")
-            return True
         else:
             print("✅ Integrations Module Def already has app_name='frappe'")
-            return True
+
+        # Clean up partially-created core DocTypes from previous crashed migrations
+        # These DocTypes were orphaned+deleted, then partially recreated with wrong module
+        BROKEN_DOCTYPES = [
+            "Google Contacts", "Google Calendar", "Webhook", "Webhook Header",
+            "Social Login Key", "OAuth Client Role", "OAuth Provider Settings",
+            "Push Notification Settings", "Google Settings", "Google Drive",
+            "Dropbox Settings", "LDAP Settings", "Token Cache",
+            "LDAP Group Mapping", "Connected App", "Slack Webhook URL",
+            "Query Parameters", "S3 Backup Settings",
+        ]
+        deleted = 0
+        for dt in BROKEN_DOCTYPES:
+            if frappe.db.exists("DocType", dt):
+                try:
+                    frappe.delete_doc("DocType", dt, ignore_on_trash=True, force=True)
+                    print(f"  🗑️ Deleted broken DocType: {dt}")
+                    deleted += 1
+                except Exception:
+                    frappe.db.sql(f"DELETE FROM `tabDocType` WHERE `name` = %s", dt)
+                    frappe.db.sql(f"DROP TABLE IF EXISTS `tab{dt.replace(' ', '_')}`")
+                    print(f"  🗑️ Force-deleted broken DocType: {dt}")
+                    deleted += 1
+
+        frappe.db.commit()
+
+        # Clear ALL caches so nothing stale remains
+        frappe.clear_cache()
+        frappe.cache().delete_key("bootinfo")
+
+        if deleted:
+            print(f"✅ Cleaned up {deleted} broken DocTypes — run migrate now!")
+        else:
+            print("✅ No broken DocTypes found — ready for migrate!")
+        return True
     else:
         print("⚠️ Integrations Module Def not found in database")
         return False
