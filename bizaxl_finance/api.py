@@ -210,7 +210,30 @@ def fix_modules_and_workspace():
     return results
 
 
-# ── Fix Integrations Module ────────────────────────────────────────────────
+def _fix_integrations_module():
+    """Standalone fix — reset Integrations Module Def to Frappe core.
+
+    Can be run via terminal (no browser needed):
+        bench --site finance.bizaxl.org execute bizaxl_finance.api._fix_integrations_module
+
+    Or via browser URL:
+        https://finance.bizaxl.org/api/method/bizaxl_finance.api.reset_integrations_module
+    """
+    if frappe.db.exists("Module Def", "Integrations"):
+        current = frappe.db.get_value("Module Def", "Integrations", "app_name")
+        if current != "frappe":
+            frappe.db.set_value("Module Def", "Integrations", "app_name", "frappe")
+            frappe.db.commit()
+            frappe.clear_cache()
+            print(f"✅ Integrations Module Def: '{current}' → 'frappe'")
+            return True
+        else:
+            print("✅ Integrations Module Def already has app_name='frappe'")
+            return True
+    else:
+        print("⚠️ Integrations Module Def not found in database")
+        return False
+
 
 @frappe.whitelist()
 def reset_integrations_module():
