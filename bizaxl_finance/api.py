@@ -68,7 +68,6 @@ def fix_modules_and_workspace():
         frappe.throw("Only System Manager can run this fix", frappe.PermissionError)
 
     import os
-    from bizaxl_finance.migrate_workspace import sync_workspace_from_fixture
 
     results = {"modules_fixed": 0, "modules_created": 0, "doctype_module_fixes": 0, "workspace": False, "workspace_cards": 0, "workspace_links": 0, "errors": []}
 
@@ -130,15 +129,68 @@ def fix_modules_and_workspace():
 
     frappe.db.commit()
 
-    # ── 3. Recreate Workspace (using existing migrate_workspace logic) ──────
+    # ── 3. Recreate Workspace using ORM (bypasses all validation) ──────────
     results["workspace"] = False
     try:
-        sync_workspace_from_fixture()
-        if frappe.db.exists("Workspace", "Bizaxl Finance"):
-            ws = frappe.get_doc("Workspace", "Bizaxl Finance")
-            results["workspace"] = True
-            results["workspace_cards"] = len(json.loads(ws.content))
-            results["workspace_links"] = len(ws.links)
+        fixture_path = os.path.join(base, "workspace", "bizaxl_finance", "bizaxl_finance.json")
+        if not os.path.exists(fixture_path):
+            results["errors"].append(f"Fixture not found: {fixture_path}")
+        else:
+            with open(fixture_path) as f:
+                fixture = json.load(f)
+            
+            # Delete old workspace
+            if frappe.db.exists("Workspace", "Bizaxl Finance"):
+                frappe.get_doc("Workspace", "Bizaxl Finance").delete()
+                frappe.db.commit()
+            
+            # Build new workspace doc
+            doc_data = {
+                "doctype": "Workspace",
+                "name": "Bizaxl Finance",
+                "title": "Bizaxl Finance",
+                "module": "Bizaxl Finance",
+                "label": "Bizaxl Finance",
+                "icon": "credit-card",
+                "is_hidden": 0,
+                "is_standard": 0,
+                "is_default": 1,
+                "public": 1,
+                "sequence_id": 1.0,
+                "content": fixture["content"],
+            }
+            
+            ws = frappe.get_doc(doc_data)
+            
+            # Add all links from fixture
+            for link in fixture.get("links", []):
+                ws.append("links", {
+                    "type": link.get("type", ""),
+                    "label": link.get("label", ""),
+                    "link_to": link.get("link_to", ""),
+                    "link_type": link.get("link_type", ""),
+                    "hidden": link.get("hidden", 0),
+                    "is_query_report": link.get("is_query_report", 0),
+                    "onboard": link.get("onboard", 0),
+                    "dependencies": link.get("dependencies", ""),
+                })
+            
+            # Insert with ALL bypass flags
+            ws.flags.ignore_links = True
+            original_dev_mode = frappe.conf.developer_mode
+            try:
+                frappe.conf.developer_mode = 0
+                ws.insert(ignore_permissions=True, ignore_if_duplicate=True)
+                frappe.db.commit()
+            finally:
+                frappe.conf.developer_mode = original_dev_mode
+            
+            # Verify
+            if frappe.db.exists("Workspace", "Bizaxl Finance"):
+                ws_check = frappe.get_doc("Workspace", "Bizaxl Finance")
+                results["workspace"] = True
+                results["workspace_cards"] = len(json.loads(ws_check.content))
+                results["workspace_links"] = len(ws_check.links)
     except Exception as e:
         results["errors"].append(f"Workspace: {str(e)}")
 
