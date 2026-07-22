@@ -122,6 +122,12 @@ scheduler_events = {
     ],
 }
 
+# ── after_install hook — auto-install all DocTypes ────────────────────────
+# Creates all doctype JSON definitions from the app tree into the database.
+after_install = [
+    "bizaxl_finance.install_all_doctypes.install_on_app_install",
+]
+
 # ── after_migrate hook to restore workspace layout ────────────────────────
 # DISABLED - causes workspace issues
 # after_migrate = [
