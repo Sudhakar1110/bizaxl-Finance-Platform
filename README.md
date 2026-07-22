@@ -19,7 +19,7 @@ Built on **Frappe Framework v15+** and **ERPNext v15+**, Bizaxl Finance is a sin
 | **Lending Verticals** | **12** |
 | **API Integrations** | **18** |
 | **User Roles** | **18** |
-| **Script Reports** | **35** |
+| **Script Reports** | **34** |
 | **Workspace Cards** | **24** |
 | **Scheduler Events** | **12** |
 
@@ -274,7 +274,7 @@ All integrations follow a **stub-to-live pattern** — they work without API key
 | Securitization Report | Securitization pool transactions |
 | Provisioning Report | NPA provision calculations |
 
-### Loans (4)
+### Loans (3)
 | Report | Description |
 |--------|-------------|
 | Loan Repayment Schedule | EMI schedule view |
